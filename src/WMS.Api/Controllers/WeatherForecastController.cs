@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WMS.Api.Controllers
 {
+    /// <summary>
+    /// sss
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = "auth")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -13,21 +17,17 @@ namespace WMS.Api.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        public string Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _logger.LogInformation("Sssss");
+            return "2222";
         }
     }
 }
