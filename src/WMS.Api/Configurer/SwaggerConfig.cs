@@ -1,7 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
-using WMS.Api.Configurer;
 
-namespace WMS.Api.Config
+namespace WMS.Api.Configurer
 {
     internal static class SwaggerConfig
     {
