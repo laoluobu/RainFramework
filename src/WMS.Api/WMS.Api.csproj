@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WMS.Repository\WMS.Mysql.Repository.csproj" />
+    <ProjectReference Include="..\WMS.MySQL.Repository\WMS.MySQL.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using Serilog;
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
-using WMS.Mysql.Repository;
+using WMS.MySQL.Repository;
 
 namespace WMS.Api
 {
@@ -37,6 +37,18 @@ namespace WMS.Api
             {
                 app.UseSwaggerPkg();
             }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<WMSDB>();
+                context.Database.EnsureCreated();
+                DBinit.Init(context);
+            }
+
+
+
             app.UseAuthentication();
 
             app.UseAuthorization();

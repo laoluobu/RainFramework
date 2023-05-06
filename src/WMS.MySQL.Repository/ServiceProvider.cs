@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WMS.Mysql.Repository
+namespace WMS.MySQL.Repository
 {
     public static class ServiceProvider
     {
