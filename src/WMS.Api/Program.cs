@@ -1,5 +1,6 @@
 using Serilog;
 using WMS.Api.Config;
+using WMS.Api.JWT;
 
 namespace WMS.Api
 {
@@ -14,6 +15,8 @@ namespace WMS.Api
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwagger();
+
+            builder.Services.AddSingleton<IJWTService, JWTService>();
 
             builder.Host.UseSerilog((context, logging) =>
             {

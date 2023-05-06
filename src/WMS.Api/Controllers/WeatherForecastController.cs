@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WMS.Api.JWT;
 
 namespace WMS.Api.Controllers
 {
@@ -17,16 +18,20 @@ namespace WMS.Api.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        private readonly IJWTService jWTService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IJWTService jWTService)
         {
             _logger = logger;
+            this.jWTService = jWTService;
         }
 
         [HttpGet]
         public string Get()
         {
-            _logger.LogInformation("Sssss");
+           var ss= jWTService.CreateToken("1111");
+            _logger.LogInformation(ss);
             return "2222";
         }
     }
