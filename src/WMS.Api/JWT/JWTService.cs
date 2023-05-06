@@ -17,7 +17,12 @@ namespace WMS.Api.JWT
         {
             var token = new JsonWebTokenHandler().CreateToken(new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new Claim[] { new Claim("iss", "WMS"), new Claim("sub", subject) }),
+                Subject = new ClaimsIdentity(new Claim[]
+                { 
+                    new Claim("iss", "WMS"), 
+                    new Claim("sub", subject),
+                    new Claim("aub","WMSUser")
+                }, "MyJWT"),
                 SigningCredentials = new SigningCredentials(GeneralKey(), SecurityAlgorithms.HmacSha256),
                 Expires = DateTime.Now.AddHours(2)
             });

@@ -3,7 +3,7 @@ using WMS.Api.Configurer;
 
 namespace WMS.Api.Config
 {
-    public static class SwaggerConfig
+    internal static class SwaggerConfig
     {
         public static void AddSwagger(this IServiceCollection services)
         {

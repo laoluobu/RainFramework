@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WMS.Api.Configurer;
 using WMS.Api.JWT;
 
 namespace WMS.Api.Controllers
@@ -7,21 +9,16 @@ namespace WMS.Api.Controllers
     /// sss
     /// </summary>
     [ApiController]
+    [Authorize]
     [Route("[controller]")]
-    [ApiExplorerSettings(GroupName = "auth")]
-    public class WeatherForecastController : ControllerBase
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.test))]
+    public class TestController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<TestController> _logger;
 
         private readonly IJWTService jWTService;
 
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IJWTService jWTService)
+        public TestController(ILogger<TestController> logger, IJWTService jWTService)
         {
             _logger = logger;
             this.jWTService = jWTService;

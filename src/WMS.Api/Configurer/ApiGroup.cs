@@ -1,7 +1,9 @@
 ﻿namespace WMS.Api.Configurer
 {
-    public class ApiGroup
+    internal class ApiGroup
     {
         public readonly static string auth = "授权接口";
+
+        public readonly static string test = "测试接口";
     }
 }

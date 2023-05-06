@@ -5,7 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.Api", "WMS.Api\WMS.Api.csproj", "{629907F7-1EAE-4895-89D1-406535F47350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.ApiTests", "WMS.ApiTests\WMS.ApiTests.csproj", "{41C45A7D-12FA-4425-8225-5B1A1261B7DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.ApiTests", "WMS.ApiTests\WMS.ApiTests.csproj", "{41C45A7D-12FA-4425-8225-5B1A1261B7DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.Repository", "WMS.Repository\WMS.Repository.csproj", "{02C2845D-00A7-4D1F-8D4A-62F3CE133E67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0BA96158-3EFC-4057-A9E1-2347A4B9C523}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{41C45A7D-12FA-4425-8225-5B1A1261B7DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41C45A7D-12FA-4425-8225-5B1A1261B7DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41C45A7D-12FA-4425-8225-5B1A1261B7DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C2845D-00A7-4D1F-8D4A-62F3CE133E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C2845D-00A7-4D1F-8D4A-62F3CE133E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C2845D-00A7-4D1F-8D4A-62F3CE133E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C2845D-00A7-4D1F-8D4A-62F3CE133E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41C45A7D-12FA-4425-8225-5B1A1261B7DB} = {0BA96158-3EFC-4057-A9E1-2347A4B9C523}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B149F34-D9A3-4604-BCA2-78BAFC4C4C9F}
