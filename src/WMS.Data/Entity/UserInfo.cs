@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Data.Entity
+﻿namespace WMS.Data.Entity
 {
-    public class UserInfo:EntityBase
+    public class UserInfo 
     {
         public int Id { get; private set; }
 
@@ -15,5 +9,9 @@ namespace WMS.Data.Entity
         public string? Nickname { get; set; }
 
         public bool IsDisable { get; set; }
+
+        public DateTime? CreateTime { get; set; }
+
+        public DateTime? UpdateTime { get; set; }
     }
 }

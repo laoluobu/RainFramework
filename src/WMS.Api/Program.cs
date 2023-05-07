@@ -37,18 +37,6 @@ namespace WMS.Api
             {
                 app.UseSwaggerPkg();
             }
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                var context = services.GetRequiredService<WMSDB>();
-                context.Database.EnsureCreated();
-                DBinit.Init(context);
-            }
-
-
-
             app.UseAuthentication();
 
             app.UseAuthorization();
