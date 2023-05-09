@@ -1,6 +1,9 @@
 ﻿#nullable disable
 
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace WMS.Repository.Entity;
 
 public  class UserInfo
@@ -13,11 +16,13 @@ public  class UserInfo
     /// <summary>
     /// 邮箱
     /// </summary>
+    [MaxLength(50)]
     public string Email { get; set; }
 
     /// <summary>
     /// 用户昵称
     /// </summary>
+    [MaxLength(50)]
     public string Nickname { get; set; }
 
     /// <summary>
@@ -28,6 +33,7 @@ public  class UserInfo
     /// <summary>
     /// 创建时间
     /// </summary>
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime CreateTime { get; set; }
 
     /// <summary>

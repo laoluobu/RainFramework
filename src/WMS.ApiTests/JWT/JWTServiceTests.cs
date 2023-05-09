@@ -11,7 +11,7 @@ namespace WMS.ApiTests.JWT
         [TestMethod()]
         public void CreateTokenTest()
         {
-            var ss = service.CreateToken("222");
+            var ss = service.CreateToken(new List<System.Security.Claims.Claim>());
             Console.WriteLine(ss);
             Assert.IsNotNull(ss);
         }

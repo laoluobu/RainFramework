@@ -22,9 +22,9 @@ namespace WMS.Services.Core.Auth
 
             if (userAuth == null)
             {
-                throw new ArgumentException("密码或者账户错误");
+                throw new ArgumentException("密码或者账户错误!");
             }
-            return jWTService.CreateToken("111");
+            return jWTService.CreateToken(userAuth);
         }
     }
 }

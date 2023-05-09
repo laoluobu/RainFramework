@@ -1,5 +1,7 @@
 ﻿#nullable disable
 
+using System.ComponentModel.DataAnnotations;
+
 namespace WMS.Repository.Entity;
 
 public class UserAuth
@@ -14,17 +16,21 @@ public class UserAuth
     /// <summary>
     /// 用户名
     /// </summary>
+    [MaxLength(50)]
     public string Username { get; set; }
 
     /// <summary>
     /// 密码
     /// </summary>
+    [MaxLength(100)]
     public string Password { get; set; }
 
     /// <summary>
     /// 用户登录ip
     /// </summary>
+    [MaxLength(50)]
     public string IpAddress { get; set; }
+
 
     /// <summary>
     /// 创建时间
@@ -44,5 +50,5 @@ public class UserAuth
     /// <summary>
     /// 角色
     /// </summary>
-    public List<Role> Roles { get; set; }
+    public List<Role> Roles { get; set; } = new();
 }

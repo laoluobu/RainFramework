@@ -1,7 +1,10 @@
 ﻿#nullable disable
+
+using System.ComponentModel.DataAnnotations;
+
 namespace WMS.Repository.Entity;
 
-public  class Role
+public class Role
 {
     /// <summary>
     /// 主键id
@@ -11,6 +14,7 @@ public  class Role
     /// <summary>
     /// 角色名
     /// </summary>
+    [MaxLength(50)]
     public string RoleName { get; set; }
 
     /// <summary>
@@ -31,5 +35,5 @@ public  class Role
     /// <summary>
     /// 用户
     /// </summary>
-    public List<UserAuth> UserAuths { get; set; }
+    public List<UserAuth> UserAuths { get; set; } = new();
 }

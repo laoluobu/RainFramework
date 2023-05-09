@@ -8,16 +8,14 @@ using WMS.Services.Core.Auth;
 namespace WMS.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.auth))]
+    [Route("api/[controller]")]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.user))]
     public class LoginController : ControllerBase
     {
-
         private readonly IUserAuthServices userAuthServices;
 
         public LoginController(IUserAuthServices userAuthServices)
         {
-
             this.userAuthServices = userAuthServices;
         }
 

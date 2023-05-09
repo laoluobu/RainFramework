@@ -25,6 +25,7 @@ namespace WMS.Api
                  logging.ReadFrom.Configuration(context.Configuration);
                  logging.Enrich.FromLogContext();
              });
+           
 
             builder.Services.AddCors(options =>
             {
@@ -48,6 +49,7 @@ namespace WMS.Api
                 app.UseSwaggerPkg();
             }
             app.UseAuthentication();
+            
 
             app.UseAuthorization();
 

@@ -2,27 +2,33 @@
 using System.Text;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using WMS.Models.DTO;
+using WMS.Repository.Entity;
 
 namespace WMS.Api.JWT
 {
     public class JWTService : IJWTService
     {
-        public string CreateToken(UserDetailsDTO userDetailsDTO)
+        public string CreateToken(UserAuth userAuth)
         {
-            return CreateToken(userDetailsDTO.Id.ToString());
+            var claims = new List<Claim>()
+            {
+                new Claim("iss", "WMS"),
+                new Claim("sub", userAuth.Id.ToString()),
+                new Claim(ClaimTypes.UserData, userAuth.Username)
+            };
+
+            foreach (var role in userAuth.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+            }
+            return CreateToken(claims);
         }
 
-        public string CreateToken(string subject)
+        public string CreateToken(List<Claim> claims)
         {
             var token = new JsonWebTokenHandler().CreateToken(new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                { 
-                    new Claim("iss", "WMS"), 
-                    new Claim("sub", subject),
-                    new Claim("aub","WMSUser")
-                }, "MyJWT"),
+                Subject = new ClaimsIdentity(claims, "MyJWT"),
                 SigningCredentials = new SigningCredentials(GeneralKey(), SecurityAlgorithms.HmacSha256),
                 Expires = DateTime.Now.AddHours(2)
             });
