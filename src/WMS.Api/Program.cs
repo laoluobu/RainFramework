@@ -2,6 +2,7 @@ using Serilog;
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
 using WMS.MySQL.Repository;
+using WMS.MySQL.Repository.WMSDB;
 
 namespace WMS.Api
 {

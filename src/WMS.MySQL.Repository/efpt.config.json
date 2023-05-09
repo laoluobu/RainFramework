@@ -1,13 +1,13 @@
 ﻿{
    "CodeGenerationMode": 3,
-   "ContextClassName": "auroraContext",
-   "ContextNamespace": null,
+   "ContextClassName": "WMSDBContext",
+   "ContextNamespace": "WMSDB",
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
-   "OutputContextPath": "..\/",
-   "OutputPath": "Models",
+   "OutputContextPath": "DBContext",
+   "OutputPath": "Entity",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "WMS.MySQL.Repository",
    "Schemas": null,
@@ -15,11 +15,19 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "role",
+         "ObjectType": 0
+      },
+      {
+         "Name": "user_auth",
+         "ObjectType": 0
+      },
+      {
          "Name": "user_info",
          "ObjectType": 0
       }
    ],
-   "UiHint": "WMSDB",
+   "UiHint": "WMS",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
