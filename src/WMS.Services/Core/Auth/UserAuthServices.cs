@@ -19,7 +19,6 @@ namespace WMS.Services.Core.Auth
         {
             var ss = dbContext.UserAuths.SingleOrDefault(user => user.Username == userVO.Username && user.Password == userVO.Password);
            
-
             if (ss == null)
             {
                 throw new Exception("密码或者账户错误");
