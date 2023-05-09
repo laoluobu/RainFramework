@@ -1,6 +1,5 @@
 using Serilog;
 using WMS.Api.Configurer;
-using WMS.Api.JWT;
 using WMS.Services;
 
 namespace WMS.Api
@@ -17,16 +16,15 @@ namespace WMS.Api
 
             builder.Services.AddSwagger();
 
-
             builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
 
             builder.Services.AddWMSCore();
 
-           builder.Host.UseSerilog((context, logging) =>
-            {
-                logging.ReadFrom.Configuration(context.Configuration);
-                logging.Enrich.FromLogContext();
-            });
+            builder.Host.UseSerilog((context, logging) =>
+             {
+                 logging.ReadFrom.Configuration(context.Configuration);
+                 logging.Enrich.FromLogContext();
+             });
 
             builder.Services.AddCors(options =>
             {
@@ -34,8 +32,8 @@ namespace WMS.Api
                         builder =>
                         {
                             builder.AllowAnyOrigin()
-                           .SetPreflightMaxAge(TimeSpan.FromSeconds(2520))
-                            .AllowAnyHeader().AllowAnyMethod();
+                           .SetPreflightMaxAge(TimeSpan.FromHours(5))
+                           .AllowAnyHeader().AllowAnyMethod();
                         });
             });
 
