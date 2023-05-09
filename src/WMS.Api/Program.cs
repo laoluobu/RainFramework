@@ -29,7 +29,20 @@ namespace WMS.Api
                 logging.Enrich.FromLogContext();
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                        builder =>
+                        {
+                            builder.AllowAnyOrigin()
+                           .SetPreflightMaxAge(TimeSpan.FromSeconds(2520))
+                            .AllowAnyHeader().AllowAnyMethod();
+                        });
+            });
+
             var app = builder.Build();
+            //∆Ù”√øÁ”Ú«Î«Û
+            app.UseCors();
 
             app.UseSerilogRequestLogging();
 
