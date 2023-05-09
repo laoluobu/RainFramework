@@ -5,6 +5,6 @@ namespace WMS.Services.Core.Auth
 {
     public interface IUserAuthServices
     {
-        string LoginService(UserVO userVO);
+        Task<string> LoginService(UserVO userVO);
     }
 }

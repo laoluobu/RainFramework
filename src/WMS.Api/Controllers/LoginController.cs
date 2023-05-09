@@ -2,6 +2,7 @@
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
 using WMS.Models.VO;
+using WMS.Repository.Entity;
 using WMS.Services.Core.Auth;
 
 namespace WMS.Api.Controllers
@@ -23,8 +24,7 @@ namespace WMS.Api.Controllers
         [HttpPost]
         public async Task<string> Login(UserVO userVO)
         {
-            return userAuthServices.LoginService(userVO);
-            
+            return await userAuthServices.LoginService(userVO);   
         }
     }
 }

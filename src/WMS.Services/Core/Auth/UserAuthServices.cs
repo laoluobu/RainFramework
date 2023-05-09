@@ -1,4 +1,5 @@
-﻿using WMS.Api.JWT;
+﻿using Microsoft.EntityFrameworkCore;
+using WMS.Api.JWT;
 using WMS.Models.VO;
 using WMS.Repository.WMSDB;
 
@@ -15,13 +16,13 @@ namespace WMS.Services.Core.Auth
             this.jWTService = jWTService;
         }
 
-        public string LoginService(UserVO userVO)
+        public async Task<string> LoginService(UserVO userVO)
         {
-            var ss = dbContext.UserAuths.SingleOrDefault(user => user.Username == userVO.Username && user.Password == userVO.Password);
-           
-            if (ss == null)
+            var userAuth = await dbContext.UserAuths.SingleOrDefaultAsync(user => user.Username == userVO.Username && user.Password == userVO.Password);
+
+            if (userAuth == null)
             {
-                throw new Exception("密码或者账户错误");
+                throw new ArgumentException("密码或者账户错误");
             }
             return jWTService.CreateToken("111");
         }
