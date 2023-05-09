@@ -18,7 +18,6 @@ namespace RainFramework.AspNetCore.Core.Auth
         public async Task<string> LoginService(UserVO userVO)
         {
             var userAuth = await dbContext.UserAuths.SingleOrDefaultAsync(user => user.Username == userVO.Username && user.Password == userVO.Password);
-
             if (userAuth == null)
             {
                 throw new ArgumentException("密码或者账户错误!");

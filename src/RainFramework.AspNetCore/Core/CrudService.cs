@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace RainFramework.AspNetCore.Core
-{
-    internal class CrudService 
+{   
+    internal class CrudService
     {
         private DbContext dbContext;
 
@@ -17,9 +17,10 @@ namespace RainFramework.AspNetCore.Core
         }
 
 
-        public void update<TEntity>(T entity) {
+        public void update<TEntity>(TEntity entity) where TEntity : class
+        {
 
-            dbContext.Update<>(entity);
+            dbContext.Update<TEntity>(entity);
         }
     }
 }

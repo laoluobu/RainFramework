@@ -1,13 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WMS.Services.Core.Auth;
+using RainFramework.AspNetCore.Core.Auth;
 
 namespace WMS.ApiTests.JWT
 {
     [TestClass()]
     public class JWTServiceTests
     {
-        private IJWTService service = new JWTService();
+        private IJWTService service = null;
 
         [TestMethod()]
         public void CreateTokenTest()

@@ -16,12 +16,6 @@ public class WMSDBContext : DbContext
 
     public DbSet<UserInfo> UserInfos { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        //打印sql参数
-        optionsBuilder.EnableSensitiveDataLogging();
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder

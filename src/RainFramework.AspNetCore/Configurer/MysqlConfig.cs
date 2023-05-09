@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using WMS.Repository.DBContext;
 
 namespace RainFramework.AspNetCore.Configurer
@@ -19,7 +20,11 @@ namespace RainFramework.AspNetCore.Configurer
                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(
                     maxRetryCount: 5,
                      maxRetryDelay: TimeSpan.FromSeconds(30),
-                       errorNumbersToAdd: null));
+                   errorNumbersToAdd: null));
+
+                //打印sql参数
+                //打印sql参数
+                options.EnableSensitiveDataLogging();
             });
         }
     }
