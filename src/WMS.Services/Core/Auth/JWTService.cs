@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using WMS.Api.Models.DTO;
+using WMS.Models.DTO;
 
 namespace WMS.Api.JWT
 {

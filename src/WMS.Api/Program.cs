@@ -1,7 +1,7 @@
 using Serilog;
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
-using WMS.MySQL.Repository;
+using WMS.Services;
 
 namespace WMS.Api
 {
@@ -17,13 +17,12 @@ namespace WMS.Api
 
             builder.Services.AddSwagger();
 
-            builder.Services.AddSingleton<IJWTService, JWTService>();
-
-            builder.Services.AddJwtBearerPkg();
 
             builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
 
-            builder.Host.UseSerilog((context, logging) =>
+            builder.Services.AddWMSCore();
+
+           builder.Host.UseSerilog((context, logging) =>
             {
                 logging.ReadFrom.Configuration(context.Configuration);
                 logging.Enrich.FromLogContext();

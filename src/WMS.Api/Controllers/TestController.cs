@@ -16,19 +16,16 @@ namespace WMS.Api.Controllers
     {
         private readonly ILogger<TestController> _logger;
 
-        private readonly IJWTService jWTService;
+        
 
         public TestController(ILogger<TestController> logger, IJWTService jWTService)
         {
             _logger = logger;
-            this.jWTService = jWTService;
         }
 
         [HttpGet]
         public string Get()
         {
-           var ss= jWTService.CreateToken("1111");
-            _logger.LogInformation(ss);
             return "2222";
         }
     }

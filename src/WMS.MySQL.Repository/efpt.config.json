@@ -9,7 +9,7 @@
    "OutputContextPath": "DBContext",
    "OutputPath": "Entity",
    "PreserveCasingWithRegex": true,
-   "ProjectRootNamespace": "WMS.MySQL.Repository",
+   "ProjectRootNamespace": "WMS.Repository",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,

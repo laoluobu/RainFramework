@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
+using WMS.Models.VO;
+using WMS.Services.Core.Auth;
 
 namespace WMS.Api.Controllers
 {
@@ -9,17 +11,20 @@ namespace WMS.Api.Controllers
     [ApiExplorerSettings(GroupName = nameof(ApiGroup.auth))]
     public class LoginController : ControllerBase
     {
-        private readonly IJWTService jWTService;
 
-        public LoginController(IJWTService jWTService)
+        private readonly IUserAuthServices userAuthServices;
+
+        public LoginController(IUserAuthServices userAuthServices)
         {
-            this.jWTService = jWTService;
+
+            this.userAuthServices = userAuthServices;
         }
 
         [HttpPost]
-        public string Login(string username, string password)
+        public async Task<string> Login(UserVO userVO)
         {
-            return jWTService.CreateToken(username);
+            return userAuthServices.LoginService(userVO);
+            
         }
     }
 }

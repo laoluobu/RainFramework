@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using WMS.Api.Models.DTO;
+using WMS.Models.DTO;
 
 namespace WMS.Api.JWT
 {

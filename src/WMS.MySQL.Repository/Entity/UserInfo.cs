@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WMS.MySQL.Repository.Entity;
+namespace WMS.Repository.Entity;
 
 public partial class UserInfo
 {

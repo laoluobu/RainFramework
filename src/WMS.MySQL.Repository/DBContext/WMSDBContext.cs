@@ -3,9 +3,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using WMS.MySQL.Repository.Entity;
+using WMS.Repository.Entity;
 
-namespace WMS.MySQL.Repository.WMSDB;
+namespace WMS.Repository.WMSDB;
 
 public partial class WMSDBContext : DbContext
 {
