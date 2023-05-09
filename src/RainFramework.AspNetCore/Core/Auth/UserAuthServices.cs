@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WMS.Api.JWT;
 using WMS.Models.VO;
-using WMS.Repository.WMSDB;
+using WMS.Repository.DBContext;
 
-namespace WMS.Services.Core.Auth
+namespace RainFramework.AspNetCore.Core.Auth
 {
-    public class UserAuthServices : IUserAuthServices
+    internal class UserAuthServices : IUserAuthServices
     {
         private readonly WMSDBContext dbContext;
         private readonly IJWTService jWTService;

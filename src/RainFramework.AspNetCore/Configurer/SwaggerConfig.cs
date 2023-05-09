@@ -1,10 +1,12 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
-namespace WMS.Api.Configurer
+namespace RainFramework.AspNetCore.Configurer
 {
-    internal static class SwaggerConfig
+    public static class SwaggerConfig
     {
-        public static void AddSwagger(this IServiceCollection services)
+        public static void AddSwagger(this IServiceCollection services, string? programName)
         {
             services.AddSwaggerGen(options =>
             {
@@ -18,8 +20,11 @@ namespace WMS.Api.Configurer
                         Title = field.GetValue(apiGroup)?.ToString(),
                     });
                 }
-                var filePath = Path.Combine(AppContext.BaseDirectory, $"{typeof(Program).Assembly.GetName().Name}.xml");
-                options.IncludeXmlComments(filePath, true);
+                if (programName != null)
+                {
+                    var filePath = Path.Combine(AppContext.BaseDirectory, $"{programName}.xml");
+                    options.IncludeXmlComments(filePath, true);
+                }
             });
         }
 

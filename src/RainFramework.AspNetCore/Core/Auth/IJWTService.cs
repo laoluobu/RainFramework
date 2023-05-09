@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using WMS.Models.DTO;
 using WMS.Repository.Entity;
 
-namespace WMS.Api.JWT
+namespace RainFramework.AspNetCore.Core.Auth
 {
     public interface IJWTService
     {

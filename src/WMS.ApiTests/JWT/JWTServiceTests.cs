@@ -1,5 +1,6 @@
-﻿using WMS.Api.JWT;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WMS.Services.Core.Auth;
 
 namespace WMS.ApiTests.JWT
 {

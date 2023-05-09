@@ -1,6 +1,4 @@
-using Serilog;
-using WMS.Api.Configurer;
-using WMS.Services;
+using RainFramework.AspNetCore;
 
 namespace WMS.Api
 {
@@ -12,46 +10,7 @@ namespace WMS.Api
 
             builder.Services.AddControllers();
 
-            builder.Services.AddEndpointsApiExplorer();
-
-            builder.Services.AddSwagger();
-
-            builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
-
-            builder.Services.AddWMSCore();
-
-            builder.Host.UseSerilog((context, logging) =>
-             {
-                 logging.ReadFrom.Configuration(context.Configuration);
-                 logging.Enrich.FromLogContext();
-             });
-           
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                        builder =>
-                        {
-                            builder.AllowAnyOrigin()
-                           .SetPreflightMaxAge(TimeSpan.FromHours(5))
-                           .AllowAnyHeader().AllowAnyMethod();
-                        });
-            });
-
-            var app = builder.Build();
-            //∆Ù”√øÁ”Ú«Î«Û
-            app.UseCors();
-
-            app.UseSerilogRequestLogging();
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwaggerPkg();
-            }
-            app.UseAuthentication();
-            
-
-            app.UseAuthorization();
+            builder.AddWMSCore<Program>(out WebApplication app);
 
             app.MapControllers();
 

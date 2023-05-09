@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WMS.Repository.Entity;
 
-namespace WMS.Repository.WMSDB;
+namespace WMS.Repository.DBContext;
 
 public class WMSDBContext : DbContext
 {

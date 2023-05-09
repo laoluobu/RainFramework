@@ -1,22 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WMS.Api.Configurer;
-using WMS.Models.VO;
+using RainFramework.AspNetCore.Configurer;
 using WMS.Repository.Entity;
 
-namespace WMS.Api.Controllers
+namespace RainFramework.AspNetCore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.user))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.USER))]
     public class UserController : ControllerBase
     {
         [HttpGet, Route("{Id}")]
         public async Task<UserInfo> GetUserInfo(int Id)
         {
-            if (Id == null)
-            {
-                await Console.Out.WriteLineAsync(Id + "");
-            }
             return new UserInfo();
         }
 
@@ -27,9 +22,7 @@ namespace WMS.Api.Controllers
         [HttpGet]
         public async Task<UserInfo> GetUserInfo()
         {
-     
             return new UserInfo();
         }
-
     }
 }

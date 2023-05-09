@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WMS.Api.Configurer;
-using WMS.Api.JWT;
+using RainFramework.AspNetCore.Configurer;
+using RainFramework.AspNetCore.Core.Auth;
 using WMS.Models.VO;
-using WMS.Repository.Entity;
-using WMS.Services.Core.Auth;
 
-namespace WMS.Api.Controllers
+namespace RainFramework.AspNetCore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.user))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.AUTH))]
     public class LoginController : ControllerBase
     {
         private readonly IUserAuthServices userAuthServices;
@@ -22,7 +20,7 @@ namespace WMS.Api.Controllers
         [HttpPost]
         public async Task<string> Login(UserVO userVO)
         {
-            return await userAuthServices.LoginService(userVO);   
+            return await userAuthServices.LoginService(userVO);
         }
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using WMS.Repository.Entity;
 
-namespace WMS.Api.JWT
+namespace RainFramework.AspNetCore.Core.Auth
 {
-    public class JWTService : IJWTService
+    internal class JWTService : IJWTService
     {
         public string CreateToken(UserAuth userAuth)
         {

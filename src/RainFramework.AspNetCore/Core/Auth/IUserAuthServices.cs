@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WMS.Models.VO;
 
-namespace WMS.Services.Core.Auth
+namespace RainFramework.AspNetCore.Core.Auth
 {
     public interface IUserAuthServices
     {

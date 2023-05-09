@@ -1,34 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using WMS.Api.JWT;
-using WMS.Repository.WMSDB;
-using WMS.Services.Core.Auth;
+using RainFramework.AspNetCore.Core.Auth;
 
-namespace WMS.Services
+namespace RainFramework.AspNetCore.Configurer
 {
-    public static class ServiceProvider
+    internal static class JwtConfig
     {
-        public static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
-        {
-            if (string.IsNullOrEmpty(DbConnectString))
-            {
-                throw new ArgumentNullException(nameof(DbConnectString));
-            }
-
-            services.AddDbContextPool<WMSDBContext>(options =>
-            {
-                options.UseMySql(DbConnectString, ServerVersion.Parse("8.0.33-mysql"),
-                   optionsBuilder => optionsBuilder.EnableRetryOnFailure(
-                    maxRetryCount: 5,
-                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                       errorNumbersToAdd: null));
-            });
-        }
-
-        private static void AddJwtBearerPkg(this IServiceCollection services)
+        public static void AddJwtBearerPkg(this IServiceCollection services)
         {
             services.AddAuthentication(options =>
             {
@@ -58,12 +38,6 @@ namespace WMS.Services
                 };
             });
             services.AddSingleton<IJWTService, JWTService>();
-        }
-
-        public static void AddWMSCore(this IServiceCollection services)
-        {
-            services.AddJwtBearerPkg();
-            services.AddTransient<IUserAuthServices, UserAuthServices>();
         }
     }
 }
