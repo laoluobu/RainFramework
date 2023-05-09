@@ -1,7 +1,7 @@
 using Serilog;
 using WMS.Api.Configurer;
 using WMS.Api.JWT;
-using WMS.Mysql.Repository;
+using WMS.MySQL.Repository;
 
 namespace WMS.Api
 {
