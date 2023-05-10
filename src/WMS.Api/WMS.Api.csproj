@@ -33,7 +33,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.AspNetCore\RainFramework.AspNetCore.csproj" />
-    <ProjectReference Include="..\WMS.Data\WMS.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

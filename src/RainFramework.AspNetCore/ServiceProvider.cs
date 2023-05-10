@@ -17,7 +17,8 @@ namespace RainFramework.AspNetCore
             builder.Services.AddSwagger(typeof(T).Assembly.GetName().Name);
             builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
             builder.Services.AddJwtBearerPkg();
-            builder.Services.AddTransient<IUserAuthServices, UserAuthServices>();
+            builder.Services.AddTransient<IUserAuthService, UserAuthService>();
+            builder.Services.AddTransient<IUserInfoService, USerInfoService>();
             builder.Services.AddMyCors();
 
             application = builder.Build();

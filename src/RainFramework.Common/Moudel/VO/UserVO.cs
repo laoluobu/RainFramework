@@ -1,7 +1,7 @@
 ﻿#nullable disable
 using System.ComponentModel.DataAnnotations;
 
-namespace WMS.Models.VO
+namespace RainFramework.Common.Moudel.VO
 {
     public class UserVO
     {

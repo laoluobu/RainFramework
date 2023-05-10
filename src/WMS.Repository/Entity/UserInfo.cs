@@ -6,12 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WMS.Repository.Entity;
 
-public  class UserInfo
+public class UserInfo
 {
     /// <summary>
     /// 用户ID
     /// </summary>
     public int Id { get; set; }
+
+
+    public int UserAuthId  { get; set; }
 
     /// <summary>
     /// 邮箱

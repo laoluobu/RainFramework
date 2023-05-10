@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace WMS.Models.DTO
+namespace RainFramework.Common.Moudel.DTO
 {
     public record UserDetailsDTO
     {

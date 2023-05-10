@@ -13,8 +13,8 @@ namespace RainFramework.AspNetCore.Core.Auth
             var claims = new List<Claim>()
             {
                 new Claim("iss", "WMS"),
-                new Claim("sub", userAuth.Id.ToString()),
-                new Claim(ClaimTypes.UserData, userAuth.Username)
+                new Claim(ClaimTypes.NameIdentifier, userAuth.Id.ToString()),
+                new Claim(ClaimTypes.Name, userAuth.Username),
             };
 
             foreach (var role in userAuth.Roles)

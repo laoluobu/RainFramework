@@ -8,10 +8,8 @@ public class UserAuth
 {
     public int Id { get; set; }
 
-    /// <summary>
-    /// 用户信息id
-    /// </summary>
-    public UserInfo UserInfo { get; set; }
+
+    public UserInfo? UserInfo { get; set; }
 
     /// <summary>
     /// 用户名

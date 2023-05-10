@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using WMS.Models.DTO;
 using WMS.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Core.Auth

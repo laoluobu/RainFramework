@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RainFramework.Common\RainFramework.Common.csproj" />
     <ProjectReference Include="..\WMS.Repository\WMS.Repository.csproj" />
   </ItemGroup>
 
