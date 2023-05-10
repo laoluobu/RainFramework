@@ -1,10 +1,11 @@
 ﻿#nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using RainFramework.Common.Base;
 
 namespace WMS.Repository.Entity;
 
-public class Role
+public class Role: EntityBase
 {
     /// <summary>
     /// 主键id

@@ -1,10 +1,9 @@
-﻿#nullable disable
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using RainFramework.Common.Base;
 
 namespace WMS.Repository.Entity;
 
-public class UserAuth
+public class UserAuth : EntityBase
 {
     public int Id { get; set; }
 

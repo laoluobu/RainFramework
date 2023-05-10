@@ -2,11 +2,10 @@
 
 namespace RainFramework.Common.Base
 {
-    public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : class
+    public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
     {
         private TDbContext dbContext;
         protected readonly DbSet<TEntity> dbSet;
-
 
         public CrudService(TDbContext dbContext)
         {
@@ -14,25 +13,22 @@ namespace RainFramework.Common.Base
             dbSet = dbContext.Set<TEntity>();
         }
 
-        public async Task<bool> UpdatesAsync(TEntity entity)
+        public async Task<int> UpdatesAsync(TEntity entity)
         {
-            dbContext.Update(entity);
-            var result = await dbContext.SaveChangesAsync();
-            return result > 0;
+            dbSet.Update(entity);
+            return await dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> AddAsync(TEntity entity)
+        public async Task<int> AddAsync(TEntity entity)
         {
-            await dbContext.AddAsync(entity);
-            var result = await dbContext.SaveChangesAsync();
-            return result > 0;
+            await dbSet.AddAsync(entity);
+            return await dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> RemoveAsync(TEntity entity)
+        public async Task<int> RemoveAsync(TEntity entity)
         {
-            dbContext.Remove(entity);
-            var result = await dbContext.SaveChangesAsync();
-            return result > 0;
+            dbSet.Remove(entity);
+            return await dbContext.SaveChangesAsync();
         }
 
         public async Task<TEntity?> FindAsync(object key)

@@ -20,6 +20,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPost]
         public async Task<ResultVO<string>> Login(UserVO userVO)
         {
+            var requestIp = Request.HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
             var token = await userAuthServices.LoginService(userVO);
             return ResultVO<string>.Ok(token);
         }

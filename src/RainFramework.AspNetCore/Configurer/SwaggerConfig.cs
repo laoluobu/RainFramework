@@ -11,7 +11,6 @@ namespace RainFramework.AspNetCore.Configurer
             services.AddSwaggerGen(options =>
             {
                 var apiGroup = new ApiGroup();
-
                 foreach (var field in typeof(ApiGroup).GetFields())
                 {
                     options.SwaggerDoc(field.Name, new OpenApiInfo
@@ -25,6 +24,27 @@ namespace RainFramework.AspNetCore.Configurer
                     var filePath = Path.Combine(AppContext.BaseDirectory, $"{programName}.xml");
                     options.IncludeXmlComments(filePath, true);
                 }
+
+                //增加JWT Header
+                var scheme = new OpenApiSecurityScheme()
+                {
+                    Description = "Authorization header. \r\nExample: 'Bearer 12345abcdef'",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Authorization"
+                    },
+                    Scheme = "oauth2",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                };
+                options.AddSecurityDefinition("Authorization", scheme);
+                var requirement = new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                };
+                options.AddSecurityRequirement(requirement);
             });
         }
 

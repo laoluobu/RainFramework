@@ -3,10 +3,11 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RainFramework.Common.Base;
 
 namespace WMS.Repository.Entity;
 
-public class UserInfo
+public class UserInfo : EntityBase
 {
     /// <summary>
     /// 用户ID

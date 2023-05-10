@@ -15,6 +15,7 @@ namespace RainFramework.AspNetCore.Core.Auth
 
         public async Task<UserInfo?> FindUserInfoByUserId(int userId)
         {
+           
           return await dbContext.UserInfos.SingleOrDefaultAsync(o => o.UserAuthId == userId);
         }
     }

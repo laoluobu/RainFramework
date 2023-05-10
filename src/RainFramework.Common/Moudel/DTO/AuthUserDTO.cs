@@ -13,6 +13,8 @@ namespace RainFramework.Common.Moudel.DTO
 
         public string Username { get; init; }
 
+        public string IpAddress { get; set; }
+
         public List<string> Roles { get; init; } = new();
     }
 }
