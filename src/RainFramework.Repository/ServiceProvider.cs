@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using WMS.Repository.DBContext;
 
-namespace RainFramework.AspNetCore.Configurer
+namespace RainFramework.Repository
 {
-    internal static class MysqlConfig
+    public static class ServiceProvider
     {
         public static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
         {
@@ -14,17 +13,17 @@ namespace RainFramework.AspNetCore.Configurer
                 throw new ArgumentNullException(nameof(DbConnectString));
             }
 
-            services.AddDbContextPool<WMSDBContext>(options =>
+            services.AddDbContextPool<MySqlContext>(options =>
             {
                 options.UseMySql(DbConnectString, ServerVersion.Parse("8.0.33-mysql"),
                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(
                     maxRetryCount: 5,
-                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                   errorNumbersToAdd: null));
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null).UseNewtonsoftJson());
 
                 //打印sql参数
-                //打印sql参数
                 options.EnableSensitiveDataLogging();
+                options.EnableDetailedErrors();
             });
         }
     }

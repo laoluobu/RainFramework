@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RainFramework.Repository.Entity;
 using WMS.Repository.Entity;
 
 namespace WMS.Repository.DBContext;
 
-public class WMSDBContext : DbContext
+public class MySqlContext : DbContext
 {
-    public WMSDBContext(DbContextOptions<WMSDBContext> options)
+    public MySqlContext(DbContextOptions<MySqlContext> options)
         : base(options)
     {
     }
@@ -15,6 +16,8 @@ public class WMSDBContext : DbContext
     public DbSet<UserAuth> UserAuths { get; set; }
 
     public DbSet<UserInfo> UserInfos { get; set; }
+
+    public DbSet<SysMenu> SysMenus { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

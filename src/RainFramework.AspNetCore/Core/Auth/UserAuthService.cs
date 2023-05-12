@@ -6,12 +6,12 @@ using WMS.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
-    internal class UserAuthService : CrudService<WMSDBContext, UserAuth>, IUserAuthService
+    internal class UserAuthService : CrudService<MySqlContext, UserAuth>, IUserAuthService
     {
-        private readonly WMSDBContext dbContext;
+        private readonly MySqlContext dbContext;
         private readonly IJWTService jWTService;
 
-        public UserAuthService(WMSDBContext dbContext, IJWTService jWTService):base(dbContext)
+        public UserAuthService(MySqlContext dbContext, IJWTService jWTService):base(dbContext)
         {
             this.dbContext = dbContext;
             this.jWTService = jWTService;

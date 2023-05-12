@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WMS.Repository.DBContext;
 
 #nullable disable
 
-namespace WMS.Repository.Migrations
+namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(WMSDBContext))]
-    partial class WMSDBContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MySqlContext))]
+    [Migration("20230512080623_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,26 @@ namespace WMS.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Component")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Meta")
+                        .HasColumnType("json");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SysMenus");
+                });
 
             modelBuilder.Entity("RoleUserAuth", b =>
                 {

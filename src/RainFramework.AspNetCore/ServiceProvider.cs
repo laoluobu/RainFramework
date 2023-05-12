@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
 using Serilog;
+using RainFramework.Repository;
 
 namespace RainFramework.AspNetCore
 {

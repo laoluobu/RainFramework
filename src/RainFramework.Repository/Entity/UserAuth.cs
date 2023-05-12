@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using RainFramework.Common.Base;
+using RainFramework.Repository.Entity;
 
 namespace WMS.Repository.Entity;
 

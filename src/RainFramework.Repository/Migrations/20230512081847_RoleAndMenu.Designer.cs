@@ -8,11 +8,11 @@ using WMS.Repository.DBContext;
 
 #nullable disable
 
-namespace WMS.Repository.Migrations
+namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(WMSDBContext))]
-    [Migration("20230510072721_11111222222")]
-    partial class _11111222222
+    [DbContext(typeof(MySqlContext))]
+    [Migration("20230512081847_RoleAndMenu")]
+    partial class RoleAndMenu
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,31 @@ namespace WMS.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Component")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Meta")
+                        .HasColumnType("json");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("SysMenus");
+                });
 
             modelBuilder.Entity("RoleUserAuth", b =>
                 {
@@ -134,6 +159,13 @@ namespace WMS.Repository.Migrations
                     b.ToTable("UserInfos");
                 });
 
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.HasOne("WMS.Repository.Entity.Role", null)
+                        .WithMany("SysMenus")
+                        .HasForeignKey("RoleId");
+                });
+
             modelBuilder.Entity("RoleUserAuth", b =>
                 {
                     b.HasOne("WMS.Repository.Entity.Role", null)
@@ -156,6 +188,11 @@ namespace WMS.Repository.Migrations
                         .HasForeignKey("WMS.Repository.Entity.UserInfo", "UserAuthId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WMS.Repository.Entity.Role", b =>
+                {
+                    b.Navigation("SysMenus");
                 });
 
             modelBuilder.Entity("WMS.Repository.Entity.UserAuth", b =>

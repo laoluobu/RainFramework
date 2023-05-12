@@ -2,20 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WMS.Repository.DBContext;
 
 #nullable disable
 
-namespace WMS.Repository.Migrations
+namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(WMSDBContext))]
-    [Migration("20230509074655_Init")]
-    partial class Init
+    [DbContext(typeof(MySqlContext))]
+    partial class MySqlContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +21,46 @@ namespace WMS.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Component")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Meta")
+                        .HasColumnType("json");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("SysMenus");
+                });
+
+            modelBuilder.Entity("RoleSysMenu", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SysMenusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesId", "SysMenusId");
+
+                    b.HasIndex("SysMenusId");
+
+                    b.ToTable("RoleSysMenu");
+                });
 
             modelBuilder.Entity("RoleUserAuth", b =>
                 {
@@ -53,7 +90,8 @@ namespace WMS.Repository.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("RoleName")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime(6)");
@@ -73,26 +111,27 @@ namespace WMS.Repository.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("IpAddress")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("LastLoginTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserInfoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserInfoId");
 
                     b.ToTable("UserAuths");
                 });
@@ -104,23 +143,56 @@ namespace WMS.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<bool>("IsDisable")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Nickname")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("UserAuthId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserAuthId")
+                        .IsUnique();
+
                     b.ToTable("UserInfos");
+                });
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.HasOne("RainFramework.Repository.Entity.SysMenu", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("RoleSysMenu", b =>
+                {
+                    b.HasOne("WMS.Repository.Entity.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RainFramework.Repository.Entity.SysMenu", null)
+                        .WithMany()
+                        .HasForeignKey("SysMenusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RoleUserAuth", b =>
@@ -138,12 +210,22 @@ namespace WMS.Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WMS.Repository.Entity.UserInfo", b =>
+                {
+                    b.HasOne("WMS.Repository.Entity.UserAuth", null)
+                        .WithOne("UserInfo")
+                        .HasForeignKey("WMS.Repository.Entity.UserInfo", "UserAuthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.Navigation("Children");
+                });
+
             modelBuilder.Entity("WMS.Repository.Entity.UserAuth", b =>
                 {
-                    b.HasOne("WMS.Repository.Entity.UserInfo", "UserInfo")
-                        .WithMany()
-                        .HasForeignKey("UserInfoId");
-
                     b.Navigation("UserInfo");
                 });
 #pragma warning restore 612, 618

@@ -5,10 +5,10 @@ using WMS.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
-    internal class USerInfoService : CrudService<WMSDBContext,UserInfo>, IUserInfoService
+    internal class USerInfoService : CrudService<MySqlContext,UserInfo>, IUserInfoService
     {
-        private readonly WMSDBContext dbContext;
-        public USerInfoService(WMSDBContext dbContext) : base(dbContext)
+        private readonly MySqlContext dbContext;
+        public USerInfoService(MySqlContext dbContext) : base(dbContext)
         {
             this.dbContext = dbContext;
         }

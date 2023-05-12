@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using RainFramework.Common.Base;
+using RainFramework.Repository.Entity;
 
 namespace WMS.Repository.Entity;
 
@@ -37,4 +38,10 @@ public class Role: EntityBase
     /// 用户
     /// </summary>
     public List<UserAuth> UserAuths { get; set; } = new();
+
+
+    /// <summary>
+    /// 用户
+    /// </summary>
+    public List<SysMenu> SysMenus { get; set; } = new();
 }
