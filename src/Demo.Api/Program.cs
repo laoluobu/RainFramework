@@ -14,7 +14,7 @@ namespace Demo.Api
 
             builder.Services.AddControllers();
 
-            builder.AddWMSCore<Program>(out WebApplication app);
+            builder.AddRainFrameworkCore<Program>(out WebApplication app);
 
             app.MapControllers();
 

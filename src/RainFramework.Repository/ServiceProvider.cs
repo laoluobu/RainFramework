@@ -6,7 +6,13 @@ namespace RainFramework.Repository
 {
     public static class ServiceProvider
     {
-        private static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
+        /// <summary>
+        /// 提供连接池
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="DbConnectString"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
         {
             if (string.IsNullOrEmpty(DbConnectString))
             {
@@ -27,6 +33,12 @@ namespace RainFramework.Repository
             });
         }
 
+        /// <summary>
+        /// 普通连接
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="DbConnectString"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void AddBaseDBContext(this IServiceCollection services, string DbConnectString)
         {
             if (string.IsNullOrEmpty(DbConnectString))

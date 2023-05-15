@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.Common.Base;

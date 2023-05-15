@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
 
@@ -12,12 +13,13 @@ namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static void AddWMSCore<T>(this WebApplicationBuilder builder, out WebApplication application)
+        public static void AddRainFrameworkCore<T>(this WebApplicationBuilder builder, out WebApplication application)
         {
             builder.Host.UseSerilogger();
             builder.Services.AddSwagger(typeof(T).Assembly.GetName().Name);          
             builder.Services.AddJwtBearerPkg();
-            builder.Services.AddBaseDBContext(builder.Configuration.GetConnectionString("Mysql"));
+            builder.Services.AddSingleton<IJWTService, JWTService>();
+            builder.Services.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"));
             builder.Services.AddTransient<IUserAuthService, UserAuthService>();
             builder.Services.AddTransient<IUserInfoService, UserInfoService>();
             builder.Services.AddTransient<IMenuService, MenuService>();

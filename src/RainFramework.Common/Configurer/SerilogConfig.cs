@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Serilog;
 
-namespace RainFramework.AspNetCore.Configurer
+namespace RainFramework.Common.Configurer
 {
-    internal static class SerilogConfig
+    public static class SerilogConfig
     {
         public static void UseSerilogger(this ConfigureHostBuilder Host)
         {

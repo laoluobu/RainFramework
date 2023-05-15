@@ -50,7 +50,6 @@ namespace RainFramework.AspNetCore.Configurer
                 options.AddSecurityRequirement(requirement);
             });
         }
-
         public static void UseSwaggerPkg(this IApplicationBuilder app)
         {
             app.UseSwagger();

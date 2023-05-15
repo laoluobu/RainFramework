@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using RainFramework.AspNetCore.Core.Auth;
 
-namespace RainFramework.AspNetCore.Configurer
+
+namespace RainFramework.Common.Configurer
 {
-    internal static class JwtConfig
+    public static class JwtConfig
     {
         public static void AddJwtBearerPkg(this IServiceCollection services)
         {
@@ -37,7 +37,6 @@ namespace RainFramework.AspNetCore.Configurer
                     }
                 };
             });
-            services.AddSingleton<IJWTService, JWTService>();
         }
     }
 }

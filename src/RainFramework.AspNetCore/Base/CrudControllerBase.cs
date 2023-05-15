@@ -2,10 +2,10 @@
 using RainFramework.Common.Base;
 using RainFramework.Common.Moudel.VO;
 
-namespace RainFramework.AspNetCore.Controllers
+namespace RainFramework.AspNetCore.Base
 {
     [Route("api/[controller]")]
-    public class CrudControllerBase<TEntity>: AuthControllerBase where TEntity : EntityBase 
+    public class CrudControllerBase<TEntity> : AuthControllerBase where TEntity : EntityBase
     {
         private ICrudService<TEntity> crudService;
 
