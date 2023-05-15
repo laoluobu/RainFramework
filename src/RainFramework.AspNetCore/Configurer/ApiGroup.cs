@@ -6,6 +6,5 @@
 
         public const string TEST = "测试接口";
 
-        public const string WMS = "用户信息接口";
     }
 }
