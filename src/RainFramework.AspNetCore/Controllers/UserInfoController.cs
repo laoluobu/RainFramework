@@ -8,11 +8,8 @@ using RainFramework.Common.Moudel.VO;
 using WMS.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Controllers
-{
-    [ApiController]
-    [Route("api/[controller]")]
-    [Authorize]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.USER))]
+{ 
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
     public class UserInfoController : CrudControllerBase<UserInfo>
     {
         private IUserInfoService userInfoService;
@@ -27,11 +24,8 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResultVO<UserInfo>> GetUserInfo()
+        public async Task<ResultVO<UserInfo>> GetCurrentUserInfo()
         {
-            var s = User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value;
-            await Console.Out.WriteLineAsync(RequestUser.ToString());
-
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
             return ResultVO<UserInfo>.Ok(userInfo);
         }

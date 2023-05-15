@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RainFramework.Common.Base;
 using WMS.Repository.Entity;
@@ -23,7 +21,7 @@ namespace RainFramework.Repository.Entity
         /// <summary>
         /// 父菜单
         /// </summary>
-        public SysMenu Parent { get; set; }
+        public SysMenu? Parent { get; set; }
 
         /// <summary>
         /// 子菜单

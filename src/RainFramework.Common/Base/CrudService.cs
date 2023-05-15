@@ -35,5 +35,10 @@ namespace RainFramework.Common.Base
         {
             return await dbSet.FindAsync(key);
         }
+
+        public async Task<IEnumerable<TEntity?>> FindAll()
+        {
+            return await dbSet.ToListAsync();
+        }
     }
 }

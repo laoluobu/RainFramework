@@ -7,7 +7,7 @@ namespace RainFramework.AspNetCore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.AUTH))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
     public class LoginController : ControllerBase
     {
         private readonly IUserAuthService userAuthServices;
@@ -17,6 +17,11 @@ namespace RainFramework.AspNetCore.Controllers
             this.userAuthServices = userAuthServices;
         }
 
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="userVO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ResultVO<string>> Login(UserVO userVO)
         {

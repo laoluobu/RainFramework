@@ -1,4 +1,6 @@
-﻿namespace RainFramework.Common.Moudel.VO
+﻿using System.Text.Json.Serialization;
+
+namespace RainFramework.Common.Moudel.VO
 {
     public class ResultVO<T>
     {

@@ -24,6 +24,9 @@ namespace RainFramework.AspNetCore.Configurer
                     var filePath = Path.Combine(AppContext.BaseDirectory, $"{programName}.xml");
                     options.IncludeXmlComments(filePath, true);
                 }
+           
+                var BasePath = Path.Combine(AppContext.BaseDirectory, "RainFramework.AspNetCore.xml");
+                options.IncludeXmlComments(BasePath, true);
 
                 //增加JWT Header
                 var scheme = new OpenApiSecurityScheme()

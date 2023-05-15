@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
-using Serilog;
 using RainFramework.Repository;
+using Serilog;
 
 namespace RainFramework.AspNetCore
 {
@@ -19,7 +19,9 @@ namespace RainFramework.AspNetCore
             builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
             builder.Services.AddJwtBearerPkg();
             builder.Services.AddTransient<IUserAuthService, UserAuthService>();
-            builder.Services.AddTransient<IUserInfoService, USerInfoService>();
+            builder.Services.AddTransient<IUserInfoService, UserInfoService>();
+            builder.Services.AddTransient<IMenuService, MenuService>();
+            builder.Services.AddTransient<IRoleService, RoleService>();
             builder.Services.AddMyCors();
 
             application = builder.Build();
