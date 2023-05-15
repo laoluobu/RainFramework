@@ -12,6 +12,7 @@ namespace RainFramework.AspNetCore.Controllers
         {
             Username = User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
             Id = int.Parse(User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)!.Value),
+            Roles = User.Claims.Where(o=>o.Type == ClaimTypes.Role).Select(o=>o.Value).ToList()
         };
     }
 }

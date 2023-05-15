@@ -1,6 +1,6 @@
 ﻿using RainFramework.Common.Base;
 using RainFramework.Repository.Entity;
-using WMS.Repository.Entity;
+
 
 namespace RainFramework.AspNetCore.Core.Auth
 {

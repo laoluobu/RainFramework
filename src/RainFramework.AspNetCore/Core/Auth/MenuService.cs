@@ -1,19 +1,18 @@
 ﻿using System.Data;
 using RainFramework.Common.Base;
+using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
-using WMS.Repository.DBContext;
+using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
-    internal class MenuService : CrudService<MySqlContext, SysMenu>, IMenuService
+    internal class MenuService : CrudService<BaseDBContext, SysMenu>, IMenuService
     {
-        private readonly MySqlContext dbContext;
 
         private readonly IRoleService roleService;
 
-        public MenuService(MySqlContext dbContext, IRoleService roleService) : base(dbContext)
+        public MenuService(BaseDBContext daseDBContext, IRoleService roleService) : base(daseDBContext)
         {
-            this.dbContext = dbContext;
             this.roleService = roleService;
         }
 

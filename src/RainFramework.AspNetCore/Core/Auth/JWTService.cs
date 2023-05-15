@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using WMS.Repository.Entity;
+using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Controllers
@@ -20,9 +21,10 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<SysMenu>?> GetCurrentUserMenus()
+        public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
         {
-            return await menuService.FindEenuByRoleNames(RequestUser.Roles);
+            var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
+            return ResultVO<IEnumerable<SysMenu>>.Ok(menus);
         }
     }
 }

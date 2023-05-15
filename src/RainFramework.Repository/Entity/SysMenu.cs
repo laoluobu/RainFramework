@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RainFramework.Common.Base;
-using WMS.Repository.Entity;
 
 namespace RainFramework.Repository.Entity
 {

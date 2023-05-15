@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using RainFramework.AspNetCore;
+using RainFramework.Repository;
+using RainFramework.Repository.DBContext;
+using static RainFramework.Repository.DBContext.BaseDBContext;
 
-namespace WMS.Api
+namespace Demo.Api
 {
     public class Program
     {

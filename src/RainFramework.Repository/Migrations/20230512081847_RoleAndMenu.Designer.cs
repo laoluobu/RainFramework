@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WMS.Repository.DBContext;
+using RainFramework.Repository.DBContext;
 
 #nullable disable
 
 namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(MySqlContext))]
+    [DbContext(typeof(BaseDBContext))]
     [Migration("20230512081847_RoleAndMenu")]
     partial class RoleAndMenu
     {

@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RainFramework.Repository.Entity;
-using WMS.Repository.Entity;
 
-namespace WMS.Repository.DBContext;
+namespace RainFramework.Repository.DBContext;
 
-public class MySqlContext : DbContext
+/// <summary>
+/// 框架共用层DBContext
+/// </summary>
+public class BaseDBContext : DbContext
 {
-    public MySqlContext(DbContextOptions<MySqlContext> options)
-        : base(options)
+    public BaseDBContext(DbContextOptions<BaseDBContext> options) : base(options)
     {
     }
 

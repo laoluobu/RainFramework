@@ -5,10 +5,10 @@ using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.Common.Base;
 using RainFramework.Common.Moudel.VO;
-using WMS.Repository.Entity;
+using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Controllers
-{ 
+{
     [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
     public class UserInfoController : CrudControllerBase<UserInfo>
     {

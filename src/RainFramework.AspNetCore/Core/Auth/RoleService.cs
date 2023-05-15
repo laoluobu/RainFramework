@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Base;
-using WMS.Repository.DBContext;
-using WMS.Repository.Entity;
+using RainFramework.Repository.DBContext;
+using RainFramework.Repository.Entity;
+using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
-    internal class RoleService : CrudService<MySqlContext, Role>, IRoleService
+    internal class RoleService : CrudService<BaseDBContext, Role>, IRoleService
     {
-        private readonly MySqlContext dbContext;
-
-        public RoleService(MySqlContext dbContext) : base(dbContext)
+        public RoleService(BaseDBContext daseDBContext) : base(daseDBContext)
         {
-            this.dbContext = dbContext;
         }
 
         public async Task<Role?> FindRoleByName(string name)

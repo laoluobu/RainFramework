@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using RainFramework.Common.Base;
 
-namespace WMS.Repository.Entity;
+namespace RainFramework.Repository.Entity;
 
 public class UserAuth : EntityBase
 {

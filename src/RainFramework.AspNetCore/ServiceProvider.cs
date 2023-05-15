@@ -15,9 +15,9 @@ namespace RainFramework.AspNetCore
         public static void AddWMSCore<T>(this WebApplicationBuilder builder, out WebApplication application)
         {
             builder.Host.UseSerilogger();
-            builder.Services.AddSwagger(typeof(T).Assembly.GetName().Name);
-            builder.Services.AddMySQLDbPool(builder.Configuration.GetConnectionString("Mysql"));
+            builder.Services.AddSwagger(typeof(T).Assembly.GetName().Name);          
             builder.Services.AddJwtBearerPkg();
+            builder.Services.AddBaseDBContext(builder.Configuration.GetConnectionString("Mysql"));
             builder.Services.AddTransient<IUserAuthService, UserAuthService>();
             builder.Services.AddTransient<IUserInfoService, UserInfoService>();
             builder.Services.AddTransient<IMenuService, MenuService>();

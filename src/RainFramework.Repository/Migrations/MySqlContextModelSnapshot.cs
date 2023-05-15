@@ -3,13 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WMS.Repository.DBContext;
+using RainFramework.Repository.DBContext;
 
 #nullable disable
 
 namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(MySqlContext))]
+    [DbContext(typeof(BaseDBContext))]
     partial class MySqlContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

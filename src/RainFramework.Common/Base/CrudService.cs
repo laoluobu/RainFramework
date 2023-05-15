@@ -4,7 +4,7 @@ namespace RainFramework.Common.Base
 {
     public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
     {
-        private TDbContext dbContext;
+        protected TDbContext dbContext;
         protected readonly DbSet<TEntity> dbSet;
 
         public CrudService(TDbContext dbContext)

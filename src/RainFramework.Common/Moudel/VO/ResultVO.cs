@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace RainFramework.Common.Moudel.VO
+﻿namespace RainFramework.Common.Moudel.VO
 {
     public class ResultVO<T>
     {
@@ -39,7 +37,7 @@ namespace RainFramework.Common.Moudel.VO
             return new ResultVO<T>
             {
                 Data = default,
-                Code = 400,
+                Code = 40000,
                 Message = msg
             };
         }

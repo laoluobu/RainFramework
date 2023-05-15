@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using RainFramework.Common.Base;
 
-namespace WMS.Repository.Entity;
+namespace RainFramework.Repository.Entity;
 
 public class UserInfo : EntityBase
 {
@@ -15,7 +15,7 @@ public class UserInfo : EntityBase
     public int Id { get; set; }
 
 
-    public int UserAuthId  { get; set; }
+    public int UserAuthId { get; set; }
 
     /// <summary>
     /// 邮箱
