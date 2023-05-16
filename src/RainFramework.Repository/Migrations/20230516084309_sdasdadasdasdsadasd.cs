@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RainFramework.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class sdasdadasdasdsadasd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,16 +40,24 @@ namespace RainFramework.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Path = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    Path = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Component = table.Column<string>(type: "longtext", nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    Component = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Meta = table.Column<string>(type: "json", nullable: true, collation: "utf8mb4_0900_ai_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Meta = table.Column<string>(type: "json", nullable: false, collation: "utf8mb4_0900_ai_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    Hidden = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    OrderNum = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SysMenus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SysMenus_SysMenus_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "SysMenus",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
@@ -73,6 +81,32 @@ namespace RainFramework.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserAuths", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+
+            migrationBuilder.CreateTable(
+                name: "RoleSysMenu",
+                columns: table => new
+                {
+                    RolesId = table.Column<int>(type: "int", nullable: false),
+                    SysMenusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleSysMenu", x => new { x.RolesId, x.SysMenusId });
+                    table.ForeignKey(
+                        name: "FK_RoleSysMenu_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleSysMenu_SysMenus_SysMenusId",
+                        column: x => x.SysMenusId,
+                        principalTable: "SysMenus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
@@ -133,9 +167,19 @@ namespace RainFramework.Repository.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RoleSysMenu_SysMenusId",
+                table: "RoleSysMenu",
+                column: "SysMenusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RoleUserAuth_UserAuthsId",
                 table: "RoleUserAuth",
                 column: "UserAuthsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SysMenus_ParentId",
+                table: "SysMenus",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserInfos_UserAuthId",
@@ -148,13 +192,16 @@ namespace RainFramework.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "RoleSysMenu");
+
+            migrationBuilder.DropTable(
                 name: "RoleUserAuth");
 
             migrationBuilder.DropTable(
-                name: "SysMenus");
+                name: "UserInfos");
 
             migrationBuilder.DropTable(
-                name: "UserInfos");
+                name: "SysMenus");
 
             migrationBuilder.DropTable(
                 name: "Roles");

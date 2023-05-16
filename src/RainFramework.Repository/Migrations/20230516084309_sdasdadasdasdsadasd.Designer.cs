@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RainFramework.Repository.DBContext;
 
@@ -10,9 +11,11 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(BaseDBContext))]
-    partial class MySqlContextModelSnapshot : ModelSnapshot
+    [Migration("20230516084309_sdasdadasdasdsadasd")]
+    partial class sdasdadasdasdsadasd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

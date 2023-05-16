@@ -37,14 +37,15 @@ namespace RainFramework.AspNetCore.Base
         }
 
         /// <summary>
-        /// 获取所有实体
+        /// 添加实体
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultVO<IEnumerable<TEntity>>> FindAllAsync()
+        public async Task<ResultVO<IEnumerable<TEntity>>> Add(TEntity entity)
         {
-            var entity = await crudService.FindAll();
-            return ResultVO<IEnumerable<TEntity>>.Ok(entity);
+            var count=await crudService.AddAsync(entity);
+
+            return count > 0 ? ResultVO<IEnumerable<TEntity>>.Ok() : ResultVO<IEnumerable<TEntity>>.Fail($"add {entity.GetType().Name} Errr.");
         }
     }
 }

@@ -22,6 +22,16 @@
             };
         }
 
+        public static ResultVO<T> Ok()
+        {
+            return new ResultVO<T>
+            {
+                Data = default,
+                Code = 20000,
+                Message = "Success"
+            };
+        }
+
         public static ResultVO<T> Fail(Exception exception)
         {
             return Fail(exception.Message);

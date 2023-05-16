@@ -11,8 +11,8 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(BaseDBContext))]
-    [Migration("20230512083739_ParentAndChildren")]
-    partial class ParentAndChildren
+    [Migration("20230516090059_sda")]
+    partial class sda
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,62 +25,7 @@ namespace RainFramework.Repository.Migrations
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Component")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Meta")
-                        .HasColumnType("json");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("SysMenus");
-                });
-
-            modelBuilder.Entity("RoleSysMenu", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SysMenusId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RolesId", "SysMenusId");
-
-                    b.HasIndex("SysMenusId");
-
-                    b.ToTable("RoleSysMenu");
-                });
-
-            modelBuilder.Entity("RoleUserAuth", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAuthsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RolesId", "UserAuthsId");
-
-                    b.HasIndex("UserAuthsId");
-
-                    b.ToTable("RoleUserAuth");
-                });
-
-            modelBuilder.Entity("WMS.Repository.Entity.Role", b =>
+            modelBuilder.Entity("RainFramework.Repository.Entity.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +49,48 @@ namespace RainFramework.Repository.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("WMS.Repository.Entity.UserAuth", b =>
+            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Component")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("Hidden")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Meta")
+                        .IsRequired()
+                        .HasColumnType("json");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("OrderNum")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("SysMenus");
+                });
+
+            modelBuilder.Entity("RainFramework.Repository.Entity.UserAuth", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +125,7 @@ namespace RainFramework.Repository.Migrations
                     b.ToTable("UserAuths");
                 });
 
-            modelBuilder.Entity("WMS.Repository.Entity.UserInfo", b =>
+            modelBuilder.Entity("RainFramework.Repository.Entity.UserInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -174,6 +160,36 @@ namespace RainFramework.Repository.Migrations
                     b.ToTable("UserInfos");
                 });
 
+            modelBuilder.Entity("RoleSysMenu", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SysMenusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesId", "SysMenusId");
+
+                    b.HasIndex("SysMenusId");
+
+                    b.ToTable("RoleSysMenu");
+                });
+
+            modelBuilder.Entity("RoleUserAuth", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserAuthsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesId", "UserAuthsId");
+
+                    b.HasIndex("UserAuthsId");
+
+                    b.ToTable("RoleUserAuth");
+                });
+
             modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
                 {
                     b.HasOne("RainFramework.Repository.Entity.SysMenu", "Parent")
@@ -183,9 +199,18 @@ namespace RainFramework.Repository.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("RainFramework.Repository.Entity.UserInfo", b =>
+                {
+                    b.HasOne("RainFramework.Repository.Entity.UserAuth", null)
+                        .WithOne("UserInfo")
+                        .HasForeignKey("RainFramework.Repository.Entity.UserInfo", "UserAuthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RoleSysMenu", b =>
                 {
-                    b.HasOne("WMS.Repository.Entity.Role", null)
+                    b.HasOne("RainFramework.Repository.Entity.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -200,24 +225,15 @@ namespace RainFramework.Repository.Migrations
 
             modelBuilder.Entity("RoleUserAuth", b =>
                 {
-                    b.HasOne("WMS.Repository.Entity.Role", null)
+                    b.HasOne("RainFramework.Repository.Entity.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WMS.Repository.Entity.UserAuth", null)
+                    b.HasOne("RainFramework.Repository.Entity.UserAuth", null)
                         .WithMany()
                         .HasForeignKey("UserAuthsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WMS.Repository.Entity.UserInfo", b =>
-                {
-                    b.HasOne("WMS.Repository.Entity.UserAuth", null)
-                        .WithOne("UserInfo")
-                        .HasForeignKey("WMS.Repository.Entity.UserInfo", "UserAuthId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -227,7 +243,7 @@ namespace RainFramework.Repository.Migrations
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("WMS.Repository.Entity.UserAuth", b =>
+            modelBuilder.Entity("RainFramework.Repository.Entity.UserAuth", b =>
                 {
                     b.Navigation("UserInfo");
                 });

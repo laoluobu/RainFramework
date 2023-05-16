@@ -27,5 +27,20 @@ namespace RainFramework.AspNetCore.Controllers
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
             return ResultVO<IEnumerable<SysMenu>>.Ok(menus);
         }
+
+
+
+        /// <summary>
+        /// 获取当前用户可用菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost,Route("Add")]
+        public async Task<ResultVO<IEnumerable<SysMenu>>> AddMenus()
+        {
+            //menuService.AddAsync(new SysMenu().)
+
+            var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
+            return ResultVO<IEnumerable<SysMenu>>.Ok(menus);
+        }
     }
 }
