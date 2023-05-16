@@ -25,5 +25,7 @@ public class BaseDBContext : DbContext
         modelBuilder
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<SysMenu>().HasOne(o => o.Parent).WithMany(o=>o.Children);
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.AspNetCore.Mapper;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
@@ -25,6 +26,7 @@ namespace RainFramework.AspNetCore
             builder.Services.AddTransient<IMenuService, MenuService>();
             builder.Services.AddTransient<IRoleService, RoleService>();
             builder.Services.AddMyCors();
+            builder.Services.AddAutoMapper(typeof(CoreProfile));
 
             application = builder.Build();
             //启用跨域请求
