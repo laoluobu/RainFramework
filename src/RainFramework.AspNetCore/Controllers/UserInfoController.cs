@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
-using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.Common.Base;
+using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
 
@@ -29,6 +29,12 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
             return ResultVO<UserInfo>.Ok(userInfo);
+        }
+
+        [HttpPost]
+        public void AddUserInfo(UserInfo userInfo)
+        {
+            
         }
     }
 }

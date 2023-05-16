@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace RainFramework.AspNetCore.Configurer
+namespace RainFramework.Common.Configurer
 {
     public static class SwaggerConfig
     {
@@ -24,7 +24,7 @@ namespace RainFramework.AspNetCore.Configurer
                     var filePath = Path.Combine(AppContext.BaseDirectory, $"{programName}.xml");
                     options.IncludeXmlComments(filePath, true);
                 }
-           
+
                 var BasePath = Path.Combine(AppContext.BaseDirectory, "RainFramework.AspNetCore.xml");
                 options.IncludeXmlComments(BasePath, true);
 

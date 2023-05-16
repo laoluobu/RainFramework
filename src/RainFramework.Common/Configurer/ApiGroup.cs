@@ -1,4 +1,4 @@
-﻿namespace RainFramework.AspNetCore.Configurer
+﻿namespace RainFramework.Common.Configurer
 {
     public class ApiGroup
     {

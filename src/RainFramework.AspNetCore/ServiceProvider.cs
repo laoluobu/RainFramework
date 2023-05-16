@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.AspNetCore.Mapper;
 using RainFramework.Common.Configurer;

@@ -7,7 +7,6 @@ public class UserAuth : EntityBase
 {
     public int Id { get; set; }
 
-
     public UserInfo? UserInfo { get; set; }
 
     /// <summary>
@@ -27,7 +26,6 @@ public class UserAuth : EntityBase
     /// </summary>
     [MaxLength(50)]
     public string IpAddress { get; set; }
-
 
     /// <summary>
     /// 创建时间

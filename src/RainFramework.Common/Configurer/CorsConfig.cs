@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace RainFramework.AspNetCore.Configurer
+namespace RainFramework.Common.Configurer
 {
     internal static class CorsConfig
     {

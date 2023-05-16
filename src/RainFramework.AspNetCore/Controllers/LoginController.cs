@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RainFramework.AspNetCore.Configurer;
 using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 
 namespace RainFramework.AspNetCore.Controllers
