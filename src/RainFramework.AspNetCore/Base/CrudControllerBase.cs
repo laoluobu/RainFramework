@@ -35,5 +35,16 @@ namespace RainFramework.AspNetCore.Base
             var entity = await crudService.FindAll();
             return ResultVO<IEnumerable<TEntity>>.Ok(entity);
         }
+
+        /// <summary>
+        /// 获取所有实体
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ResultVO<IEnumerable<TEntity>>> FindAllAsync()
+        {
+            var entity = await crudService.FindAll();
+            return ResultVO<IEnumerable<TEntity>>.Ok(entity);
+        }
     }
 }

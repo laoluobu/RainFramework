@@ -1,8 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using RainFramework.AspNetCore;
-using RainFramework.Repository;
-using RainFramework.Repository.DBContext;
-using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace Demo.Api
 {
