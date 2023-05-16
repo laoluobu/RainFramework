@@ -2,20 +2,23 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5218
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["WMS.Api/WMS.Api.csproj", "WMS.Api/"]
-RUN dotnet restore "WMS.Api/WMS.Api.csproj"
+COPY ["Demo.Api/Demo.Api.csproj", "Demo.Api/"]
+COPY ["RainFramework.AspNetCore/RainFramework.AspNetCore.csproj", "RainFramework.AspNetCore/"]
+COPY ["RainFramework.Repository/RainFramework.Repository.csproj", "RainFramework.Repository/"]
+COPY ["RainFramework.Common/RainFramework.Common.csproj", "RainFramework.Common/"]
+RUN dotnet restore "Demo.Api/Demo.Api.csproj"
 COPY . .
-WORKDIR "/src/WMS.Api"
-RUN dotnet build "WMS.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/Demo.Api"
+RUN dotnet build "Demo.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WMS.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Demo.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WMS.Api.dll"]
+ENTRYPOINT ["dotnet", "Demo.Api.dll"]
