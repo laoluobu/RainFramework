@@ -13,22 +13,22 @@ namespace RainFramework.Common.Base
             dbSet = dbContext.Set<TEntity>();
         }
 
-        public async Task<int> UpdatesAsync(TEntity entity)
+        public async Task<bool> UpdatesAsync(TEntity entity)
         {
             dbSet.Update(entity);
-            return await dbContext.SaveChangesAsync();
+            return await dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<int> AddAsync(TEntity entity)
+        public async Task<bool> AddAsync(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-            return await dbContext.SaveChangesAsync();
+            return await dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<int> RemoveAsync(TEntity entity)
+        public async Task<bool> RemoveAsync(TEntity entity)
         {
             dbSet.Remove(entity);
-            return await dbContext.SaveChangesAsync();
+            return await dbContext.SaveChangesAsync() > 0;
         }
 
         public async Task<TEntity?> FindAsync(object key)

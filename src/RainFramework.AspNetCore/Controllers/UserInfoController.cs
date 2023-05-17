@@ -1,12 +1,10 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.Core.Auth;
-using RainFramework.Common.Base;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
+using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -28,7 +26,7 @@ namespace RainFramework.AspNetCore.Controllers
         public async Task<ResultVO<UserInfo>> GetCurrentUserInfo()
         {
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
-            return ResultVO<UserInfo>.Ok(userInfo);
+            return ResultTool.Ok(userInfo);
         }
 
     }

@@ -2,6 +2,7 @@
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
+using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -27,7 +28,7 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var requestIp = Request.HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
             var token = await userAuthServices.LoginService(userVO);
-            return ResultVO<string>.Ok(token);
+            return ResultTool.Ok(token);
         }
     }
 }

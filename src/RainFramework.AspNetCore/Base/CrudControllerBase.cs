@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RainFramework.Common.Base;
 using RainFramework.Common.Moudel.VO;
+using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Base
 {
@@ -13,6 +15,7 @@ namespace RainFramework.AspNetCore.Base
         {
             this.crudService = crudService;
         }
+
         /// <summary>
         /// 根据主键获取实体
         /// </summary>
@@ -22,7 +25,7 @@ namespace RainFramework.AspNetCore.Base
         public async Task<ResultVO<TEntity>> FindAsync(int id)
         {
             var entity = await crudService.FindAsync(id);
-            return ResultVO<TEntity>.Ok(entity);
+            return ResultTool.Ok(entity);
         }
 
         /// <summary>
@@ -30,10 +33,10 @@ namespace RainFramework.AspNetCore.Base
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("all")]
-        public async Task<ResultVO<IEnumerable<TEntity>>> FindAllAsync()
+        public async Task<ResultVO<IEnumerable<TEntity?>>> FindAllAsync()
         {
             var entity = await crudService.FindAll();
-            return ResultVO<IEnumerable<TEntity>>.Ok(entity);
+            return ResultTool.Ok(entity);
         }
 
         /// <summary>
@@ -41,11 +44,20 @@ namespace RainFramework.AspNetCore.Base
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultVO<IEnumerable<TEntity>>> Add(TEntity entity)
+        public async Task<ResultVO<bool>> Add(TEntity entity)
         {
-            var count=await crudService.AddAsync(entity);
+            return await crudService.AddAsync(entity) ? ResultTool.Ok() : Fail($"Add {entity.GetType().Name} Errr.");
+        }
 
-            return count > 0 ? ResultVO<IEnumerable<TEntity>>.Ok() : ResultVO<IEnumerable<TEntity>>.Fail($"add {entity.GetType().Name} Errr.");
+        /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpDelete, Authorize(Roles = "Administrator")]
+        public async Task<ResultVO<bool>> Delete(TEntity entity)
+        {
+            return await crudService.RemoveAsync(entity) ? ResultTool.Ok() : Fail($"Delete {entity.GetType().Name} Errr.");
         }
     }
 }

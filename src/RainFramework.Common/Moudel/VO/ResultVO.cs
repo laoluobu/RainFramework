@@ -1,18 +1,17 @@
 ﻿namespace RainFramework.Common.Moudel.VO
 {
-    public class ResultVO<T>
+    public class ResultTool
     {
-        public static ResultVO<T> Failed => Fail();
+        public class ResultVO<T>
+        {
+            public T? Data { get; set; }
 
-        public static ResultVO<bool> Successed => ResultVO<bool>.Ok(true);
+            public int Code { get; set; }
 
-        public T? Data { get; set; }
+            public string? Message { get; set; }
+        }
 
-        public int Code { get; set; }
-
-        public string? Message { get; set; }
-
-        public static ResultVO<T> Ok(T? data)
+        public static ResultVO<T> Ok<T>(T? data)
         {
             return new ResultVO<T>
             {
@@ -22,39 +21,29 @@
             };
         }
 
-        public static ResultVO<T> Ok()
+        public static ResultVO<bool> Ok()
         {
-            return new ResultVO<T>
+            return new ResultVO<bool>
             {
-                Data = default,
+                Data = true,
                 Code = 20000,
                 Message = "Success"
             };
         }
 
-        public static ResultVO<T> Fail(Exception exception)
+        public static ResultVO<bool> Fail(Exception exception)
         {
             return Fail(exception.Message);
         }
 
-        public static ResultVO<T2> From<T2>(T2 d) where T2 : class
+        public static ResultVO<bool> Fail(string msg)
         {
-            return d != null ? ResultVO<T2>.Ok(d) : ResultVO<T2>.Failed;
-        }
-
-        public static ResultVO<T> Fail(string msg = "")
-        {
-            return new ResultVO<T>
+            return new ResultVO<bool>
             {
-                Data = default,
+                Data = false,
                 Code = 40000,
                 Message = msg
             };
-        }
-
-        public static ResultVO<bool> From(bool b)
-        {
-            return b ? ResultVO<bool>.Successed : ResultVO<bool>.Failed;
         }
     }
 }

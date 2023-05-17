@@ -7,6 +7,13 @@ namespace RainFramework.AspNetCore.Core.Auth
     public interface IMenuService : ICrudService<SysMenu>
     {
         /// <summary>
+        /// 根据主键删除菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> DeleteMenuById(int id);
+
+        /// <summary>
         /// 获取指定角色可用菜单
         /// </summary>
         /// <param name="RoleName"></param>
@@ -24,6 +31,6 @@ namespace RainFramework.AspNetCore.Core.Auth
         /// 获取所有菜单
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MenuVO> FindMenus();
+        IEnumerable<MenuVO> ListMenus();
     }
 }

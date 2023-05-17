@@ -16,7 +16,7 @@ namespace RainFramework.AspNetCore.Core.Auth
         public MenuService(BaseDBContext daseDBContext, IRoleService roleService, IMapper mapper) : base(daseDBContext)
         {
             this.roleService = roleService;
-            this.mapper = mapper;   
+            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
@@ -26,7 +26,7 @@ namespace RainFramework.AspNetCore.Core.Auth
             {
                 throw new ArgumentException($"Role {RoleName} is inexistence!");
             }
-            return dbContext.SysMenus.Include(menu=>menu.Children).Where(menu => menu.Roles.Contains(role) && menu.ParentId==null).ToArray();
+            return dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.Roles.Contains(role) && menu.ParentId == null).ToArray();
         }
 
         public async Task<IEnumerable<SysMenu>?> FindEenuByRoleNames(IEnumerable<string> RoleNames)
@@ -45,11 +45,21 @@ namespace RainFramework.AspNetCore.Core.Auth
             return distinctItems;
         }
 
-
-        public IEnumerable<MenuVO> FindMenus()
+        public IEnumerable<MenuVO> ListMenus()
         {
-           var menus= dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.ParentId == null).ToList();
-           return mapper.Map<List<SysMenu>,List<MenuVO>>(menus);
+            var menus = dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.ParentId == null).ToList();
+            return mapper.Map<List<SysMenu>, List<MenuVO>>(menus);
+        }
+
+        public async Task<bool> DeleteMenuById(int id)
+        {
+            var menu = await FindAsync(id);
+            if (menu == null)
+            {
+                throw new ArgumentException($"The menus id is {id} not found!");
+            }
+            dbContext.SysMenus.Remove(menu);
+            return await dbContext.SaveChangesAsync() > 0;
         }
     }
 }

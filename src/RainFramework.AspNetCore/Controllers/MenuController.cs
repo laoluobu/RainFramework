@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.Core.Auth;
 using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
+using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -26,7 +29,8 @@ namespace RainFramework.AspNetCore.Controllers
         public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
         {
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
-            return ResultVO<IEnumerable<SysMenu>>.Ok(menus);
+
+            return ResultTool.Ok(menus);
         }
 
         /// <summary>
@@ -36,7 +40,18 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpGet, Route("list")]
         public ResultVO<IEnumerable<MenuVO>> ListMenus()
         {
-           return ResultVO<IEnumerable<MenuVO>>.Ok(menuService.FindMenus());
+            return ResultTool.Ok(menuService.ListMenus());
+        }
+
+        /// <summary>
+        /// 根据ID删除菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete, Route("{id}"), Authorize(Roles = "Administrator")]
+        public async Task<ResultVO<bool>> DeleteMenus(int id)
+        {
+            return ResultTool.Ok(await menuService.DeleteMenuById(id));
         }
     }
 }
