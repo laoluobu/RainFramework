@@ -59,5 +59,16 @@ namespace RainFramework.AspNetCore.Base
         {
             return await crudService.RemoveAsync(entity) ? ResultTool.Ok() : Fail($"Delete {entity.GetType().Name} Errr.");
         }
+
+        /// <summary>
+        /// 修改实体
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPut, Authorize(Roles = "Administrator")]
+        public async Task<ResultVO<bool>> Update(TEntity entity)
+        {
+            return await crudService.UpdatesAsync(entity) ? ResultTool.Ok() : Fail($"Delete {entity.GetType().Name} Errr.");
+        }
     }
 }
