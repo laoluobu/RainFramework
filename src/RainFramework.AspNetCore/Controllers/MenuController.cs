@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
@@ -26,6 +27,16 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
             return ResultVO<IEnumerable<SysMenu>>.Ok(menus);
+        }
+
+        /// <summary>
+        /// 获取所有菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("list")]
+        public ResultVO<IEnumerable<MenuVO>> ListMenus()
+        {
+           return ResultVO<IEnumerable<MenuVO>>.Ok(menuService.FindMenus());
         }
     }
 }

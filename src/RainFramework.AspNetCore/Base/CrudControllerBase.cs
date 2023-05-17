@@ -16,12 +16,12 @@ namespace RainFramework.AspNetCore.Base
         /// <summary>
         /// 根据主键获取实体
         /// </summary>
-        /// <param name="key">主键</param>
+        /// <param name="id">主键</param>
         /// <returns></returns>
-        [HttpGet, Route("{Id}")]
-        public async Task<ResultVO<TEntity>> FindAsync(int key)
+        [HttpGet, Route("{id}")]
+        public async Task<ResultVO<TEntity>> FindAsync(int id)
         {
-            var entity = await crudService.FindAsync(key);
+            var entity = await crudService.FindAsync(id);
             return ResultVO<TEntity>.Ok(entity);
         }
 
@@ -29,7 +29,7 @@ namespace RainFramework.AspNetCore.Base
         /// 获取所有实体
         /// </summary>
         /// <returns></returns>
-        [HttpGet, Route("All")]
+        [HttpGet, Route("all")]
         public async Task<ResultVO<IEnumerable<TEntity>>> FindAllAsync()
         {
             var entity = await crudService.FindAll();

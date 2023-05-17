@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using RainFramework.AspNetCore.Moudel.VO;
+using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.Mapper
 {
@@ -6,6 +8,7 @@ namespace RainFramework.AspNetCore.Mapper
     {
         public CoreProfile()
         {
+            CreateMap<SysMenu, MenuVO>();
         }
     }
 }

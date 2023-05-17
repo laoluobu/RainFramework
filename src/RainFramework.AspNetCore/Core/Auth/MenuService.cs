@@ -1,19 +1,22 @@
 ﻿using System.Data;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Base;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
-using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
     internal class MenuService : CrudService<BaseDBContext, SysMenu>, IMenuService
     {
-
         private readonly IRoleService roleService;
+        private readonly IMapper mapper;
 
-        public MenuService(BaseDBContext daseDBContext, IRoleService roleService) : base(daseDBContext)
+        public MenuService(BaseDBContext daseDBContext, IRoleService roleService, IMapper mapper) : base(daseDBContext)
         {
             this.roleService = roleService;
+            this.mapper = mapper;   
         }
 
         public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
@@ -23,7 +26,7 @@ namespace RainFramework.AspNetCore.Core.Auth
             {
                 throw new ArgumentException($"Role {RoleName} is inexistence!");
             }
-            return dbContext.SysMenus.Where(menu => menu.Roles.Contains(role)).ToArray();
+            return dbContext.SysMenus.Include(menu=>menu.Children).Where(menu => menu.Roles.Contains(role) && menu.ParentId==null).ToArray();
         }
 
         public async Task<IEnumerable<SysMenu>?> FindEenuByRoleNames(IEnumerable<string> RoleNames)
@@ -40,6 +43,13 @@ namespace RainFramework.AspNetCore.Core.Auth
             }
             var distinctItems = userEmunes.GroupBy(x => x.Id).Select(y => y.First());
             return distinctItems;
+        }
+
+
+        public IEnumerable<MenuVO> FindMenus()
+        {
+           var menus= dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.ParentId == null).ToList();
+           return mapper.Map<List<SysMenu>,List<MenuVO>>(menus);
         }
     }
 }

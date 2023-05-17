@@ -31,10 +31,5 @@ namespace RainFramework.AspNetCore.Controllers
             return ResultVO<UserInfo>.Ok(userInfo);
         }
 
-        [HttpPost]
-        public void AddUserInfo(UserInfo userInfo)
-        {
-            
-        }
     }
 }

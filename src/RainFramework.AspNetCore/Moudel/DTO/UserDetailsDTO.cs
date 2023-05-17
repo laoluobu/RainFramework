@@ -1,6 +1,8 @@
 ﻿#nullable disable
 
-namespace RainFramework.Common.Moudel.DTO
+using RainFramework;
+
+namespace RainFramework.AspNetCore.Moudel.DTO
 {
     public record UserDetailsDTO
     {

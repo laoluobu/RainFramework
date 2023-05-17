@@ -2,7 +2,7 @@
 
 namespace RainFramework.Common.Configurer
 {
-    internal static class CorsConfig
+    public static class CorsConfig
     {
         public static void AddMyCors(this IServiceCollection services)
         {
