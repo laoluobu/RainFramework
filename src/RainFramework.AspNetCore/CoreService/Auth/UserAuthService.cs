@@ -4,7 +4,7 @@ using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 
-namespace RainFramework.AspNetCore.Core.Auth
+namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class UserAuthService : CrudService<BaseDBContext, UserAuth>, IUserAuthService
     {

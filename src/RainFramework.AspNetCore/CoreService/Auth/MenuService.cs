@@ -9,7 +9,7 @@ using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 
-namespace RainFramework.AspNetCore.Core.Auth
+namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class MenuService : CrudService<BaseDBContext, SysMenu>, IMenuService
     {
@@ -67,7 +67,7 @@ namespace RainFramework.AspNetCore.Core.Auth
 
         public async Task PatchMenu(int id, JsonPatchDocument<SysMenu> patchDoc)
         {
-            
+
         }
     }
 }
