@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,15 +9,17 @@ using RainFramework.AspNetCore.Mapper;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
+using Serilog.Events;
 
 namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static void AddRainFrameworkCore<T>(this WebApplicationBuilder builder, out WebApplication application)
+        public static void AddRainFrameworkCore(this WebApplicationBuilder builder, out WebApplication application)
         {
             builder.Host.UseSerilogger();
-            builder.Services.AddSwagger(typeof(T).Assembly.GetName().Name);          
+
+            builder.Services.AddSwagger();          
             builder.Services.AddJwtBearerPkg();
             builder.Services.AddSingleton<IJWTService, JWTService>();
             builder.Services.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"));
@@ -30,7 +33,18 @@ namespace RainFramework.AspNetCore
             application = builder.Build();
             //启用跨域请求
             application.UseCors();
-            application.UseSerilogRequestLogging();
+            application.UseSerilogRequestLogging(option =>
+            {
+                option.MessageTemplate = "User {UserName} ClientIp {ClientIp} " + option.MessageTemplate;
+
+                option.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;
+
+                option.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    diagnosticContext.Set("UserName", httpContext.User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value);
+                    diagnosticContext.Set("ClientIp", httpContext.Connection.RemoteIpAddress?.MapToIPv4());
+                };
+            });
 
             if (application.Environment.IsDevelopment())
             {

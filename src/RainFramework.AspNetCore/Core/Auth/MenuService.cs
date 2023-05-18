@@ -1,8 +1,11 @@
 ﻿using System.Data;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Base;
+using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 
@@ -24,7 +27,7 @@ namespace RainFramework.AspNetCore.Core.Auth
             var role = await roleService.FindRoleByName(RoleName);
             if (role == null)
             {
-                throw new ArgumentException($"Role {RoleName} is inexistence!");
+                throw new NotFoundException($"Role {RoleName} is inexistence!");
             }
             return dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.Roles.Contains(role) && menu.ParentId == null).ToArray();
         }
@@ -56,10 +59,15 @@ namespace RainFramework.AspNetCore.Core.Auth
             var menu = await FindAsync(id);
             if (menu == null)
             {
-                throw new ArgumentException($"The menus id is {id} not found!");
+                throw new NotFoundException($"The menus id is {id} not found!");
             }
             dbContext.SysMenus.Remove(menu);
             return await dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task PatchMenu(int id, JsonPatchDocument<SysMenu> patchDoc)
+        {
+            
         }
     }
 }

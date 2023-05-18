@@ -6,7 +6,7 @@ namespace RainFramework.Common.Configurer
 {
     public static class SwaggerConfig
     {
-        public static void AddSwagger(this IServiceCollection services, string? programName)
+        public static void AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
             {
@@ -19,15 +19,15 @@ namespace RainFramework.Common.Configurer
                         Title = field.GetValue(apiGroup)?.ToString(),
                     });
                 }
-                if (programName != null)
+
+                var directory = new DirectoryInfo(AppContext.BaseDirectory);
+                foreach (var file in directory.GetFiles())
                 {
-                    var filePath = Path.Combine(AppContext.BaseDirectory, $"{programName}.xml");
-                    options.IncludeXmlComments(filePath, true);
+                    if ((file.Name.StartsWith("RainFramework.") && file.Name.EndsWith(".xml")) || file.Name.EndsWith("Api.xml"))
+                    {
+                        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, file.Name), true);
+                    }
                 }
-
-                var BasePath = Path.Combine(AppContext.BaseDirectory, "RainFramework.AspNetCore.xml");
-                options.IncludeXmlComments(BasePath, true);
-
                 //增加JWT Header
                 var scheme = new OpenApiSecurityScheme()
                 {

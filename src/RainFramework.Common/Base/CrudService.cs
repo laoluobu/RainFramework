@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RainFramework.Common.CoreException;
 
 namespace RainFramework.Common.Base
 {
@@ -31,9 +32,14 @@ namespace RainFramework.Common.Base
             return await dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<TEntity?> FindAsync(object key)
+        public async Task<TEntity> FindAsync(object key)
         {
-            return await dbSet.FindAsync(key);
+            var entity = await dbSet.FindAsync(key);
+            if(entity == null)
+            {
+                throw new NotFoundException($"The Entity id is {key} inexistence!");
+            }
+            return entity;
         }
 
         public async Task<IEnumerable<TEntity?>> FindAll()

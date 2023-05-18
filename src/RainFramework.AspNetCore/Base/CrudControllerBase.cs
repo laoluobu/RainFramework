@@ -25,7 +25,7 @@ namespace RainFramework.AspNetCore.Base
         public async Task<ResultVO<TEntity>> FindAsync(int id)
         {
             var entity = await crudService.FindAsync(id);
-            return ResultTool.Ok(entity);
+            return ResultTool.Success(entity);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace RainFramework.AspNetCore.Base
         public async Task<ResultVO<IEnumerable<TEntity?>>> FindAllAsync()
         {
             var entity = await crudService.FindAll();
-            return ResultTool.Ok(entity);
+            return ResultTool.Success(entity);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace RainFramework.AspNetCore.Base
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultVO<bool>> Add(TEntity entity)
+        public async Task<ResultVO> Add(TEntity entity)
         {
-            return await crudService.AddAsync(entity) ? ResultTool.Ok() : Fail($"Add {entity.GetType().Name} Errr.");
+            return await crudService.AddAsync(entity) ? Success() : Fail($"Add {entity.GetType().Name} Errr.");
         }
 
         /// <summary>
@@ -55,20 +55,20 @@ namespace RainFramework.AspNetCore.Base
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpDelete, Authorize(Roles = "Administrator")]
-        public async Task<ResultVO<bool>> Delete(TEntity entity)
+        public async Task<ResultVO> Delete(TEntity entity)
         {
-            return await crudService.RemoveAsync(entity) ? ResultTool.Ok() : Fail($"Delete {entity.GetType().Name} Errr.");
+            return await crudService.RemoveAsync(entity) ? Success() : Fail($"Delete {entity.GetType().Name} Errr.");
         }
 
         /// <summary>
-        /// 修改实体
+        /// 修改整个实体
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpPut, Authorize(Roles = "Administrator")]
-        public async Task<ResultVO<bool>> Update(TEntity entity)
+        public async Task<ResultVO> Update(TEntity entity)
         {
-            return await crudService.UpdatesAsync(entity) ? ResultTool.Ok() : Fail($"Delete {entity.GetType().Name} Errr.");
+            return await crudService.UpdatesAsync(entity) ? Success() : Fail($"Delete {entity.GetType().Name} Errr.");
         }
     }
 }

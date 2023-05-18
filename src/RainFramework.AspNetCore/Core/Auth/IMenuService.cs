@@ -1,4 +1,5 @@
-﻿using RainFramework.AspNetCore.Moudel.VO;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Base;
 using RainFramework.Repository.Entity;
 
@@ -32,5 +33,7 @@ namespace RainFramework.AspNetCore.Core.Auth
         /// </summary>
         /// <returns></returns>
         IEnumerable<MenuVO> ListMenus();
+
+        Task PatchMenu(int id, JsonPatchDocument<SysMenu> patchDoc);
     }
 }

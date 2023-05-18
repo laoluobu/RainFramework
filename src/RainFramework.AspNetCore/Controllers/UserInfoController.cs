@@ -26,7 +26,7 @@ namespace RainFramework.AspNetCore.Controllers
         public async Task<ResultVO<UserInfo>> GetCurrentUserInfo()
         {
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
-            return ResultTool.Ok(userInfo);
+            return ResultTool.Success(userInfo);
         }
 
     }

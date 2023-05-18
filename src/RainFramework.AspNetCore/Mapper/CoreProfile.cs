@@ -9,6 +9,7 @@ namespace RainFramework.AspNetCore.Mapper
         public CoreProfile()
         {
             CreateMap<SysMenu, MenuVO>();
+            CreateMap<MenuVO, SysMenu>();
         }
     }
 }

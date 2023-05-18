@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Data;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.Core.Auth;
@@ -30,7 +30,7 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
 
-            return ResultTool.Ok(menus);
+            return ResultTool.Success(menus);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpGet, Route("list")]
         public ResultVO<IEnumerable<MenuVO>> ListMenus()
         {
-            return ResultTool.Ok(menuService.ListMenus());
+            return ResultTool.Success(menuService.ListMenus());
         }
 
         /// <summary>
@@ -51,7 +51,21 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpDelete, Route("{id}"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO<bool>> DeleteMenus(int id)
         {
-            return ResultTool.Ok(await menuService.DeleteMenuById(id));
+            return ResultTool.Success(await menuService.DeleteMenuById(id));
+        }
+
+        /// <summary>
+        /// 局部修改菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patchDoc"></param>
+        /// <returns></returns>
+        [HttpPatch, Route("id")]
+        public async Task<ResultVO<bool>> UpdateMenus(int id, [FromBody] JsonPatchDocument<SysMenu> patchDoc)
+        {
+            var sysMenu = await menuService.FindAsync(id);
+            patchDoc.ApplyTo(sysMenu);
+            return ResultTool.Success(await menuService.UpdatesAsync(sysMenu)); 
         }
     }
 }

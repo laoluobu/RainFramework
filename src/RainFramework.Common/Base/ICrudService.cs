@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Task<TEntity?> FindAsync(object key);
+        Task<TEntity> FindAsync(object key);
 
         Task<bool> RemoveAsync(TEntity entity);
 

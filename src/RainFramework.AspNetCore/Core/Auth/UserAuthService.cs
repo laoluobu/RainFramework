@@ -3,7 +3,6 @@ using RainFramework.Common.Base;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
-using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace RainFramework.AspNetCore.Core.Auth
 {
@@ -21,7 +20,7 @@ namespace RainFramework.AspNetCore.Core.Auth
             var userAuth = await dbContext.UserAuths.Include(user => user.Roles).SingleOrDefaultAsync(user => user.Username == userVO.Username && user.Password == userVO.Password);
             if (userAuth == null)
             {
-                throw new ArgumentException("密码或者账户错误!");
+                return string.Empty;
             }
             return jWTService.CreateToken(userAuth);
         }

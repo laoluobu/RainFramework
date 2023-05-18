@@ -11,7 +11,16 @@
             public string? Message { get; set; }
         }
 
-        public static ResultVO<T> Ok<T>(T? data)
+        public class ResultVO
+        {
+            public object? Data { get; set; }
+
+            public int Code { get; set; }
+
+            public string? Message { get; set; }
+        }
+
+        public static ResultVO<T> Success<T>(T? data)
         {
             return new ResultVO<T>
             {
@@ -21,27 +30,48 @@
             };
         }
 
-        public static ResultVO<bool> Ok()
+        public static ResultVO Success()
         {
-            return new ResultVO<bool>
+            return new ResultVO
             {
-                Data = true,
+                Data = null,
                 Code = 20000,
                 Message = "Success"
             };
         }
 
-        public static ResultVO<bool> Fail(Exception exception)
+        public static ResultVO Fail(Exception exception)
         {
             return Fail(exception.Message);
         }
 
-        public static ResultVO<bool> Fail(string msg)
+        public static ResultVO Fail(string msg)
         {
-            return new ResultVO<bool>
+            return new ResultVO
             {
-                Data = false,
-                Code = 40000,
+                Data = null,
+                Code = 50000,
+                Message = msg
+            };
+        }
+
+
+        public static ResultVO NotFound(string msg)
+        {
+            return new ResultVO
+            {
+                Data = null,
+                Code = 40001,
+                Message = msg
+            };
+        }
+
+        public static ResultVO<string> TFail(string msg)
+        {
+            return new ResultVO<string>
+            {
+                Data = default,
+                Code = 50000,
                 Message = msg
             };
         }

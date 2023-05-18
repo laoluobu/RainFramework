@@ -2,6 +2,7 @@ using RainFramework.AspNetCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
+using RainFramework.AspNetCore.Filters;
 
 namespace Demo.Api
 {
@@ -11,8 +12,7 @@ namespace Demo.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers()
-
+            builder.Services.AddControllers(options => options.Filters.Add<HttpResponseFilter>())
             .AddNewtonsoftJson(options =>
             {
                 //使用驼峰样式的key
@@ -28,11 +28,7 @@ namespace Demo.Api
                 //空值处理
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
-
-            builder.AddRainFrameworkCore<Program>(out WebApplication app);
-
-
-
+            builder.AddRainFrameworkCore(out WebApplication app);
             app.MapControllers();
 
             app.Run();
