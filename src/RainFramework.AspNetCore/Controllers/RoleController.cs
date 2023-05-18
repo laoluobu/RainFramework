@@ -21,7 +21,7 @@ namespace RainFramework.AspNetCore.Controllers
 
 
         /// <summary>
-        /// 根据ID删除菜单
+        /// 根据ID删除角色
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -30,7 +30,5 @@ namespace RainFramework.AspNetCore.Controllers
         {
             return Success(await roleService.DeleteRoleById(id));
         }
-
-
     }
 }
