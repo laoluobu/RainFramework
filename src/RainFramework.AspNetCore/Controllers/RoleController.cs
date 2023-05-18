@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository.Entity;
+using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -15,5 +18,19 @@ namespace RainFramework.AspNetCore.Controllers
         {
             this.roleService= roleService;
         }
+
+
+        /// <summary>
+        /// 根据ID删除菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
+        public async Task<ResultVO<bool>> DeleteRoles(int id)
+        {
+            return Success(await roleService.DeleteRoleById(id));
+        }
+
+
     }
 }

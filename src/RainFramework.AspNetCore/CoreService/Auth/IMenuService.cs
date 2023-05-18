@@ -33,7 +33,5 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         /// </summary>
         /// <returns></returns>
         IEnumerable<MenuVO> ListMenus();
-
-        Task PatchMenu(int id, JsonPatchDocument<SysMenu> patchDoc);
     }
 }
