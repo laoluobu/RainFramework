@@ -5,7 +5,6 @@ using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Configurer;
-using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;
 using static RainFramework.Common.Moudel.VO.ResultTool;
 
@@ -30,7 +29,7 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
 
-            return ResultTool.Success(menus);
+            return Success(menus);
         }
 
         /// <summary>
@@ -40,7 +39,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpGet, Route("list")]
         public ResultVO<IEnumerable<MenuVO>> ListMenus()
         {
-            return ResultTool.Success(menuService.ListMenus());
+            return Success(menuService.ListMenus());
         }
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpDelete, Route("{id}"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO<bool>> DeleteMenus(int id)
         {
-            return ResultTool.Success(await menuService.DeleteMenuById(id));
+            return Success(await menuService.DeleteMenuById(id));
         }
 
         /// <summary>
@@ -65,7 +64,7 @@ namespace RainFramework.AspNetCore.Controllers
         {
             var sysMenu = await menuService.FindAsync(id);
             patchDoc.ApplyTo(sysMenu);
-            return ResultTool.Success(await menuService.UpdatesAsync(sysMenu)); 
+            return Success(await menuService.UpdatesAsync(sysMenu)); 
         }
     }
 }

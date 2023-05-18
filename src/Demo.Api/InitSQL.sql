@@ -8,7 +8,7 @@ insert into `SysMenus` values (1, '/order', 'Layout', '{\"title\":\"订单管理\"}'
 
 
 insert into `SysMenus` values (2, '/authManger', 'Layout', '{\"title\":\"权限管理\"}',null,0,1,'authManger');
-insert into `SysMenus` values (3, '/menusManger', 'menu/Menu.vue', '{\"title\":\"菜单管理\"}',2,0,1,'menusManger');
+insert into `SysMenus` values (3, '/menusManger', 'menu/index.vue', '{\"title\":\"菜单管理\"}',2,0,1,'menusManger');
 insert into `RoleSysMenu` values(2,1);
 insert into `RoleSysMenu` values(2,2);
 insert into `RoleSysMenu` values(2,3);
