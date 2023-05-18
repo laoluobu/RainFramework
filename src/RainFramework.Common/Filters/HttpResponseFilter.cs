@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using RainFramework.Common.CoreException;
 using RainFramework.Common.Moudel.VO;
 
-namespace RainFramework.AspNetCore.Filters
+namespace RainFramework.Common.Filters
 {
     public class HttpResponseFilter : IAsyncActionFilter, IOrderedFilter
     {

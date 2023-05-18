@@ -2,7 +2,7 @@ using RainFramework.AspNetCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
-using RainFramework.AspNetCore.Filters;
+using RainFramework.Common.Filters;
 
 namespace Demo.Api
 {
