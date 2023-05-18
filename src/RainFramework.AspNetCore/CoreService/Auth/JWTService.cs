@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using RainFramework.Repository.Entity;
 
-namespace RainFramework.AspNetCore.Core.Auth
+namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class JWTService : IJWTService
     {

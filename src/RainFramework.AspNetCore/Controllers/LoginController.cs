@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using static RainFramework.Common.Moudel.VO.ResultTool;

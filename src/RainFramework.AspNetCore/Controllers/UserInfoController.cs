@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
-using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Common.Configurer;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.Entity;

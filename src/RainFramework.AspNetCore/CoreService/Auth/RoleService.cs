@@ -4,7 +4,7 @@ using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 using static RainFramework.Repository.DBContext.BaseDBContext;
 
-namespace RainFramework.AspNetCore.Core.Auth
+namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class RoleService : CrudService<BaseDBContext, Role>, IRoleService
     {

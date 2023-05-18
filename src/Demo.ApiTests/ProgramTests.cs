@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RainFramework.AspNetCore.Core.Auth;
+using RainFramework.AspNetCore.CoreService.Auth;
 
 namespace Demo.ApiTests
 {
