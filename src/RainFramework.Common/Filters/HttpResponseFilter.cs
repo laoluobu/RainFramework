@@ -23,6 +23,15 @@ namespace RainFramework.Common.Filters
                     afer.ExceptionHandled = true;
                     return;
                 }
+                else
+                {
+                    afer.Result = new ObjectResult(ResultTool.Fail(afer.Exception))
+                    {
+                        StatusCode = 500
+                    };
+                    afer.ExceptionHandled = true;
+                    return;
+                }
             }
         }
     }

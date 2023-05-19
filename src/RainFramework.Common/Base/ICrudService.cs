@@ -2,7 +2,7 @@
 {
     public interface ICrudService<TEntity> where TEntity : class
     {
-        Task<bool> AddAsync(TEntity entity);
+        Task AddAsync(TEntity entity);
 
         /// <summary>
         /// 查找全表
@@ -17,8 +17,8 @@
         /// <returns></returns>
         Task<TEntity> FindAsync(object key);
 
-        Task<bool> RemoveAsync(TEntity entity);
+        Task RemoveAsync(TEntity entity);
 
-        Task<bool> UpdatesAsync(TEntity entity);
+        Task UpdatesAsync(TEntity entity);
     }
 }

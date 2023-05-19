@@ -46,7 +46,8 @@ namespace RainFramework.AspNetCore.Base
         [HttpPost]
         public async Task<ResultVO> Add(TEntity entity)
         {
-            return await crudService.AddAsync(entity) ? Success() : Fail($"Add {entity.GetType().Name} Errr.");
+            await crudService.AddAsync(entity);
+            return Success();
         }
 
         /// <summary>
@@ -57,7 +58,8 @@ namespace RainFramework.AspNetCore.Base
         [HttpDelete, Authorize(Roles = "Administrator")]
         public async Task<ResultVO> Delete(TEntity entity)
         {
-            return await crudService.RemoveAsync(entity) ? Success() : Fail($"Delete {entity.GetType().Name} Errr.");
+            await crudService.RemoveAsync(entity);
+            return Success();
         }
 
         /// <summary>
@@ -68,7 +70,8 @@ namespace RainFramework.AspNetCore.Base
         [HttpPut, Authorize(Roles = "Administrator")]
         public async Task<ResultVO> Update(TEntity entity)
         {
-            return await crudService.UpdatesAsync(entity) ? Success() : Fail($"Delete {entity.GetType().Name} Errr.");
+            await crudService.UpdatesAsync(entity);
+            return Success();
         }
     }
 }

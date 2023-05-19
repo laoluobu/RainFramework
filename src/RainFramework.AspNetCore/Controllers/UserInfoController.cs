@@ -22,7 +22,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// 获取当前用户信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("myself")]
         public async Task<ResultVO<UserInfo>> GetCurrentUserInfo()
         {
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);

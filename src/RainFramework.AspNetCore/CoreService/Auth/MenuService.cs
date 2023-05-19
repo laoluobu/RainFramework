@@ -56,8 +56,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<bool> DeleteMenuById(int id)
         {
-            await dbContext.SysMenus.Where(menu=>menu.Id==id).ExecuteDeleteAsync();
-            var count=await dbContext.SaveChangesAsync() > 0;
+            var count = await dbContext.SysMenus.Where(menu=>menu.Id==id).ExecuteDeleteAsync() > 0;
             if (!count)
             {
                 throw new NotFoundException($"The menus id is {id} not found!");

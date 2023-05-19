@@ -17,8 +17,8 @@ namespace RainFramework.AspNetCore
     {
         public static void AddRainFrameworkCore(this WebApplicationBuilder builder, out WebApplication application)
         {
+            builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
-
             builder.Services.AddSwagger();          
             builder.Services.AddJwtBearerPkg();
             builder.Services.AddSingleton<IJWTService, JWTService>();
@@ -27,7 +27,7 @@ namespace RainFramework.AspNetCore
             builder.Services.AddTransient<IUserInfoService, UserInfoService>();
             builder.Services.AddTransient<IMenuService, MenuService>();
             builder.Services.AddTransient<IRoleService, RoleService>();
-            builder.Services.AddMyCors();
+            
             builder.Services.AddAutoMapper(typeof(CoreProfile));
 
             application = builder.Build();

@@ -10,7 +10,11 @@ namespace RainFramework.Common.Configurer
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.AllowAnyOrigin().SetPreflightMaxAge(TimeSpan.FromHours(5)).AllowAnyHeader().AllowAnyMethod();
+                    builder.AllowAnyOrigin()
+                           .SetPreflightMaxAge(TimeSpan.FromHours(5))
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                           
                 });
             });
         }

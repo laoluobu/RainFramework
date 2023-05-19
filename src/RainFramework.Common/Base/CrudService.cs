@@ -14,28 +14,34 @@ namespace RainFramework.Common.Base
             dbSet = dbContext.Set<TEntity>();
         }
 
-        public async Task<bool> UpdatesAsync(TEntity entity)
+        public async Task UpdatesAsync(TEntity entity)
         {
             dbSet.Update(entity);
-            return await dbContext.SaveChangesAsync() > 0;
+            if (await dbContext.SaveChangesAsync() < 1)
+            {
+                throw new EntityUpdateException($"The {entity} Update error!");
+            }
         }
 
-        public async Task<bool> AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-            return await dbContext.SaveChangesAsync() > 0;
+            if (await dbContext.SaveChangesAsync() < 1)
+            {
+                throw new EntityUpdateException($"The {entity} insert error!");
+            }
         }
 
-        public async Task<bool> RemoveAsync(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             dbSet.Remove(entity);
-            return await dbContext.SaveChangesAsync() > 0;
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<TEntity> FindAsync(object key)
         {
             var entity = await dbSet.FindAsync(key);
-            if(entity == null)
+            if (entity == null)
             {
                 throw new NotFoundException($"The Entity id is {key} inexistence!");
             }

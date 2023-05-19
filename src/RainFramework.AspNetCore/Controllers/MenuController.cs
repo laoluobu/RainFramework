@@ -24,7 +24,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// 获取当前用户可用菜单
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("myself")]
         public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
         {
             var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
@@ -59,12 +59,14 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>
         /// <returns></returns>
-        [HttpPatch, Route("id")]
-        public async Task<ResultVO<bool>> UpdateMenus(int id, [FromBody] JsonPatchDocument<SysMenu> patchDoc)
+        [HttpPatch("{id}")]
+        public async Task<ResultVO> UpdateMenus(int id, [FromBody] JsonPatchDocument<SysMenu> patchDoc)
         {
+            throw new Exception("sss");
             var sysMenu = await menuService.FindAsync(id);
             patchDoc.ApplyTo(sysMenu);
-            return Success(await menuService.UpdatesAsync(sysMenu)); 
+            await menuService.UpdatesAsync(sysMenu);
+            return Success();
         }
     }
 }
