@@ -21,11 +21,11 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<bool> DeleteRoleById(int id)
         {
-            await dbContext.Roles.Where(menu => menu.Id == id).ExecuteDeleteAsync();
+            await dbContext.Roles.Where(role => role.Id == id).ExecuteDeleteAsync();
             var count = await dbContext.SaveChangesAsync() > 0;
             if (!count)
             {
-                throw new NotFoundException($"The menus id is {id} not found!");
+                throw new NotFoundException($"The roles id is {id} not found!");
             }
             return count;
         }
