@@ -26,9 +26,10 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
-        public async Task<ResultVO<bool>> DeleteRoles(int id)
+        public async Task<ResultVO> DeleteRoles(int id)
         {
-            return Success(await roleService.DeleteRoleById(id));
+            await roleService.DeleteRoleById(id);
+            return Success();
         }
 
 
