@@ -27,7 +27,10 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             {
                 throw new NotFoundException($"Role {RoleName} is inexistence!");
             }
-            return dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.Roles.Contains(role) && menu.ParentId == null).ToArray();
+            return dbSet.AsNoTracking()
+                        .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
+                        .Where(menu => menu.Roles.Contains(role) && menu.ParentId == null)
+                        .OrderBy(menu => menu.OrderNum).ToArray();
         }
 
         public async Task<IEnumerable<SysMenu>?> FindEenuByRoleNames(IEnumerable<string> RoleNames)
@@ -48,18 +51,21 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public IEnumerable<MenuVO> ListMenus()
         {
-            var menus = dbContext.SysMenus.Include(menu => menu.Children).Where(menu => menu.ParentId == null).ToList();
+            var menus = dbSet.AsNoTracking()
+                             .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
+                             .Where(menu => menu.ParentId == null)
+                             .OrderBy(menu => menu.OrderNum)
+                             .ToList();
             return mapper.Map<List<SysMenu>, List<MenuVO>>(menus);
         }
 
-        public async Task<bool> DeleteMenuById(int id)
+        public async Task DeleteMenuById(int id)
         {
-            var count = await dbContext.SysMenus.Where(menu=>menu.Id==id).ExecuteDeleteAsync() > 0;
+            var count = await dbSet.Where(menu => menu.Id == id).ExecuteDeleteAsync() > 0;
             if (!count)
             {
                 throw new NotFoundException($"The menus id is {id} not found!");
             }
-            return count;
         }
-    } 
+    }
 }

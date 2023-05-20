@@ -11,7 +11,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> DeleteMenuById(int id);
+        Task DeleteMenuById(int id);
 
         /// <summary>
         /// 获取指定角色可用菜单
