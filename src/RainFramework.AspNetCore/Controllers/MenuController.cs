@@ -61,7 +61,6 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPatch("{id}")]
         public async Task<ResultVO> UpdateMenus(int id, [FromBody] JsonPatchDocument<SysMenu> patchDoc)
         {
-            throw new Exception("sss");
             var sysMenu = await menuService.FindAsync(id);
             patchDoc.ApplyTo(sysMenu);
             await menuService.UpdatesAsync(sysMenu);
