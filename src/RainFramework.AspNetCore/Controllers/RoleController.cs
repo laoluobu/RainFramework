@@ -6,6 +6,7 @@ using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository.Entity;
 using static RainFramework.Common.Moudel.VO.ResultTool;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -29,6 +30,21 @@ namespace RainFramework.AspNetCore.Controllers
         public async Task<ResultVO> DeleteRoles(int id)
         {
             await roleService.DeleteRoleById(id);
+            return Success();
+        }
+
+        /// <summary>
+        /// 局部修改角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patchDoc"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ResultVO> UpdateRoles(int id, [FromBody] JsonPatchDocument<Role> patchDoc)
+        {
+            var role = await roleService.FindAsync(id);
+            patchDoc.ApplyTo(role);
+            await roleService.UpdatesAsync(role);
             return Success();
         }
     }
