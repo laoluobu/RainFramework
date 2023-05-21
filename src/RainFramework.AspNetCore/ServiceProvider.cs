@@ -33,7 +33,7 @@ namespace RainFramework.AspNetCore
             application = builder.Build();
             //启用跨域请求
             application.UseCors();
-            application.UseSerilogRequestLogging(option =>
+           application.UseSerilogRequestLogging(option =>
             {
                 option.MessageTemplate = "User {UserName} ClientIp {ClientIp} " + option.MessageTemplate;
 
@@ -41,7 +41,7 @@ namespace RainFramework.AspNetCore
 
                 option.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    diagnosticContext.Set("UserName", httpContext.User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value);
+                    diagnosticContext.Set("UserName", httpContext.User.Claims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value ?? "None");
                     diagnosticContext.Set("ClientIp", httpContext.Connection.RemoteIpAddress?.MapToIPv4());
                 };
             });

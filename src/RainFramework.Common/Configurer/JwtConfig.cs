@@ -29,9 +29,12 @@ namespace RainFramework.Common.Configurer
                 {
                     OnMessageReceived = msgContex =>
                     {
-                        if (msgContex.Request.Query.ContainsKey("access_token"))
+                        if (msgContex.Request.Path.HasValue && msgContex.Request.Path.Value.Contains("Hub"))
                         {
-                            msgContex.Token = msgContex.Request.Query["access_token"];
+                            if (msgContex.Request.Query.ContainsKey("access_token"))
+                            {
+                                msgContex.Token = msgContex.Request.Query["access_token"];
+                            }
                         }
                         return Task.CompletedTask;
                     }
