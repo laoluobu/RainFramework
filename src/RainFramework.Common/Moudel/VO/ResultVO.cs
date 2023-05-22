@@ -13,8 +13,6 @@
 
         public class ResultVO
         {
-            public object? Data { get; set; }
-
             public int Code { get; set; }
 
             public string? Message { get; set; }
@@ -34,7 +32,6 @@
         {
             return new ResultVO
             {
-                Data = null,
                 Code = 20000,
                 Message = "Success"
             };
@@ -49,7 +46,6 @@
         {
             return new ResultVO
             {
-                Data = null,
                 Code = 50000,
                 Message = msg
             };
@@ -60,7 +56,6 @@
         {
             return new ResultVO
             {
-                Data = null,
                 Code = 40001,
                 Message = msg
             };
