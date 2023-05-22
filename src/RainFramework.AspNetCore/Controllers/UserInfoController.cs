@@ -32,18 +32,6 @@ namespace RainFramework.AspNetCore.Controllers
         }
 
         /// <summary>
-        /// 根据ID删除用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("{id}"), Authorize(Roles = "Administrator")]
-        public async Task<ResultVO> DeleteUser(int id)
-        {
-            await userInfoService.DeleteUserById(id);
-            return Success();
-        }
-
-        /// <summary>
         /// 局部修改用户
         /// </summary>
         /// <param name="id"></param>

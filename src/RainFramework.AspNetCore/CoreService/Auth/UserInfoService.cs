@@ -16,15 +16,5 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         {
             return await dbSet.AsNoTracking().SingleOrDefaultAsync(o => o.UserAuthId == userId);
         }
-
-        public async Task<bool> DeleteUserById(int id)
-        {
-            var count = await dbContext.UserInfos.Where(user => user.Id == id).ExecuteDeleteAsync() > 0;
-            if (!count)
-            {
-                throw new NotFoundException($"The User id is {id} not found!");
-            }
-            return count;
-        }
     }
 }
