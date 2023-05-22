@@ -37,7 +37,7 @@ namespace RainFramework.AspNetCore.Moudel.VO
         /// <summary>
         /// 子菜单列表
         /// </summary>
-        public List<SysMenu> Children { get; set; } = new();
+        public List<MenuVO> Children { get; set; } = new();
 
         /// <summary>
         /// 是否显示

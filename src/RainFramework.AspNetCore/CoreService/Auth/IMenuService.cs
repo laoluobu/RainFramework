@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
-using RainFramework.AspNetCore.Moudel.VO;
+﻿using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Base;
 using RainFramework.Repository.Entity;
 
@@ -12,7 +11,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> DeleteMenuById(int id);
+        Task DeleteMenuById(int id);
 
         /// <summary>
         /// 获取指定角色可用菜单

@@ -16,7 +16,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<Role?> FindRoleByName(string name)
         {
-            return await dbContext.Roles.SingleOrDefaultAsync(role => role.RoleName == name);
+            return await dbSet.SingleOrDefaultAsync(role => role.RoleName == name);
         }
         public IEnumerable<Role> FindMutilRolesByRoleName(string rolename)
         {
@@ -24,14 +24,13 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         }
 
 
-        public async Task<bool> DeleteRoleById(int id)
+        public async Task DeleteRoleById(int id)
         {
-            var count=await dbContext.Roles.Where(role => role.Id == id).ExecuteDeleteAsync()>0;
+            var count=await dbSet.Where(role => role.Id == id).ExecuteDeleteAsync()>0;
             if (!count)
             {
                 throw new NotFoundException($"The roles id is {id} not found!");
             }
-            return count;
         }
     }
 }

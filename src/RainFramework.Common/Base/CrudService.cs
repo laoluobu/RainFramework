@@ -50,7 +50,7 @@ namespace RainFramework.Common.Base
 
         public async Task<IEnumerable<TEntity?>> FindAll()
         {
-            return await dbSet.ToListAsync();
+            return await dbSet.AsNoTracking().ToListAsync();
         }
     }
 }

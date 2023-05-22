@@ -25,5 +25,22 @@ public class BaseDBContext : DbContext
         modelBuilder
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
+
+        //Roles Table
+        modelBuilder.Entity<Role>(Roles =>
+        {
+            Roles.HasIndex(Role => Role.RoleName).IsUnique();
+        });
+
+        //UserAuth Table
+        modelBuilder.Entity<UserAuth>(UserAuth =>
+        {
+            UserAuth.HasIndex(UserAuth => UserAuth.Username).IsUnique();
+        });
+
+        modelBuilder.Entity<SysMenu>(SysMenus =>
+        {
+            SysMenus.HasIndex(Menus => Menus.Name).IsUnique();
+        });
     }
 }

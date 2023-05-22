@@ -14,7 +14,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<UserInfo?> FindUserInfoByUserId(int userId)
         {
-            return await dbContext.UserInfos.SingleOrDefaultAsync(o => o.UserAuthId == userId);
+            return await dbSet.AsNoTracking().SingleOrDefaultAsync(o => o.UserAuthId == userId);
         }
 
         public async Task<bool> DeleteUserById(int id)

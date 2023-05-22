@@ -47,9 +47,10 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete, Route("{id}"), Authorize(Roles = "Administrator")]
-        public async Task<ResultVO<bool>> DeleteMenus(int id)
+        public async Task<ResultVO> DeleteMenus(int id)
         {
-            return Success(await menuService.DeleteMenuById(id));
+            await menuService.DeleteMenuById(id);
+            return Success();
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RainFramework.Repository.DBContext;
 
@@ -10,9 +11,11 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(BaseDBContext))]
-    partial class BaseDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230520054013_UPDATE")]
+    partial class UPDATE
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +45,6 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleName")
-                        .IsUnique();
 
                     b.ToTable("Roles");
                 });
@@ -85,9 +85,6 @@ namespace RainFramework.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.HasIndex("ParentId");
 
                     b.ToTable("SysMenus");
@@ -124,9 +121,6 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("UserAuths");
                 });

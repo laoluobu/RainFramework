@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.CoreException;
 using RainFramework.Common.Moudel.VO;
 
@@ -14,24 +15,22 @@ namespace RainFramework.Common.Filters
             var afer = await next();
             if (afer.Exception != null)
             {
-                if (afer.Exception is NotFoundException notFoundException)
+                afer.Result = afer.Exception switch
                 {
-                    afer.Result = new ObjectResult(ResultTool.NotFound(notFoundException.Message))
+                    NotFoundException notFoundException => new ObjectResult(ResultTool.NotFound(notFoundException.Message))
                     {
                         StatusCode = 404
-                    };
-                    afer.ExceptionHandled = true;
-                    return;
-                }
-                else
-                {
-                    afer.Result = new ObjectResult(ResultTool.Fail(afer.Exception))
+                    },
+                    DbUpdateException dbUpdateException => new ObjectResult(ResultTool.Fail(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message))
                     {
                         StatusCode = 500
-                    };
-                    afer.ExceptionHandled = true;
-                    return;
-                }
+                    },
+                    _ => new ObjectResult(ResultTool.Fail(afer.Exception))
+                    {
+                        StatusCode = 500
+                    },
+                };
+                afer.ExceptionHandled = true;
             }
         }
     }

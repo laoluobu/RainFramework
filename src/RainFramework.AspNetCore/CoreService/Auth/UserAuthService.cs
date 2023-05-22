@@ -17,7 +17,9 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<string> LoginService(UserVO userVO)
         {
-            var userAuth = await dbContext.UserAuths.Include(user => user.Roles).SingleOrDefaultAsync(user => user.Username == userVO.Username && user.Password == userVO.Password);
+            var userAuth = await dbSet.AsNoTracking()
+                                      .Include(user => user.Roles)
+                                      .SingleOrDefaultAsync(user => user.Username == userVO.Username && user.Password == userVO.Password);
             if (userAuth == null)
             {
                 return string.Empty;

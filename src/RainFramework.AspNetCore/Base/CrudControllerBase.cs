@@ -25,7 +25,7 @@ namespace RainFramework.AspNetCore.Base
         public async Task<ResultVO<TEntity>> FindAsync(int id)
         {
             var entity = await crudService.FindAsync(id);
-            return ResultTool.Success(entity);
+            return Success(entity);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace RainFramework.AspNetCore.Base
         public async Task<ResultVO<IEnumerable<TEntity?>>> FindAllAsync()
         {
             var entity = await crudService.FindAll();
-            return ResultTool.Success(entity);
+            return Success(entity);
         }
 
         /// <summary>
