@@ -7,6 +7,8 @@ using RainFramework.Repository.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using RainFramework.Common.CoreException;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
@@ -48,6 +50,17 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                 throw new NotFoundException($"The User id is {id} not found!");
             }
             return count;
+        }
+
+        public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
+        {
+            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
+            if (userAuth == null)
+            {
+                return;
+            }
+            patchDoc.ApplyTo(userAuth);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

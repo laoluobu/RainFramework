@@ -45,9 +45,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPatch("{id}")]
         public async Task<ResultVO> UpdateUser(int id, [FromBody] JsonPatchDocument<UserAuth> patchDoc)
         {
-            var user = await userAuthService.FindAsync(id);
-            patchDoc.ApplyTo(user);
-            await userAuthService.UpdatesAsync(user);
+            await userAuthService.PatchUserAuth(id, patchDoc);
             return Success();
         }
 
