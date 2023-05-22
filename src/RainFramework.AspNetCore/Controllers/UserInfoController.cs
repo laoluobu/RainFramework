@@ -28,6 +28,5 @@ namespace RainFramework.AspNetCore.Controllers
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
             return Success(userInfo);
         }
-
     }
 }
