@@ -8,5 +8,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         Task DeleteRoleById(int id);
 
         Task<Role?> FindRoleByName(string name);
+
+        IEnumerable<Role> FindMutilRolesByRoleName(string rolename);
     }
 }

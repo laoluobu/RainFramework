@@ -3,6 +3,7 @@ using RainFramework.Common.Base;
 using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
+using System.Data;
 using static RainFramework.Repository.DBContext.BaseDBContext;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
@@ -16,6 +17,10 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         public async Task<Role?> FindRoleByName(string name)
         {
             return await dbSet.SingleOrDefaultAsync(role => role.RoleName == name);
+        }
+        public IEnumerable<Role> FindMutilRolesByRoleName(string rolename)
+        {
+            return dbContext.Roles.Where(p => p.RoleName.Contains(rolename)).ToArray();
         }
 
 

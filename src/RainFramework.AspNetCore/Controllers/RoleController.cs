@@ -47,5 +47,16 @@ namespace RainFramework.AspNetCore.Controllers
             await roleService.UpdatesAsync(role);
             return Success();
         }
+
+        /// <summary>
+        /// 根据角色名查询角色
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ResultVO<IEnumerable<Role>> FindRolesByRoleName(string rolename)
+        {
+            var roles = roleService.FindMutilRolesByRoleName(rolename);
+            return Success(roles);
+        }
     }
 }
