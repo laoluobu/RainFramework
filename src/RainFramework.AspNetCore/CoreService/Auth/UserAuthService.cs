@@ -58,13 +58,12 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
         {
-            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).Include(userAuth => userAuth.Roles).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
+            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
             if (userAuth == null)
             {
                 return;
             }
             patchDoc.ApplyTo(userAuth);
-            //await UpadteRole(id,userAuth.Roles);
             await dbContext.SaveChangesAsync();
         }
 
