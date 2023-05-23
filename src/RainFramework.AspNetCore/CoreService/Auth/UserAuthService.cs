@@ -38,6 +38,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         {
             return dbSet.AsNoTracking()
                              .Include(ui => ui.UserInfo)
+                             .Include(ui=>ui.Roles)
                              .OrderBy(ui => ui.IpAddress)
                              .ToList();
         }
@@ -54,7 +55,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
         {
-            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
+            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).Include(ui => ui.Roles).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
             if (userAuth == null)
             {
                 return;
