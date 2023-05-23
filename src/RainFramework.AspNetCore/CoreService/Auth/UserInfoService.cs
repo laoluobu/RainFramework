@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Base;
+using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 
