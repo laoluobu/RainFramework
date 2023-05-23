@@ -16,11 +16,14 @@ namespace RainFramework.AspNetCore.CoreService.Auth
     {
         private readonly IJWTService jWTService;
         private readonly IMapper mapper;
+        private readonly IRoleService roleService;
 
-        public UserAuthService(BaseDBContext daseDBContext, IJWTService jWTService, IMapper mapper) : base(daseDBContext)
+        public UserAuthService(BaseDBContext daseDBContext, IJWTService jWTService, IMapper mapper
+            ,IRoleService roleService) : base(daseDBContext)
         {
             this.jWTService = jWTService;
             this.mapper = mapper;
+            this.roleService = roleService;
         }
 
         public async Task<string> LoginService(UserVO userVO)
@@ -55,12 +58,21 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
         {
-            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).Include(ui => ui.Roles).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
+            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
             if (userAuth == null)
             {
                 return;
             }
             patchDoc.ApplyTo(userAuth);
+            await UpadteRole(id,userAuth.Roles);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpadteRole(int userId,List<Role> roles)
+        {
+            var user = await dbSet.SingleAsync(user=>user.Id== userId);
+            //var role=await roleService.FindAsync(2);
+            user.Roles = roles;
             await dbContext.SaveChangesAsync();
         }
     }
