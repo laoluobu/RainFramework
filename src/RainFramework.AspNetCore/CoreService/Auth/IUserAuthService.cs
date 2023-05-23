@@ -11,6 +11,6 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         IEnumerable<UserAuth> ListUsers();
         Task<bool> DeleteUserById(int userId);
         Task PatchUserAuth(int userId, JsonPatchDocument<UserAuth> patchDoc);
-        Task UpadteRole(int userId,List<Role> roles);
+        Task UpadteRoleByUserId(int userId, List<int> roleIds);
     }
 }

@@ -68,10 +68,23 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task UpadteRole(int userId,List<Role> roles)
+        public async Task UpadteRoleByUserId(int userId,List<int> roleIds)
         {
-            var user = await dbSet.SingleAsync(user=>user.Id== userId);
-            //var role=await roleService.FindAsync(2);
+            var user = await dbSet.Include(userAuth => userAuth.Roles).SingleAsync(user=>user.Id== userId);
+
+            List<Role> roles = new List<Role>();
+
+            if (roleIds == null)
+            {
+                user.Roles = new List<Role>();
+                await dbContext.SaveChangesAsync();
+                return;
+            }
+
+            foreach(var RoleId in roleIds)
+            {
+                roles.Add(await roleService.FindAsync(RoleId));
+            }
             user.Roles = roles;
             await dbContext.SaveChangesAsync();
         }
