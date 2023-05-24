@@ -42,7 +42,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>
         /// <returns></returns>
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateUser(int id, [FromBody] JsonPatchDocument<UserAuth> patchDoc)
         {
             await userAuthService.PatchUserAuth(id, patchDoc);
@@ -59,10 +59,25 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(userAuthService.ListUsers());
         }
 
-        [HttpPost("{id}/Roles")]
+        [HttpPost("{id}/Roles"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles )
         {
             await userAuthService.UpadteRoleByUserId(id,roles);
+            return Success();
+        }
+
+
+   
+        /// <summary>
+        /// 修改自己的密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}/myselt/password"), Authorize(Roles = "Administrator")]
+        public async Task<ResultVO> UpdateMyelfAuth(int id, string password)
+        {
+            await userAuthService.PatchUserAuth(id, patchDoc);
             return Success();
         }
     }

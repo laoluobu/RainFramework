@@ -2,7 +2,7 @@
 
 namespace RainFramework.AspNetCore.Moudel.VO
 {
-    public class MenuVO
+    public record MenuVO
     {
         /// <summary>
         /// 主键

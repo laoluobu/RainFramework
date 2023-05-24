@@ -44,14 +44,9 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                              .ToList();
         }
 
-        public async Task<bool> DeleteUserById(int id)
+        public async Task DeleteUserById(int id)
         {
-            var count = await dbContext.UserAuths.Where(user => user.Id == id).ExecuteDeleteAsync() > 0;
-            if (!count)
-            {
-                throw new NotFoundException($"The User id is {id} not found!");
-            }
-            return count;
+            await dbContext.UserAuths.Where(user => user.Id == id).ExecuteDeleteAsync();
         }
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
@@ -65,9 +60,9 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task UpadteRoleByUserId(int userId, List<int> roleIds)
+        public async Task UpadteRoleByUserId(int id, List<int> roleIds)
         {
-            var user = await dbSet.Include(userAuth => userAuth.Roles).SingleAsync(user => user.Id == userId);
+            var user = await dbSet.Include(userAuth => userAuth.Roles).SingleAsync(user => user.Id == id);
 
             List<Role> roles = new List<Role>();
 
@@ -84,6 +79,23 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             }
             user.Roles = roles;
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<UserAuth> FindUserAuthIncludeInfoById(int id)
+        {
+            var user = await dbSet.Include(user => user.UserInfo).SingleOrDefaultAsync(user => user.Id == id);
+
+            if (user == null)
+            {
+                throw new NotFoundException($"User id is {id} inexistence！");
+            }
+            return user;
+        }
+
+        public async Task UpdatePasswordById(int id, string password)
+        {
+            await dbSet.Where(user => user.Id == id)
+                       .ExecuteUpdateAsync(userAuths => userAuths.SetProperty(user => user.Password, password));
         }
     }
 }

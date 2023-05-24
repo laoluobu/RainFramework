@@ -10,6 +10,7 @@ namespace RainFramework.AspNetCore.Mapper
         {
             CreateMap<SysMenu, MenuVO>();
             CreateMap<MenuVO, SysMenu>();
+            CreateMap<UserAuth, UserInfoVO>();
         }
     }
 }
