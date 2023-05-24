@@ -10,5 +10,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         Task<Role?> FindRoleByName(string name);
 
         IEnumerable<Role> FindMutilRolesByRoleName(string rolename);
+        IEnumerable<Role> ListRoles();
+        Task UpadteMenusByRoleId(int id, List<int> menus);
     }
 }

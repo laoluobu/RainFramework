@@ -11,25 +11,19 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class MenuService : CrudService<BaseDBContext, SysMenu>, IMenuService
     {
-        private readonly IRoleService roleService;
         private readonly IMapper mapper;
 
-        public MenuService(BaseDBContext daseDBContext, IRoleService roleService, IMapper mapper) : base(daseDBContext)
+        public MenuService(BaseDBContext daseDBContext, IMapper mapper) : base(daseDBContext)
         {
-            this.roleService = roleService;
             this.mapper = mapper;
         }
 
         public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
         {
-            var role = await roleService.FindRoleByName(RoleName);
-            if (role == null)
-            {
-                throw new NotFoundException($"Role {RoleName} is inexistence!");
-            }
             return dbSet.AsNoTracking()
                         .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
-                        .Where(menu => menu.Roles.Contains(role) && menu.ParentId == null)
+                        .Include(menu => menu.Roles)
+                        .Where(menu => menu.Roles.Where(role => role.RoleName == RoleName).Count() > 0 && menu.ParentId == null)
                         .OrderBy(menu => menu.OrderNum).ToArray();
         }
 

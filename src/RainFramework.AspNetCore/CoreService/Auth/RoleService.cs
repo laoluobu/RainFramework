@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using RainFramework.Common.Base;
 using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
@@ -10,8 +11,10 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class RoleService : CrudService<BaseDBContext, Role>, IRoleService
     {
-        public RoleService(BaseDBContext daseDBContext) : base(daseDBContext)
+        private IMenuService? menuService;
+        public RoleService(BaseDBContext daseDBContext, IMenuService menuService) : base(daseDBContext)
         {
+            this.menuService = menuService;
         }
 
         public async Task<Role?> FindRoleByName(string name)
@@ -31,6 +34,37 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             {
                 throw new NotFoundException($"The roles id is {id} not found!");
             }
+        }
+
+        public IEnumerable<Role> ListRoles()
+        {
+            return dbSet.AsNoTracking()
+                             .Include(role => role.SysMenus.OrderBy(menu => menu.OrderNum))
+                             .OrderBy(role => role.Id)
+                             .ToList();
+        }
+
+        public async Task UpadteMenusByRoleId(int roleId, List<int> menuIds)
+        {
+            var role = await dbSet.Include(role => role.SysMenus).SingleAsync(role => role.Id == roleId);
+
+            List<SysMenu> sysMenus = new List<SysMenu>();
+
+            if (menuIds == null)
+            {
+                role.SysMenus = new List<SysMenu>();
+                await dbContext.SaveChangesAsync();
+                return;
+            }
+
+            
+
+            foreach (var menId in menuIds)
+            {
+                sysMenus.Add(await menuService.FindAsync(menId));
+            }
+            role.SysMenus = sysMenus;
+            await dbContext.SaveChangesAsync();
         }
     }
 }

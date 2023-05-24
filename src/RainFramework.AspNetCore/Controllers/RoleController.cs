@@ -58,5 +58,22 @@ namespace RainFramework.AspNetCore.Controllers
             var roles = roleService.FindMutilRolesByRoleName(rolename);
             return Success(roles);
         }
+
+        /// <summary>
+        /// 获取所有角色
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("list")]
+        public ResultVO<IEnumerable<Role>> ListRoles()
+        {
+            return Success(roleService.ListRoles());
+        }
+
+        [HttpPost("{id}/Menus"), Authorize(Roles = "Administrator")]
+        public async Task<ResultVO> UpdateRoleMenus(int id, [FromBody] List<int> menus)
+        {
+            await roleService.UpadteMenusByRoleId(id, menus);
+            return Success();
+        }
     }
 }
