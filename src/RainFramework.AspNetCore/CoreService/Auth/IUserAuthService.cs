@@ -9,7 +9,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
     {
         Task<string> LoginService(UserVO userVO);
         IEnumerable<UserAuth> ListUsers();
-        Task<bool> DeleteUserById(int userId);
+        Task DeleteUserById(int userId);
         Task PatchUserAuth(int userId, JsonPatchDocument<UserAuth> patchDoc);
         Task UpadteRoleByUserId(int userId, List<int> roleIds);
     }

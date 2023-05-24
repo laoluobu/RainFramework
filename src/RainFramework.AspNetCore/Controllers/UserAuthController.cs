@@ -42,7 +42,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>
         /// <returns></returns>
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateUser(int id, [FromBody] JsonPatchDocument<UserAuth> patchDoc)
         {
             await userAuthService.PatchUserAuth(id, patchDoc);
@@ -59,7 +59,7 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(userAuthService.ListUsers());
         }
 
-        [HttpPost("{id}/Roles")]
+        [HttpPost("{id}/Roles"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles )
         {
             await userAuthService.UpadteRoleByUserId(id,roles);

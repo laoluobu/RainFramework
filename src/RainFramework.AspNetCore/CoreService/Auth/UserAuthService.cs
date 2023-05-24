@@ -44,14 +44,13 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                              .ToList();
         }
 
-        public async Task<bool> DeleteUserById(int id)
+        public async Task DeleteUserById(int id)
         {
             var count = await dbContext.UserAuths.Where(user => user.Id == id).ExecuteDeleteAsync() > 0;
             if (!count)
             {
                 throw new NotFoundException($"The User id is {id} not found!");
             }
-            return count;
         }
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
