@@ -59,6 +59,12 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(userAuthService.ListUsers());
         }
 
+        /// <summary>
+        /// 修改用户角色
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <param name="roles">用户角色数组</param>
+        /// <returns></returns>
         [HttpPost("{id}/Roles"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles )
         {

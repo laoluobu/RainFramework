@@ -69,6 +69,12 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(roleService.ListRoles());
         }
 
+        /// <summary>
+        /// 修改角色菜单
+        /// </summary>
+        /// <param name="id">角色id</param>
+        /// <param name="menus">角色菜单数组</param>
+        /// <returns></returns>
         [HttpPost("{id}/Menus"), Authorize(Roles = "Administrator")]
         public async Task<ResultVO> UpdateRoleMenus(int id, [FromBody] List<int> menus)
         {
