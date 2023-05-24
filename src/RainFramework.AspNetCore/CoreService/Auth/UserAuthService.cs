@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Base;
+using RainFramework.Common.CoreException;
 using RainFramework.Common.Moudel.VO;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using RainFramework.Common.CoreException;
-using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
@@ -19,7 +16,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         private readonly IRoleService roleService;
 
         public UserAuthService(BaseDBContext daseDBContext, IJWTService jWTService, IMapper mapper
-            ,IRoleService roleService) : base(daseDBContext)
+            , IRoleService roleService) : base(daseDBContext)
         {
             this.jWTService = jWTService;
             this.mapper = mapper;
@@ -37,11 +34,12 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             }
             return jWTService.CreateToken(userAuth);
         }
+
         public IEnumerable<UserAuth> ListUsers()
         {
             return dbSet.AsNoTracking()
                              .Include(ui => ui.UserInfo)
-                             .Include(ui=>ui.Roles.OrderBy(role=>role.Id))
+                             .Include(ui => ui.Roles.OrderBy(role => role.Id))
                              .OrderBy(ui => ui.IpAddress)
                              .ToList();
         }
@@ -58,7 +56,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc)
         {
-            var userAuth=await dbSet.Include(userAuth=>userAuth.UserInfo).SingleOrDefaultAsync(userAuth=>userAuth.Id==id);
+            var userAuth = await dbSet.Include(userAuth => userAuth.UserInfo).SingleOrDefaultAsync(userAuth => userAuth.Id == id);
             if (userAuth == null)
             {
                 return;
@@ -67,9 +65,9 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task UpadteRoleByUserId(int userId,List<int> roleIds)
+        public async Task UpadteRoleByUserId(int userId, List<int> roleIds)
         {
-            var user = await dbSet.Include(userAuth => userAuth.Roles).SingleAsync(user=>user.Id== userId);
+            var user = await dbSet.Include(userAuth => userAuth.Roles).SingleAsync(user => user.Id == userId);
 
             List<Role> roles = new List<Role>();
 
@@ -80,7 +78,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                 return;
             }
 
-            foreach(var RoleId in roleIds)
+            foreach (var RoleId in roleIds)
             {
                 roles.Add(await roleService.FindAsync(RoleId));
             }

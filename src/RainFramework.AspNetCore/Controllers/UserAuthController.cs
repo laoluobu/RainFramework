@@ -59,7 +59,7 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(userAuthService.ListUsers());
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/Roles")]
         public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles )
         {
             await userAuthService.UpadteRoleByUserId(id,roles);
