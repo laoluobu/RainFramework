@@ -3,14 +3,9 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository.Entity;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
@@ -19,6 +14,7 @@ namespace RainFramework.AspNetCore.Controllers
     public class UserAuthController : CrudControllerBase<UserAuth>
     {
         private IUserAuthService userAuthService;
+
         public UserAuthController(IUserAuthService userAuthService) : base(userAuthService)
         {
             this.userAuthService = userAuthService;
@@ -59,25 +55,28 @@ namespace RainFramework.AspNetCore.Controllers
             return Success(userAuthService.ListUsers());
         }
 
+        /// <summary>
+        /// 修改用户角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="roles"></param>
+        /// <returns></returns>
         [HttpPost("{id}/Roles"), Authorize(Roles = "Administrator")]
-        public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles )
+        public async Task<ResultVO> UpdateUserRole(int id, [FromBody] List<int> roles)
         {
-            await userAuthService.UpadteRoleByUserId(id,roles);
+            await userAuthService.UpadteRoleByUserId(id, roles);
             return Success();
         }
 
-
-   
         /// <summary>
         /// 修改自己的密码
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="password"></param>
+        /// <param name="userAuth"></param>
         /// <returns></returns>
-        [HttpPatch("{id}/myselt/password"), Authorize(Roles = "Administrator")]
-        public async Task<ResultVO> UpdateMyelfAuth(int id, string password)
+        [HttpPatch("myself/password")]
+        public async Task<ResultVO> UpdateMyelfAuth([FromBody] UserAuthVO userAuth)
         {
-            await userAuthService.PatchUserAuth(id, patchDoc);
+            await userAuthService.UpdatePasswordById(RequestUser.Id, userAuth.Password);
             return Success();
         }
     }
