@@ -25,10 +25,9 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("myself")]
-        public ResultVO<IEnumerable<SysMenu>> GetCurrentUserMenus()
+        public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
         {
-            var menus = menuService.FindEenuByRoleNames(RequestUser.Roles);
-            return Success(menus);
+            return Success(await menuService.FindEenuByRoleNames(RequestUser.Roles));
         }
 
         /// <summary>
@@ -36,9 +35,9 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("list")]
-        public ResultVO<IEnumerable<MenuVO>> ListMenus()
+        public async Task<ResultVO<IEnumerable<MenuVO>>> ListMenus()
         {
-            return Success(menuService.ListMenus());
+            return Success(await menuService.ListMenus());
         }
 
         /// <summary>

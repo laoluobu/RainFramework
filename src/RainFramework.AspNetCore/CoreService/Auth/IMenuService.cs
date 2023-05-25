@@ -18,19 +18,19 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         /// </summary>
         /// <param name="RoleName"></param>
         /// <returns></returns>
-        IEnumerable<SysMenu> FindEenuByRoleName(string RoleName);
+        Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName);
 
         /// <summary>
         /// 获取多角色角色可用菜单
         /// </summary>
         /// <param name="RoleNames"></param>
         /// <returns></returns>
-        IEnumerable<SysMenu> FindEenuByRoleNames(IEnumerable<string> RoleNames);
+        Task<IEnumerable<SysMenu>> FindEenuByRoleNames(IEnumerable<string> RoleNames);
 
         /// <summary>
         /// 获取所有菜单
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MenuVO> ListMenus();
+        Task<IEnumerable<MenuVO>> ListMenus();
     }
 }

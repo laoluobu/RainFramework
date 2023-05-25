@@ -18,47 +18,42 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             this.mapper = mapper;
         }
 
-        public IEnumerable<SysMenu> FindEenuByRoleName(string RoleName)
+        public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
         {
-            var rootMenus = FindRoleRootMenusLoad(RoleName);
+            var rootMenus = await FindRoleMenus(RoleName);
             return rootMenus;
         }
 
-        private List<SysMenu> FindRoleRootMenus(string RoleName)
-        {
-            return dbSet.AsNoTracking()
-            .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
-            .Include(menu => menu.Roles)
-            .Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null)
-            .OrderBy(menu => menu.OrderNum).ToList();
-        }
 
-
-        private List<SysMenu> FindRoleRootMenusLoad(string RoleName)
+        private async Task<List<SysMenu>> FindRoleMenus(string RoleName)
         {
-            var root = dbSet.Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null);
-            dbContext.Entry(root.First())
-                .Collection(root=>root.Children)
-                .Query()
-                .Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).Load();
+            var root = dbSet.Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null).ToList();
+            await LoopLoadMenu(root, RoleName);
             return root.ToList();
         }
             
 
 
-        private List<SysMenu> FindRoleMenus(List<SysMenu> menuList, string RoleName)
+        private async Task LoopLoadMenu(List<SysMenu> menus, string? RoleName)
         {
-            var menus = menuList.Where(menu => menu.Children.Any(menu => menu.Roles.Any(role => role.RoleName == RoleName))).ToList();
-
-            if (menus.Any(menu => menu.Children.Any()))
+            if (!menus.Any()) return;
+            foreach (var menu in menus)
             {
-                menus = FindRoleMenus(menus, RoleName);
-            }
+                var entry = dbContext.Entry(menu).Collection(root => root.Children);
+                if (RoleName == null)
+                {
+                    await entry.LoadAsync();
+                    await LoopLoadMenu(menu.Children, null);
+                }
+                await entry.Query().Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).LoadAsync();
+                await LoopLoadMenu(menu.Children, RoleName);
 
-            return menus;
+            }
         }
 
-        public IEnumerable<SysMenu> FindEenuByRoleNames(IEnumerable<string> RoleNames)
+
+
+        public async Task<IEnumerable<SysMenu>> FindEenuByRoleNames(IEnumerable<string> RoleNames)
         {
             if (RoleNames == null || !RoleNames.Any())
             {
@@ -67,21 +62,18 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             var userEmunes = new List<SysMenu>();
             foreach (var roleName in RoleNames)
             {
-                var emuns = FindEenuByRoleName(roleName);
+                var emuns =await FindEenuByRoleName(roleName);
                 userEmunes.AddRange(emuns);
             }
             var distinctItems = userEmunes.GroupBy(x => x.Id).Select(y => y.First());
             return distinctItems;
         }
 
-        public IEnumerable<MenuVO> ListMenus()
+        public async Task<IEnumerable<MenuVO>> ListMenus()
         {
-            var menus = dbSet.AsNoTracking()
-                             .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
-                             .Where(menu => menu.ParentId == null)
-                             .OrderBy(menu => menu.OrderNum)
-                             .ToList();
-            return mapper.Map<List<SysMenu>, List<MenuVO>>(menus);
+            var root = dbSet.Where(menu=> menu.ParentId == null).ToList();
+            await LoopLoadMenu(root, null);
+            return mapper.Map<List<SysMenu>, List<MenuVO>>(root);
         }
 
         public async Task DeleteMenuById(int id)
