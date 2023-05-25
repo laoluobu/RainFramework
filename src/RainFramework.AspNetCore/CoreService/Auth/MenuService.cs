@@ -18,16 +18,47 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
+        public IEnumerable<SysMenu> FindEenuByRoleName(string RoleName)
         {
-            return dbSet.AsNoTracking()
-                        .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
-                        .Include(menu => menu.Roles)
-                        .Where(menu => menu.Roles.Where(role => role.RoleName == RoleName).Count() > 0 && menu.ParentId == null)
-                        .OrderBy(menu => menu.OrderNum).ToArray();
+            var rootMenus = FindRoleRootMenusLoad(RoleName);
+            return rootMenus;
         }
 
-        public async Task<IEnumerable<SysMenu>?> FindEenuByRoleNames(IEnumerable<string> RoleNames)
+        private List<SysMenu> FindRoleRootMenus(string RoleName)
+        {
+            return dbSet.AsNoTracking()
+            .Include(menu => menu.Children.OrderBy(menu => menu.OrderNum))
+            .Include(menu => menu.Roles)
+            .Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null)
+            .OrderBy(menu => menu.OrderNum).ToList();
+        }
+
+
+        private List<SysMenu> FindRoleRootMenusLoad(string RoleName)
+        {
+            var root = dbSet.Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null);
+            dbContext.Entry(root.First())
+                .Collection(root=>root.Children)
+                .Query()
+                .Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).Load();
+            return root.ToList();
+        }
+            
+
+
+        private List<SysMenu> FindRoleMenus(List<SysMenu> menuList, string RoleName)
+        {
+            var menus = menuList.Where(menu => menu.Children.Any(menu => menu.Roles.Any(role => role.RoleName == RoleName))).ToList();
+
+            if (menus.Any(menu => menu.Children.Any()))
+            {
+                menus = FindRoleMenus(menus, RoleName);
+            }
+
+            return menus;
+        }
+
+        public IEnumerable<SysMenu> FindEenuByRoleNames(IEnumerable<string> RoleNames)
         {
             if (RoleNames == null || !RoleNames.Any())
             {
@@ -36,7 +67,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             var userEmunes = new List<SysMenu>();
             foreach (var roleName in RoleNames)
             {
-                var emuns = await FindEenuByRoleName(roleName);
+                var emuns = FindEenuByRoleName(roleName);
                 userEmunes.AddRange(emuns);
             }
             var distinctItems = userEmunes.GroupBy(x => x.Id).Select(y => y.First());

@@ -25,9 +25,9 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("myself")]
-        public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
+        public ResultVO<IEnumerable<SysMenu>> GetCurrentUserMenus()
         {
-            var menus = await menuService.FindEenuByRoleNames(RequestUser.Roles);
+            var menus = menuService.FindEenuByRoleNames(RequestUser.Roles);
             return Success(menus);
         }
 
