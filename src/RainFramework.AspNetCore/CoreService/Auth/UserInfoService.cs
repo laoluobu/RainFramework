@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Base;
-using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 
@@ -8,13 +8,20 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 {
     internal class UserInfoService : CrudService<BaseDBContext, UserInfo>, IUserInfoService
     {
-        public UserInfoService(BaseDBContext daseDBContext) : base(daseDBContext)
+        private readonly IUserAuthService userAuthService;
+
+        private readonly IMapper mapper;
+
+        public UserInfoService(BaseDBContext daseDBContext, IUserAuthService userAuthService, IMapper mapper) : base(daseDBContext)
         {
+            this.userAuthService = userAuthService;
+            this.mapper = mapper;
         }
 
-        public async Task<UserInfo?> FindUserInfoByUserId(int userId)
+        public async Task<UserInfoVO> FindUserInfoByUserId(int userId)
         {
-            return await dbSet.AsNoTracking().SingleOrDefaultAsync(o => o.UserAuthId == userId);
+            var userAuth = await userAuthService.FindUserAuthIncludeInfoById(userId);
+            return mapper.Map<UserInfoVO>(userAuth);
         }
     }
 }

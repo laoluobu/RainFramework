@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
+using RainFramework.AspNetCore.Moudel.VO;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository.Entity;
 using System.Data;
@@ -25,7 +26,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("myself")]
-        public async Task<ResultVO<UserInfo>> GetCurrentUserInfo()
+        public async Task<ResultVO<UserInfoVO>> GetCurrentUserInfo()
         {
             var userInfo = await userInfoService.FindUserInfoByUserId(RequestUser.Id);
             return Success(userInfo);

@@ -9,8 +9,17 @@ namespace RainFramework.AspNetCore.CoreService.Auth
     {
         Task<string> LoginService(UserVO userVO);
         IEnumerable<UserAuth> ListUsers();
-        Task DeleteUserById(int userId);
-        Task PatchUserAuth(int userId, JsonPatchDocument<UserAuth> patchDoc);
-        Task UpadteRoleByUserId(int userId, List<int> roleIds);
+        Task DeleteUserById(int id);
+        Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc);
+        Task UpadteRoleByUserId(int id, List<int> roleIds);
+        Task<UserAuth> FindUserAuthIncludeInfoById(int id);
+
+        /// <summary>
+        /// 修改用户密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        Task UpdatePasswordById(int id, string password);
     }
 }
