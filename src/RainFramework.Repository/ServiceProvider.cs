@@ -25,8 +25,9 @@ namespace RainFramework.Repository
                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(
                     maxRetryCount: 5,
                     maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null).UseNewtonsoftJson());
-
+                    errorNumbersToAdd: null)
+                    .UseNewtonsoftJson()
+                    .MigrationsAssembly("RainFramework.Repository"));
                 //打印sql参数
                 options.EnableSensitiveDataLogging();
                 options.EnableDetailedErrors();
