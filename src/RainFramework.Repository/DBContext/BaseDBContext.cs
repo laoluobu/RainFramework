@@ -30,14 +30,27 @@ public class BaseDBContext : DbContext
         modelBuilder.Entity<Role>(Roles =>
         {
             Roles.HasIndex(Role => Role.RoleName).IsUnique();
+            Roles.Property(Role => Role.CreateTime).ValueGeneratedOnAdd();
+            Roles.Property(Role => Role.UpdateTime).ValueGeneratedOnUpdate();
         });
 
         //UserAuth Table
         modelBuilder.Entity<UserAuth>(UserAuth =>
         {
             UserAuth.HasIndex(UserAuth => UserAuth.Username).IsUnique();
+            UserAuth.Property(UserAuth=>UserAuth.CreateTime).ValueGeneratedOnAdd();
+            UserAuth.Property(UserAuth=>UserAuth.UpdateTime).ValueGeneratedOnUpdate();
         });
 
+
+        //UserInfo Table
+        modelBuilder.Entity<UserInfo>(UserInfo =>
+        {
+            UserInfo.Property(UserInfo => UserInfo.CreateTime).ValueGeneratedOnAdd();
+            UserInfo.Property(UserInfo => UserInfo.UpdateTime).ValueGeneratedOnUpdate();
+        });
+
+        //SysMenu Table
         modelBuilder.Entity<SysMenu>(SysMenus =>
         {
             SysMenus.HasIndex(Menus => Menus.Name).IsUnique();
