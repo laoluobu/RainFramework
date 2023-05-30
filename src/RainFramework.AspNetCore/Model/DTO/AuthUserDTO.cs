@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 #nullable disable
 
-namespace RainFramework.AspNetCore.Moudel.DTO
+namespace RainFramework.AspNetCore.Model.DTO
 {
     public record AuthUserDTO
     {

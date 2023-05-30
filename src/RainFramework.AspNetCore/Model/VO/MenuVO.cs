@@ -1,6 +1,6 @@
 ﻿using RainFramework.Repository.Entity;
 
-namespace RainFramework.AspNetCore.Moudel.VO
+namespace RainFramework.AspNetCore.Model.VO
 {
     public record MenuVO
     {

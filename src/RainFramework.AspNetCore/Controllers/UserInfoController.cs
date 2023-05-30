@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
-using RainFramework.AspNetCore.Moudel.VO;
+using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository.Entity;
 using System.Data;

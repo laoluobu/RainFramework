@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RainFramework.AspNetCore.Moudel.VO;
+using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Base;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;

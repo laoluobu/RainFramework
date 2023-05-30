@@ -1,4 +1,4 @@
-﻿using RainFramework.AspNetCore.Moudel.VO;
+﻿using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Base;
 using RainFramework.Repository.Entity;
 

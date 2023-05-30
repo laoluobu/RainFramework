@@ -2,7 +2,7 @@
 
 using RainFramework;
 
-namespace RainFramework.AspNetCore.Moudel.DTO
+namespace RainFramework.AspNetCore.Model.DTO
 {
     public record UserDetailsDTO
     {

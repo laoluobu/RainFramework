@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RainFramework.AspNetCore.Moudel.VO;
+using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Base;
 using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;

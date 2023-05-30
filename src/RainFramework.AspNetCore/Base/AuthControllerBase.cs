@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RainFramework.AspNetCore.Moudel.DTO;
+using RainFramework.AspNetCore.Model.DTO;
 
 namespace RainFramework.AspNetCore.Base
 {
