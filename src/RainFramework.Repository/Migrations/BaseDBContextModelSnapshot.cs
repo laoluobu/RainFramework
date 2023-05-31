@@ -40,6 +40,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
@@ -101,6 +102,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("IpAddress")
@@ -117,6 +119,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Username")
@@ -139,7 +142,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
@@ -154,6 +157,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserAuthId")

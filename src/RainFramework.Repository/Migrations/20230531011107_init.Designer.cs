@@ -11,8 +11,8 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(BaseDBContext))]
-    [Migration("20230530015511_ada")]
-    partial class ada
+    [Migration("20230531011107_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDisable")
@@ -42,6 +43,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
@@ -103,6 +105,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("IpAddress")
@@ -119,6 +122,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Username")
@@ -141,7 +145,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAddOrUpdate()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
@@ -156,6 +160,7 @@ namespace RainFramework.Repository.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdateTime")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserAuthId")

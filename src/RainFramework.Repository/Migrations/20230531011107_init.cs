@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RainFramework.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class ada : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,7 +24,8 @@ namespace RainFramework.Repository.Migrations
                     RoleName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
@@ -76,7 +77,8 @@ namespace RainFramework.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IpAddress = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     LastLoginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -152,7 +154,7 @@ namespace RainFramework.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>

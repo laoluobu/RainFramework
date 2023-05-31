@@ -11,12 +11,13 @@ using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
 using Serilog.Events;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static void AddRainFrameworkCore(this WebApplicationBuilder builder, out WebApplication application)
+        public static WebApplication AddRainFrameworkCore(this WebApplicationBuilder builder)
         {
             builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
@@ -32,7 +33,7 @@ namespace RainFramework.AspNetCore
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
             builder.Services.AddAutoMapper(profiles);
 
-            application = builder.Build();
+            var application = builder.Build();
             //启用跨域请求
             application.UseCors();
             application.UseSerilogRequestLogging(option =>
@@ -54,6 +55,9 @@ namespace RainFramework.AspNetCore
             }
             application.UseAuthentication();
             application.UseAuthorization();
+            application.MapControllers();
+
+            return application;
         }
     }
 }

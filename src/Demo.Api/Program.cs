@@ -1,7 +1,7 @@
-using RainFramework.AspNetCore;
+using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Globalization;
+using RainFramework.AspNetCore;
 using RainFramework.Common.Filters;
 
 namespace Demo.Api
@@ -26,9 +26,7 @@ namespace Demo.Api
                 //ø’÷µ¥¶¿Ì
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
-            builder.AddRainFrameworkCore(out WebApplication app);
-            app.MapControllers();
-            app.Run();
+            builder.AddRainFrameworkCore().Run();
         }
     }
 }
