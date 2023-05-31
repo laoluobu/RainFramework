@@ -8,7 +8,7 @@ namespace RainFramework.Common.Configurer
 {
     public static class JwtConfig
     {
-        public static void AddJwtBearerPkg(this IServiceCollection services)
+        public static IServiceCollection AddJwtBearerPkg(this IServiceCollection services)
         {
             services.AddAuthentication(options =>
             {
@@ -40,6 +40,7 @@ namespace RainFramework.Common.Configurer
                     }
                 };
             });
+            return services;
         }
     }
 }

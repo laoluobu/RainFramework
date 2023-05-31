@@ -6,7 +6,7 @@ namespace RainFramework.Common.Configurer
 {
     public static class SwaggerConfig
     {
-        public static void AddSwagger(this IServiceCollection services)
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
             {
@@ -49,6 +49,7 @@ namespace RainFramework.Common.Configurer
                 };
                 options.AddSecurityRequirement(requirement);
             });
+            return services;
         }
         public static void UseSwaggerPkg(this IApplicationBuilder app)
         {

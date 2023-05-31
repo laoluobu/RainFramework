@@ -40,7 +40,7 @@ namespace RainFramework.Repository
         /// <param name="services"></param>
         /// <param name="DbConnectString"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void AddBaseDBContext(this IServiceCollection services, string DbConnectString)
+        public static IServiceCollection AddBaseDBContext(this IServiceCollection services, string DbConnectString)
         {
             if (string.IsNullOrEmpty(DbConnectString))
             {
@@ -58,6 +58,7 @@ namespace RainFramework.Repository
                     options.EnableSensitiveDataLogging();
                     options.EnableDetailedErrors();
                 });
+            return services;
         }
     }
 }

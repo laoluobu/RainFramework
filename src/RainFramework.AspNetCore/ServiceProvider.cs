@@ -11,27 +11,36 @@ using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
 using Serilog.Events;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static WebApplication AddRainFrameworkCore(this WebApplicationBuilder builder)
+        public static WebApplication AddRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
         {
+            var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
+
+            if (profiles.Any())
+            {
+                profiles = profiles.Concat(profileAssemblyMarkerTypes).ToArray();
+            }
+
+#if DEBUG
+            var profileNames = profiles.Select(profile => profile.Name).ToArray();
+            Console.WriteLine($"[AutoMapper] FindProfile: {string.Join(",", profileNames)}");
+#endif
             builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
-            builder.Services.AddSwagger();
-            builder.Services.AddJwtBearerPkg();
-            builder.Services.AddSingleton<IJWTService, JWTService>();
-            builder.Services.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"));
-            builder.Services.AddTransient<IUserAuthService, UserAuthService>();
-            builder.Services.AddTransient<IUserInfoService, UserInfoService>();
-            builder.Services.AddTransient<IMenuService, MenuService>();
-            builder.Services.AddTransient<IRoleService, RoleService>();
+            builder.Services.AddSwagger()
+                            .AddJwtBearerPkg()
+                            .AddSingleton<IJWTService, JWTService>()
+                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"))
+                            .AddTransient<IUserAuthService, UserAuthService>()
+                            .AddTransient<IUserInfoService, UserInfoService>()
+                            .AddTransient<IMenuService, MenuService>()
+                            .AddTransient<IRoleService, RoleService>()
 
-            var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
-            builder.Services.AddAutoMapper(profiles);
+            .AddAutoMapper(profiles);
 
             var application = builder.Build();
             //启用跨域请求
