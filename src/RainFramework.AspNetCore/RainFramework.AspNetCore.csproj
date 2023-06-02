@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
-    <Version>1.0.45</Version>
+    <Version>1.0.46</Version>
 	<Description>RF 核心</Description>
   </PropertyGroup>
 
@@ -18,10 +18,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;1591;</NoWarn>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.5" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
