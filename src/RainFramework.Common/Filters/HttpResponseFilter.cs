@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RainFramework.Common.CoreException;
 using RainFramework.Common.Moudel.VO;
 
@@ -9,6 +10,13 @@ namespace RainFramework.Common.Filters
     public class HttpResponseFilter : IAsyncActionFilter, IOrderedFilter
     {
         public int Order => int.MaxValue - 10;
+
+        private ILogger<HttpResponseFilter> logger;
+
+        public HttpResponseFilter(ILogger<HttpResponseFilter> logger)
+        {
+            this.logger = logger;
+        }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -30,6 +38,7 @@ namespace RainFramework.Common.Filters
                         StatusCode = 500
                     },
                 };
+                logger.LogError(" response {DisplayName} {Message} ", afer.ActionDescriptor.DisplayName, afer.Exception.Message);
                 afer.ExceptionHandled = true;
             }
         }

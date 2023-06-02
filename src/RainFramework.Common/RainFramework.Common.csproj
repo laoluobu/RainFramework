@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>1.0.42</Version>
+    <Version>1.0.43</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
