@@ -49,11 +49,5 @@ public class BaseDBContext : DbContext
             UserInfo.Property(UserInfo => UserInfo.CreateTime).ValueGeneratedOnAdd();
             UserInfo.Property(UserInfo => UserInfo.UpdateTime).ValueGeneratedOnUpdate();
         });
-
-        //SysMenu Table
-        modelBuilder.Entity<SysMenu>(SysMenus =>
-        {
-            SysMenus.HasIndex(Menus => Menus.Name).IsUnique();
-        });
     }
 }

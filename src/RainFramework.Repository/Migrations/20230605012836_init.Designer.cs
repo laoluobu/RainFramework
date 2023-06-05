@@ -11,7 +11,7 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(BaseDBContext))]
-    [Migration("20230531011107_init")]
+    [Migration("20230605012836_init")]
     partial class init
     {
         /// <inheritdoc />
