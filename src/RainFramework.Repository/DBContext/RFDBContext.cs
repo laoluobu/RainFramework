@@ -20,6 +20,8 @@ public class RFDBContext : DbContext
 
     public DbSet<SysMenu> SysMenus { get; set; }
 
+    public DbSet<AppConfig> AppConfigs { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
