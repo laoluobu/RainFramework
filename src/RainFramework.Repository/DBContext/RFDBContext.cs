@@ -6,9 +6,9 @@ namespace RainFramework.Repository.DBContext;
 /// <summary>
 /// 框架共用层DBContext
 /// </summary>
-public class BaseDBContext : DbContext
+public class RFDBContext : DbContext
 {
-    public BaseDBContext(DbContextOptions<BaseDBContext> options) : base(options)
+    public RFDBContext(DbContextOptions<RFDBContext> options) : base(options)
     {
     }
 

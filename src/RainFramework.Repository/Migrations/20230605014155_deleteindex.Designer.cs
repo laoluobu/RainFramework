@@ -10,7 +10,7 @@ using RainFramework.Repository.DBContext;
 
 namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(BaseDBContext))]
+    [DbContext(typeof(RFDBContext))]
     [Migration("20230605014155_deleteindex")]
     partial class deleteindex
     {

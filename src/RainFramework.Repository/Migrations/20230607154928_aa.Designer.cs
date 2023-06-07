@@ -10,7 +10,7 @@ using RainFramework.Repository.DBContext;
 
 namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(BaseDBContext))]
+    [DbContext(typeof(RFDBContext))]
     [Migration("20230607154928_aa")]
     partial class aa
     {

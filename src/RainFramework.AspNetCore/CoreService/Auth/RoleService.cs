@@ -5,14 +5,14 @@ using RainFramework.Common.CoreException;
 using RainFramework.Repository.DBContext;
 using RainFramework.Repository.Entity;
 using System.Data;
-using static RainFramework.Repository.DBContext.BaseDBContext;
+using static RainFramework.Repository.DBContext.RFDBContext;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class RoleService : CrudService<BaseDBContext, Role>, IRoleService
+    internal class RoleService : CrudService<RFDBContext, Role>, IRoleService
     {
         private IMenuService? menuService;
-        public RoleService(BaseDBContext daseDBContext, IMenuService menuService) : base(daseDBContext)
+        public RoleService(RFDBContext daseDBContext, IMenuService menuService) : base(daseDBContext)
         {
             this.menuService = menuService;
         }

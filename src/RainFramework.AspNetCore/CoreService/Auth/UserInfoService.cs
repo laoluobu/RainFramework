@@ -6,13 +6,13 @@ using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class UserInfoService : CrudService<BaseDBContext, UserInfo>, IUserInfoService
+    internal class UserInfoService : CrudService<RFDBContext, UserInfo>, IUserInfoService
     {
         private readonly IUserAuthService userAuthService;
 
         private readonly IMapper mapper;
 
-        public UserInfoService(BaseDBContext daseDBContext, IUserAuthService userAuthService, IMapper mapper) : base(daseDBContext)
+        public UserInfoService(RFDBContext daseDBContext, IUserAuthService userAuthService, IMapper mapper) : base(daseDBContext)
         {
             this.userAuthService = userAuthService;
             this.mapper = mapper;

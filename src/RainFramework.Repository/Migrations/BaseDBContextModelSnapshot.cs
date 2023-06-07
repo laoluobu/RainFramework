@@ -9,7 +9,7 @@ using RainFramework.Repository.DBContext;
 
 namespace RainFramework.Repository.Migrations
 {
-    [DbContext(typeof(BaseDBContext))]
+    [DbContext(typeof(RFDBContext))]
     partial class BaseDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
