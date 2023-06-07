@@ -1,7 +1,5 @@
 use WMSDB;
 
-use WMSDB;
-
 INSERT INTO WMSDB.Roles (Id, RoleName, IsDisable, CreateTime, UpdateTime) VALUES (2, 'Administrator', 0, '2023-05-13 14:37:34', '2023-05-13 14:37:34');
 INSERT INTO WMSDB.Roles (Id, RoleName, IsDisable, CreateTime, UpdateTime) VALUES (3, 'Customer', 0, '2023-05-13 14:37:34', '2023-05-13 14:37:34');
 
