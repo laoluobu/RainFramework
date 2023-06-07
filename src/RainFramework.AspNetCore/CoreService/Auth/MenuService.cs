@@ -27,7 +27,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         private async Task<List<SysMenu>> FindRoleMenus(string RoleName)
         {
-            var root = dbSet.Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null).ToList();
+            var root = dbSet.OrderBy(menu=>menu.OrderNum).Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null).ToList();
             await LoopLoadMenu(root, RoleName);
             return root.ToList();
         }
@@ -45,9 +45,8 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                     await entry.LoadAsync();
                     await LoopLoadMenu(menu.Children, null);
                 }
-                await entry.Query().Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).LoadAsync();
+                await entry.Query().OrderBy(menu => menu.OrderNum).Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).LoadAsync();
                 await LoopLoadMenu(menu.Children, RoleName);
-
             }
         }
 
@@ -65,13 +64,13 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                 var emuns =await FindEenuByRoleName(roleName);
                 userEmunes.AddRange(emuns);
             }
-            var distinctItems = userEmunes.GroupBy(x => x.Id).Select(y => y.First());
+            var distinctItems = userEmunes.OrderBy(menu=>menu.OrderNum).GroupBy(x => x.Id).Select(y => y.First());
             return distinctItems;
         }
 
         public async Task<IEnumerable<MenuVO>> ListMenus()
         {
-            var root = dbSet.Where(menu=> menu.ParentId == null).ToList();
+            var root = dbSet.OrderBy(menu => menu.OrderNum).Where(menu=> menu.ParentId == null).ToList();
             await LoopLoadMenu(root, null);
             return mapper.Map<List<SysMenu>, List<MenuVO>>(root);
         }
