@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
-    <Version>1.0.47</Version>
+    <Version>1.0.48</Version>
 	<Description>RF 核心</Description>
   </PropertyGroup>
 
