@@ -34,20 +34,20 @@ namespace RainFramework.AspNetCore
             builder.Services.AddSwagger()
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"))
+                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"), builder.Configuration["Mysql.Version"])
                             .AddTransient<IUserAuthService, UserAuthService>()
                             .AddTransient<IUserInfoService, UserInfoService>()
                             .AddTransient<IMenuService, MenuService>()
                             .AddTransient<IRoleService, RoleService>()
-
-            .AddAutoMapper(profiles);
+                            .AddMemoryCache(option => option.SizeLimit = builder.Configuration.GetValue<int>("MemoryCache.SizeLimit"))
+                            .AddAutoMapper(profiles);
 
             var application = builder.Build();
             //启用跨域请求
             application.UseCors();
             application.UseSerilogRequestLogging(option =>
              {
-                 option.MessageTemplate = "User {UserName} ClientIp {ClientIp} " + option.MessageTemplate;
+                 option.MessageTemplate = "[ApiOperate] User {UserName} ClientIp {ClientIp} " + option.MessageTemplate;
 
                  option.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;
 

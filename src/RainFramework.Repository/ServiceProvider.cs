@@ -12,7 +12,7 @@ namespace RainFramework.Repository
         /// <param name="services"></param>
         /// <param name="DbConnectString"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
+        private static void AddMySQLDbPool(this IServiceCollection services, string DbConnectString)
         {
             if (string.IsNullOrEmpty(DbConnectString))
             {
@@ -38,18 +38,23 @@ namespace RainFramework.Repository
         /// 普通连接
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="DbConnectString"></param>
+        /// <param name="dbConnectString"></param>
+        /// <param name="version"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IServiceCollection AddBaseDBContext(this IServiceCollection services, string DbConnectString)
+        public static IServiceCollection AddBaseDBContext(this IServiceCollection services, string dbConnectString, string version)
         {
-            if (string.IsNullOrEmpty(DbConnectString))
+            if (string.IsNullOrEmpty(dbConnectString))
             {
-                throw new ArgumentNullException(nameof(DbConnectString));
+                throw new ArgumentNullException(nameof(dbConnectString));
+            }
+            if (string.IsNullOrEmpty(version))
+            {
+                version = "8.0.33-mysql";
             }
             services.AddDbContext<RFDBContext>(
                 options =>
                 {
-                    options.UseMySql(DbConnectString, ServerVersion.Parse("8.0.33-mysql"),
+                    options.UseMySql(dbConnectString, ServerVersion.Parse(version),
                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(
                     maxRetryCount: 5,
                     maxRetryDelay: TimeSpan.FromSeconds(30),
@@ -58,6 +63,7 @@ namespace RainFramework.Repository
                     options.EnableSensitiveDataLogging();
                     options.EnableDetailedErrors();
                 });
+
             return services;
         }
     }
