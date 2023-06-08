@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RainFramework.Repository.DBContext;
 
@@ -10,9 +11,11 @@ using RainFramework.Repository.DBContext;
 namespace RainFramework.Repository.Migrations
 {
     [DbContext(typeof(RFDBContext))]
-    partial class BaseDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230607154928_aa")]
+    partial class aa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

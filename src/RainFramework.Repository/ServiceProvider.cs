@@ -19,7 +19,7 @@ namespace RainFramework.Repository
                 throw new ArgumentNullException(nameof(DbConnectString));
             }
 
-            services.AddDbContextPool<BaseDBContext>(options =>
+            services.AddDbContextPool<RFDBContext>(options =>
             {
                 options.UseMySql(DbConnectString, ServerVersion.Parse("8.0.33-mysql"),
                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(
@@ -46,7 +46,7 @@ namespace RainFramework.Repository
             {
                 throw new ArgumentNullException(nameof(DbConnectString));
             }
-            services.AddDbContext<BaseDBContext>(
+            services.AddDbContext<RFDBContext>(
                 options =>
                 {
                     options.UseMySql(DbConnectString, ServerVersion.Parse("8.0.33-mysql"),
