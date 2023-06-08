@@ -40,15 +40,7 @@ namespace RainFramework.AspNetCore
                             .AddTransient<IUserInfoService, UserInfoService>()
                             .AddTransient<IMenuService, MenuService>()
                             .AddTransient<IRoleService, RoleService>()
-                            .AddMemoryCache(option =>
-                            {
-                                var sizeLimit = builder.Configuration.GetValue<int>("MemoryCache.SizeLimit");
-                                if (sizeLimit > 0)
-                                {
-                                    option.SizeLimit = sizeLimit;
-                                }
-                            })
-                            .AddRFMemoryCache();
+                            .AddRFMemoryCache(builder.Configuration.GetValue<int>("MemoryCache.SizeLimit"))
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
