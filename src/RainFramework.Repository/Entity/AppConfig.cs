@@ -8,6 +8,11 @@ namespace RainFramework.Repository.Entity
     public class AppConfig : EntityBase
     {
         /// <summary>
+        /// 主键
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// UI是否显示Tags
         /// </summary>
         public bool IsShowTagsView { get; set; }

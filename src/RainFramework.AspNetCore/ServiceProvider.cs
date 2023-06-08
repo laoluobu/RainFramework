@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.CoreService.Auth;
+using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
@@ -47,6 +48,7 @@ namespace RainFramework.AspNetCore
                                     option.SizeLimit = sizeLimit;
                                 }
                             })
+                            .AddRFMemoryCache();
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
