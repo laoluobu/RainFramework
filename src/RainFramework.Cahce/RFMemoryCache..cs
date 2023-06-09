@@ -6,6 +6,8 @@ namespace RainFramework.Cahce
     {
         private readonly IMemoryCache memoryCache;
 
+        private readonly object hashSetLock = new object();
+
         public RFMemoryCache(IMemoryCache memoryCache)
         {
             this.memoryCache = memoryCache;
@@ -27,7 +29,6 @@ namespace RainFramework.Cahce
             memoryCache.Set(key, value, cacheEntryOptions);
         }
 
-
         /// <summary>
         /// 设置缓存值
         /// </summary>
@@ -43,7 +44,6 @@ namespace RainFramework.Cahce
             cacheEntryOptions.SetAbsoluteExpiration(expiration);
             memoryCache.Set(key, value, cacheEntryOptions);
         }
-
 
         /// <summary>
         /// 获取缓存值
@@ -66,6 +66,87 @@ namespace RainFramework.Cahce
         public void Remove(object key)
         {
             memoryCache.Remove(key);
+        }
+
+        /// <summary>
+        /// 创建或插入 hashSet cache，默认大小为10
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="expiration">整个列表的过期时间，每次修改都会重置</param>
+        public void RPushHashSet(string key, string value, TimeSpan expiration)
+        {
+            lock (hashSetLock)
+            {
+                var set = FindHashSet(key);
+                if (set != null)
+                {
+                    set.Add(value);
+                    CreateHashSet(key, set, expiration);
+                    return;
+                }
+                CreateHashSet(key, new HashSet<string> { value }, expiration);
+            }
+        }
+
+        private void CreateHashSet<T>(string key, HashSet<T> set, TimeSpan expiration)
+        {
+            Set(key + "HashSet", set, expiration, 10);
+        }
+
+        /// <summary>
+        /// 从hashSet移除某个值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void RemoveValueHashSet(string key, string value)
+        {
+            lock (hashSetLock)
+            {
+                var set = FindHashSet(key);
+                set?.Remove(value);
+            }
+        }
+
+        /// <summary>
+        /// 判断hashSet是否包含某个值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public bool ContainsHashSet(string key, string value)
+        {
+            lock (hashSetLock)
+            {
+                var set = FindHashSet(key);
+                if (set == null)
+                {
+                    return false;
+                }
+                return set.Contains(value);
+            }
+        }
+
+        /// <summary>
+        /// 获取Hashset Cache
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public HashSet<string>? GetHashSet(string key)
+        {
+            lock (hashSetLock)
+            {
+                return FindHashSet(key);
+            }
+        }
+
+        private HashSet<string>? FindHashSet(string key)
+        {
+            bool isFound = memoryCache.TryGetValue(key + "HashSet", out HashSet<string>? hashSet);
+            if (isFound)
+            {
+                return hashSet;
+            }
+            return null;
         }
     }
 }
