@@ -26,7 +26,7 @@ namespace Demo.Api
                 //ø’÷µ¥¶¿Ì
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
-            builder.AddRainFrameworkCore().Run();
+            builder.UseRainFrameworkCore().Run();
         }
     }
 }

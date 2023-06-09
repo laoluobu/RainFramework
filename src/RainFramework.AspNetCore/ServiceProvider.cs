@@ -17,7 +17,7 @@ namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static WebApplication AddRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
+        public static WebApplication UseRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
         {
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
 
