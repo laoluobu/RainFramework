@@ -37,11 +37,14 @@ namespace RainFramework.Cahce
         /// <param name="value"></param>
         /// <param name="expirationSeconds">绝对过期时间</param>
         /// <param name="size"></param>
-        public void Set<T>(object key, T value, TimeSpan expiration, int size = 1)
+        public void Set<T>(object key, T value, TimeSpan? expiration, int size = 1)
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions().SetSize(size);
             cacheEntryOptions.SetSize(1);
-            cacheEntryOptions.SetAbsoluteExpiration(expiration);
+            if (expiration != null)
+            {
+                cacheEntryOptions.SetAbsoluteExpiration((TimeSpan)expiration);
+            }     
             memoryCache.Set(key, value, cacheEntryOptions);
         }
 
@@ -74,7 +77,7 @@ namespace RainFramework.Cahce
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="expiration">整个列表的过期时间，每次修改都会重置</param>
-        public void RPushHashSet(string key, string value, TimeSpan expiration)
+        public void RPushHashSet(string key, string value, TimeSpan? expiration)
         {
             lock (hashSetLock)
             {
@@ -89,7 +92,7 @@ namespace RainFramework.Cahce
             }
         }
 
-        private void CreateHashSet<T>(string key, HashSet<T> set, TimeSpan expiration)
+        private void CreateHashSet<T>(string key, HashSet<T> set, TimeSpan? expiration)
         {
             Set(key + "HashSet", set, expiration, 10);
         }
