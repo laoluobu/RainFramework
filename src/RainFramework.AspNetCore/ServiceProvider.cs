@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.CoreService.Auth;
+using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
@@ -16,7 +17,7 @@ namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static WebApplication AddRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
+        public static WebApplication UseRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
         {
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
 
@@ -39,7 +40,7 @@ namespace RainFramework.AspNetCore
                             .AddTransient<IUserInfoService, UserInfoService>()
                             .AddTransient<IMenuService, MenuService>()
                             .AddTransient<IRoleService, RoleService>()
-                            .AddMemoryCache(option => option.SizeLimit = builder.Configuration.GetValue<int>("MemoryCache.SizeLimit"))
+                            .AddRFMemoryCache(builder.Configuration.GetValue<int>("MemoryCache.SizeLimit"))
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
