@@ -2,6 +2,9 @@
 {
     public class ResultTool
     {
+        public const int SUCCESS = 20000;
+        public const int FAIL = 50000;
+
         public class ResultVO<T>
         {
             public T? Data { get; set; }
@@ -23,7 +26,7 @@
             return new ResultVO<T>
             {
                 Data = data,
-                Code = 20000,
+                Code = SUCCESS,
                 Message = "Success"
             };
         }
@@ -32,7 +35,7 @@
         {
             return new ResultVO
             {
-                Code = 20000,
+                Code = SUCCESS,
                 Message = "Success"
             };
         }
@@ -46,11 +49,10 @@
         {
             return new ResultVO
             {
-                Code = 50000,
+                Code = FAIL,
                 Message = msg
             };
         }
-
 
         public static ResultVO NotFound(string msg)
         {
@@ -66,7 +68,7 @@
             return new ResultVO<string>
             {
                 Data = default,
-                Code = 50000,
+                Code = FAIL,
                 Message = msg
             };
         }
