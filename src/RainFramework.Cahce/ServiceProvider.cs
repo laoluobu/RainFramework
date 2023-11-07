@@ -5,14 +5,14 @@ namespace RainFramework.Cahce
 {
     public static class ServiceProvider
     {
-        public static IServiceCollection AddRFMemoryCache(this IServiceCollection services, int sizeLimit)
+        public static IServiceCollection AddRFMemoryCache(this IServiceCollection services, RFCacheOption rfCacheOption)
         {
-            Debug.WriteLine($"[AddService] RFMemoryCache sizeLimit={sizeLimit}");
+            Debug.WriteLine($"[AddService] RFMemoryCache sizeLimit={rfCacheOption.SizeLimit}");
             return services.AddMemoryCache(option =>
             {
-                if (sizeLimit > 0)
+                if (rfCacheOption.SizeLimit > 0)
                 {
-                    option.SizeLimit = sizeLimit;
+                    option.SizeLimit = rfCacheOption.SizeLimit;
                 }
             }).AddSingleton<RFMemoryCache>();
         }

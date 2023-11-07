@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cahce.csproj" />
+    <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
     <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
   </ItemGroup>
 

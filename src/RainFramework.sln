@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{BFBB348B-9B39-4C27-8E84-24E1A2E13715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Helper", "RainFramework.Helper\RainFramework.Helper.csproj", "{E34DAA8C-8188-49F1-8F64-025CD28BC107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Helper", "RainFramework.Helper\RainFramework.Helper.csproj", "{E34DAA8C-8188-49F1-8F64-025CD28BC107}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Cahce", "RainFramework.Cahce\RainFramework.Cahce.csproj", "{6B844FF2-AF14-401C-9170-0BCFA7FB8203}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Cache", "RainFramework.Cahce\RainFramework.Cache.csproj", "{6B844FF2-AF14-401C-9170-0BCFA7FB8203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
