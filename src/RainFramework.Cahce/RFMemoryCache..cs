@@ -5,7 +5,7 @@ namespace RainFramework.Cahce
     public class RFMemoryCache
     {
         private readonly IMemoryCache memoryCache;
-
+      
         private readonly object hashSetLock = new object();
 
         public RFMemoryCache(IMemoryCache memoryCache)
@@ -77,18 +77,18 @@ namespace RainFramework.Cahce
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="expiration">整个列表的过期时间，每次修改都会重置</param>
-        public void RPushHashSet(string key, string value, TimeSpan? expiration)
+        public void PushHashSet<T>(string key, T value, TimeSpan? expiration)
         {
             lock (hashSetLock)
             {
-                var set = FindHashSet(key);
+                var set = FindHashSet<T>(key);
                 if (set != null)
                 {
                     set.Add(value);
                     CreateHashSet(key, set, expiration);
                     return;
                 }
-                CreateHashSet(key, new HashSet<string> { value }, expiration);
+                CreateHashSet(key, new HashSet<T> { value }, expiration);
             }
         }
 
@@ -102,11 +102,11 @@ namespace RainFramework.Cahce
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void RemoveValueHashSet(string key, string value)
+        public void RemoveValueHashSet<T>(string key, T value)
         {
             lock (hashSetLock)
             {
-                var set = FindHashSet(key);
+                var set = FindHashSet<T>(key);
                 set?.Remove(value);
             }
         }
@@ -116,11 +116,11 @@ namespace RainFramework.Cahce
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public bool ContainsHashSet(string key, string value)
+        public bool ContainsHashSet<T>(string key, T value)
         {
             lock (hashSetLock)
             {
-                var set = FindHashSet(key);
+                var set = FindHashSet<T>(key);
                 if (set == null)
                 {
                     return false;
@@ -134,17 +134,17 @@ namespace RainFramework.Cahce
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public HashSet<string>? GetHashSet(string key)
+        public HashSet<T>? GetHashSet<T>(string key)
         {
             lock (hashSetLock)
             {
-                return FindHashSet(key);
+                return FindHashSet<T>(key);
             }
         }
 
-        private HashSet<string>? FindHashSet(string key)
+        private HashSet<T>? FindHashSet<T>(string key)
         {
-            bool isFound = memoryCache.TryGetValue(key + "HashSet", out HashSet<string>? hashSet);
+            bool isFound = memoryCache.TryGetValue(key + "HashSet", out HashSet<T>? hashSet);
             if (isFound)
             {
                 return hashSet;
