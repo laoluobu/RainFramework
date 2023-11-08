@@ -3,30 +3,48 @@ using System.Collections.Concurrent;
 
 namespace RainFramework.EventBus
 {
-    internal class SimpleMq<M>: ISimpleMq<M>
+    internal class SimpleMq<M> : ISimpleMq<M>
     {
-        private ConcurrentDictionary<string, ConcurrentQueue<M>> queueMap=new();
+        private ConcurrentDictionary<string, ConcurrentQueue<M>> queueMap = new();
 
         public void QueueDeclare(string queueName)
         {
-            var queue=new ConcurrentQueue<M>();
-            if(!queueMap.TryAdd(queueName, queue))
+            var queue = new ConcurrentQueue<M>();
+            if (!queueMap.TryAdd(queueName, queue))
             {
-                throw new RFMqException("Create queue failed");
+                throw new RFMqException($"{queueName}:Create queue failed");
             }
         }
 
-        public void Publish(string queueName, M message)
+        public void BasicPublish(string queueName, M message)
         {
-            if(queueMap.TryGetValue(queueName, out var queue))
+            if (queueMap.TryGetValue(queueName, out var queue))
             {
                 queue.Enqueue(message);
                 return;
             }
-            throw new RFMqException("Message send failed");
+            throw new RFMqException($"{queueName}:Message Publish failed");
         }
-        
-        public M? NextDelivery(string queueName) {
+
+        public void MorePublish(string[] queueNames, M message)
+        {
+            try
+            {
+                foreach (var queueName in queueNames)
+                {
+                    BasicPublish(queueName, message);
+                }
+            }
+            catch
+            {
+                throw new RFMqException($"{string.Join(",", queueNames)} :Message Publish failed");
+            }
+
+        }
+
+
+        public M? NextDelivery(string queueName)
+        {
 
             if (queueMap.TryGetValue(queueName, out var queue))
             {
