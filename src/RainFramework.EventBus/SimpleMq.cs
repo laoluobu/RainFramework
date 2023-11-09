@@ -55,5 +55,15 @@ namespace RainFramework.EventBus
             }
             return default;
         }
+
+        public IEnumerable<Queueinfo> QueryQueueinfos()
+        {
+            var ququeInfos=new List<Queueinfo>();
+            foreach (var item in queueMap)
+            {
+                ququeInfos.Add(new Queueinfo() { QueueName = item.Key, Backlog = item.Value.Count() });
+            }
+            return ququeInfos;
+        }
     }
 }
