@@ -56,7 +56,7 @@ public class RFDBContext : DbContext
                     Nickname = "系统管理员",
                     IsDisable = false,
                 },
-                Roles = new Role[] { }
+                Roles = new List<Role>() 
             });
         });
 
