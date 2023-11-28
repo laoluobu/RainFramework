@@ -7,8 +7,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
-    <Version>1.0.492</Version>
+    <Version>1.0.493</Version>
 	<Description>RF 核心</Description>
+	<PackageReadmeFile>RainFramework.Common.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +23,17 @@
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
     <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net6.0\RainFramework.Common.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
