@@ -26,7 +26,7 @@ namespace Demo.Api
                 //ø’÷µ¥¶¿Ì
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
-            builder.UseRainFrameworkCore().Run();
+            builder.UseRainFrameworkCore(Serilog.Events.LogEventLevel.Information).Run();
         }
     }
 }
