@@ -2,7 +2,7 @@
 
 namespace RainWPF.Core
 {
-    internal static class DialogCloser
+    public static class DialogCloser
     {
         public static readonly DependencyProperty DialogResultProperty =
             DependencyProperty.RegisterAttached(
