@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using System.Runtime.Intrinsics.X86;
-using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +10,8 @@ using RainFramework.Common.Configurer;
 using RainFramework.Repository;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
+using System.Security.Claims;
 
 namespace RainFramework.AspNetCore
 {
