@@ -2,6 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RainWPF.Core;
+using Serilog;
+using Stocker.Helper.Dialog;
+using Stocker.Helper.Notification;
 using System.Windows;
 
 namespace RainWPF
@@ -11,21 +15,32 @@ namespace RainWPF
         public IServiceCollection Services { get; set; }
         public IConfigurationRoot Configuration { get; }
 
-        private T application;
+        private readonly T application;
 
-        private CancellationTokenSource backgroundHostCTS = new();
+        private readonly CancellationTokenSource backgroundHostCTS = new();
 
-        private ServiceProvider serviceProvider;
+        private ServiceProvider? serviceProvider = null;
 
-        private string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+        private readonly string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 
-        private ILogger<RainWPFApplicationBuilder<T>> logger;
+        private ILogger<RainWPFApplicationBuilder<T>>? logger;
 
         internal RainWPFApplicationBuilder()
         {
             application = new T();
             Configuration = BuildConfiguration();
+
+            Log.Logger = new LoggerConfiguration()
+                            .ReadFrom.Configuration(Configuration)
+                            .CreateBootstrapLogger();
             Services = new ServiceCollection();
+            Services.AddSingleton<IDialogService, DialogService>()
+                    .AddSingleton<INotificationService, NotificationService>()
+                    .AddLogging(logBuiler =>
+                    {
+                        logBuiler.ClearProviders();
+                        logBuiler.AddSerilog();
+                    });
             application.Exit += Application_Exit;
         }
 
@@ -42,16 +57,16 @@ namespace RainWPF
 
         private async Task StartHostingService(params Type[] IgnoreStartService)
         {
-            foreach (var hostedService in serviceProvider.GetServices<IHostedService>())
+            foreach (var hostedService in serviceProvider!.GetServices<IHostedService>())
             {
                 var type = hostedService.GetType();
                 if (IgnoreStartService.Contains(type))
                 {
-                    logger.LogDebug("[StartHosting] Ignore start {Type}", type);
+                    logger!.LogDebug("[StartHosting] Ignore start {Type}", type);
                     continue;
                 }
                 await hostedService.StartAsync(backgroundHostCTS.Token);
-                logger.LogInformation("[StartHosting] {Type} Started", type);
+                logger!.LogInformation("[StartHosting] {Type} Started", type);
             }
         }
 
@@ -68,11 +83,11 @@ namespace RainWPF
             {
                 backgroundHostCTS.Cancel();
                 backgroundHostCTS.Dispose();
-                logger.LogInformation("Cancel Background Host");
+                logger!.LogInformation("Cancel Background Host");
             }
             catch (Exception ex)
             {
-                logger.LogError("Cancel Background Host Err: {Ex}", ex);
+                logger!.LogError("Cancel Background Host Err: {Ex}", ex);
             }
         }
     }

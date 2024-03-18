@@ -2,6 +2,7 @@
 
 namespace RainWPF.Core
 {
+    //TODO 集成到Dialog控件中
     public static class DialogCloser
     {
         public static readonly DependencyProperty DialogResultProperty =

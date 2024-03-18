@@ -5,16 +5,23 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	  <Authors>Andy</Authors>
-	  <Version>1.1.1</Version>
-	  <Description>Provide DI、Background Service、MultiProgram</Description>
+	  <Version>1.2.1</Version>
+	  <Description>Provide DI、Background Service、MultiProgram、Serilog、DialogProxy、NotificationProxy</Description>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageReference Include="Serilog.Expressions" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Stocker.Helper" Version="1.1.2" />
   </ItemGroup>
 
 </Project>
