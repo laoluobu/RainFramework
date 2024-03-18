@@ -28,6 +28,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Mq", "RainFra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainWPF", "RainWPF\RainWPF.csproj", "{54B703B4-7451-4F3E-91AA-59B8386413DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainDesktop", "RainDesktop\RainDesktop.csproj", "{55FEED0F-652E-426D-AD82-4D98F81181FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{46818926-75D5-479C-862B-DD7F10B9E53B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,12 +74,18 @@ Global
 		{54B703B4-7451-4F3E-91AA-59B8386413DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B703B4-7451-4F3E-91AA-59B8386413DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B703B4-7451-4F3E-91AA-59B8386413DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FEED0F-652E-426D-AD82-4D98F81181FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FEED0F-652E-426D-AD82-4D98F81181FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FEED0F-652E-426D-AD82-4D98F81181FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FEED0F-652E-426D-AD82-4D98F81181FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BFBB348B-9B39-4C27-8E84-24E1A2E13715} = {0BA96158-3EFC-4057-A9E1-2347A4B9C523}
+		{54B703B4-7451-4F3E-91AA-59B8386413DB} = {46818926-75D5-479C-862B-DD7F10B9E53B}
+		{55FEED0F-652E-426D-AD82-4D98F81181FC} = {46818926-75D5-479C-862B-DD7F10B9E53B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B149F34-D9A3-4604-BCA2-78BAFC4C4C9F}
