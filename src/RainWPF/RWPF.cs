@@ -1,3 +1,7 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Stocker.Helper.Extensions;
+using Stocker.Helper.Notification;
 using System.Diagnostics;
 using System.Windows;
 
@@ -39,7 +43,34 @@ namespace RainWPF
 
         public void Run()
         {
+            UnhandledException();
             Application.Run();
+        }
+
+        private void UnhandledException()
+        {
+            var notificationService = ServiceProvider.GetRequiredService<INotificationService>();
+            var logger = ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<RWPF>();
+            ///处理Task Exception
+            TaskScheduler.UnobservedTaskException += (_, e) =>
+            {
+                logger.LogError("Task Exception: {GetOriginalException}", e.Exception.GetOriginalException());
+                notificationService.ErrorGlobal("[Task] " + e.Exception.GetOriginalException().Message);
+            };
+            ///处理UI线程Exception
+            Application.DispatcherUnhandledException += (_, e) =>
+            {
+                logger?.LogError("UI Exception: {GetOriginalException}", e.Exception.GetOriginalException());
+                notificationService.ErrorGlobal("[UI] " + e.Exception.Message);
+                e.Handled = true;
+            };
+
+            AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+            {
+                logger?.LogError("UnhandledException: {GetOriginalException}", ((Exception)e.ExceptionObject).GetOriginalException());
+                MessageBox.Show($"{((Exception)e.ExceptionObject).GetOriginalException()}", "Error", MessageBoxButton.OK, icon: MessageBoxImage.Error);
+                return;
+            };
         }
     }
 }
