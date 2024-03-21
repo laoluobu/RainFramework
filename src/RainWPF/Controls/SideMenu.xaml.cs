@@ -16,42 +16,43 @@ namespace RainWPF.Controls
 
         public object SelectedMenu
         {
-            get
-            {
-                return GetValue(SelectedMenuProperty);
-            }
-            set
-            {
-                SetValue(SelectedMenuProperty, value);
-            }
+            get => GetValue(SelectedMenuProperty);
+            set => SetValue(SelectedMenuProperty, value);
         }
 
         public IEnumerable<object> MenuItems
         {
-            get { return (IEnumerable<object>)GetValue(MenuItemsProperty); }
-            set { SetValue(MenuItemsProperty, value); }
+            get => (IEnumerable<object>)GetValue(MenuItemsProperty);
+            set => SetValue(MenuItemsProperty, value);
         }
 
         public Brush SelectItemColor
         {
-            get { return (Brush)GetValue(SelectItemColorProperty); }
-            set { SetValue(SelectItemColorProperty, value); }
+            get => (Brush)GetValue(SelectItemColorProperty);
+            set => SetValue(SelectItemColorProperty, value);
         }
 
         public FontFamily MenuIconFontFamity
         {
-            get => (FontFamily)GetValue(MenuIconFontFamityProperty); 
-            set { SetValue(MenuIconFontFamityProperty, value); }
+            get => (FontFamily)GetValue(MenuIconFontFamityProperty);
+            set => SetValue(MenuIconFontFamityProperty, value);
+        }
+
+        public Brush MouseOverItemColor
+        {
+
+            get => (Brush)GetValue(MouseOverItemColorProperty);
+            set => SetValue(MouseOverItemColorProperty, value);
         }
 
         public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(
-            "MenuItems",
+            nameof(MenuItems),
             typeof(IEnumerable<object>),
             typeof(SideMenu),
             new UIPropertyMetadata(new List<object>()));
 
         public static readonly DependencyProperty SelectedMenuProperty = DependencyProperty.Register(
-            "SelectedMenu",
+            nameof(SelectedMenu),
             typeof(object),
             typeof(SideMenu),
             new FrameworkPropertyMetadata(new object(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null));
@@ -67,5 +68,11 @@ namespace RainWPF.Controls
             typeof(FontFamily),
             typeof(SideMenu),
             new UIPropertyMetadata(null));
+
+        public static readonly DependencyProperty MouseOverItemColorProperty = DependencyProperty.Register(
+            nameof(MouseOverItemColor),
+            typeof(Brush),
+            typeof(SideMenu),
+            new UIPropertyMetadata(new SolidColorBrush(Colors.AliceBlue)));
     }
 }

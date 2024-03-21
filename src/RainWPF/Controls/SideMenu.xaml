@@ -172,6 +172,10 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{Binding SelectItemColor, ElementName=sideMenu}" />
                         </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{Binding MouseOverItemColor, ElementName=sideMenu}" />
+                        </Trigger>
+
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
