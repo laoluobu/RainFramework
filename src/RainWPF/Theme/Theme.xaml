@@ -5,6 +5,7 @@
 
     <FontFamily x:Key="Misans">Assest/Fonts/#MiSans</FontFamily>
     <Converters:IEnumerable2VisibilityConverter x:Key="IEnumerable2VisibilityConverter" />
+    <Converters:Bool2VisibilityReConverter x:Key="Bool2VisibilityReConverter" />
 
     <Style x:Key="Window.Universal" TargetType="Window">
         <Setter Property="WindowChrome.WindowChrome">
@@ -33,6 +34,5 @@
         </Setter>
 
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-
     </Style>
 </ResourceDictionary>
