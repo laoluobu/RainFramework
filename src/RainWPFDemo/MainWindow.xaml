@@ -1,0 +1,32 @@
+﻿<rfc:Window
+    x:Class="RainWPFDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:RainWPFDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rfc="clr-namespace:RainWPF.Controls;assembly=RainWPF"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    NonClientAreaHeight="50"
+    SearchString="{Binding SearchString}"
+    mc:Ignorable="d">
+
+    <rfc:Window.DataContext>
+        <local:MainVM />
+    </rfc:Window.DataContext>
+
+    <StackPanel>
+
+        <TextBlock
+            Width="100"
+            Height="100"
+            Text="{Binding SearchString}" />
+
+        <Button Command="{Binding UpdateSearchStringCommand}" Content="click" />
+
+    </StackPanel>
+
+</rfc:Window>

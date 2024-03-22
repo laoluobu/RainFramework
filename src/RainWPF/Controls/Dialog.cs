@@ -2,7 +2,7 @@
 
 namespace RainWPF.Controls
 {
-    public class Dialog : Window
+    public class Dialog : System.Windows.Window
     {
         public Dialog()
         {

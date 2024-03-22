@@ -1,7 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Converters="clr-namespace:RainWPF.Converters">
+    xmlns:Converters="clr-namespace:RainWPF.Converters"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:RainWPF.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./Generic.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <FontFamily x:Key="Misans">Assest/Fonts/#MiSans</FontFamily>
     <Converters:IEnumerable2VisibilityConverter x:Key="IEnumerable2VisibilityConverter" />
@@ -13,10 +19,10 @@
                 <WindowChrome GlassFrameThickness="0 64 0 0" UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
-
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#262e2f" />
         <Setter Property="FontFamily" Value="{StaticResource Misans}" />
         <Setter Property="Template">
-
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
                     <Border>
@@ -32,7 +38,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
     </Style>
 </ResourceDictionary>
