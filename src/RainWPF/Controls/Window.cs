@@ -1,28 +1,11 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Runtime.Intrinsics.X86;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace RainWPF.Controls
 {
-    /// <summary> 按照步骤 1a 或 1b 操作，然后执行步骤 2 以在 XAML 文件中使用此自定义控件。
-    ///
-    /// 步骤 1a) 在当前项目中存在的 XAML 文件中使用该自定义控件。 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根 元素中:
-    ///
-    /// xmlns:MyNamespace="clr-namespace:RainWPF.Controls"
-    ///
-    ///
-    /// 步骤 1b) 在其他项目中存在的 XAML 文件中使用该自定义控件。 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根 元素中:
-    ///
-    /// xmlns:MyNamespace="clr-namespace:RainWPF.Controls;assembly=RainWPF.Controls"
-    ///
-    /// 您还需要添加一个从 XAML 文件所在的项目到此项目的项目引用， 并重新生成以避免编译错误:
-    ///
-    /// 在解决方案资源管理器中右击目标项目，然后依次单击 “添加引用”->“项目”->[浏览查找并选择此项目]
-    ///
-    ///
-    /// 步骤 2) 继续操作并在 XAML 文件中使用控件。
-    ///
-    /// <MyNamespace:Window/>
-    ///
-    /// </summary>
     public class Window : HandyControl.Controls.Window
     {
         static Window()
@@ -30,10 +13,38 @@ namespace RainWPF.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(typeof(Window)));
         }
 
-        public string SearchString { get => (string)GetValue(SearchStringProperty); set => SetValue(SearchStringProperty, value); }
+        public string SearchPlaceholder
+        {
+            get => (string)GetValue(SearchPlaceholderProperty);
+            set => SetValue(SearchPlaceholderProperty, value);
+        }
 
-        public static readonly DependencyProperty SearchStringProperty = DependencyProperty.Register(
-            nameof(SearchString),
+        public ICommand SearchCommnad
+        {
+            get => (ICommand)GetValue(SearchCommandProperty);
+            set => SetValue(SearchCommandProperty, value);
+        }
+
+        public object TopRightAreaContent
+        {
+            get { return GetValue(TopRightAreaContentProperty); }
+            set { SetValue(TopRightAreaContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty TopRightAreaContentProperty = DependencyProperty.Register(
+            nameof(TopRightAreaContent),
+            typeof(object),
+            typeof(Window),
+            new PropertyMetadata(default(object)));
+
+        public static readonly DependencyProperty SearchCommandProperty = DependencyProperty.Register(
+            nameof(SearchCommnad),
+            typeof(ICommand),
+            typeof(Window),
+            new PropertyMetadata(default(ICommand)));
+
+        public static readonly DependencyProperty SearchPlaceholderProperty = DependencyProperty.Register(
+            nameof(SearchPlaceholder),
             typeof(string),
             typeof(Window),
             new PropertyMetadata(default(string)));

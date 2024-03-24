@@ -100,7 +100,6 @@
                                 From="90"
                                 To="60"
                                 Duration="0:0:0.1" />
-
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -124,7 +123,6 @@
                                 From="90"
                                 To="130"
                                 Duration="0:0:0.1" />
-
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -147,7 +145,7 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Visibility" Value="{Binding IsHidden, Converter={StaticResource Bool2VisibilityReConverter}}" />
+                    <Setter Property="Visibility" Value="{Binding IsHidden, Converter={StaticResource Boolean2VisibilityReConverter}}" />
 
                     <Setter Property="Template">
                         <Setter.Value>
@@ -175,7 +173,6 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{Binding MouseOverItemColor, ElementName=sideMenu}" />
                         </Trigger>
-
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>

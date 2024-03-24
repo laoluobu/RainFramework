@@ -9,8 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\engineer.png" />
+    <None Remove="engineer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RainDesktop\RainDesktop.csproj" />
     <ProjectReference Include="..\RainWPF\RainWPF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\engineer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

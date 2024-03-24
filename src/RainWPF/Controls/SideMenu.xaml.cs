@@ -26,9 +26,9 @@ namespace RainWPF.Controls
             set => SetValue(MenuItemsProperty, value);
         }
 
-        public Brush SelectItemColor
+        public SolidColorBrush SelectItemColor
         {
-            get => (Brush)GetValue(SelectItemColorProperty);
+            get => (SolidColorBrush)GetValue(SelectItemColorProperty);
             set => SetValue(SelectItemColorProperty, value);
         }
 
@@ -38,10 +38,9 @@ namespace RainWPF.Controls
             set => SetValue(MenuIconFontFamityProperty, value);
         }
 
-        public Brush MouseOverItemColor
+        public SolidColorBrush MouseOverItemColor
         {
-
-            get => (Brush)GetValue(MouseOverItemColorProperty);
+            get => (SolidColorBrush)GetValue(MouseOverItemColorProperty);
             set => SetValue(MouseOverItemColorProperty, value);
         }
 
@@ -59,9 +58,9 @@ namespace RainWPF.Controls
 
         public static readonly DependencyProperty SelectItemColorProperty = DependencyProperty.Register(
             nameof(SelectItemColor),
-            typeof(Brush),
+            typeof(SolidColorBrush),
             typeof(SideMenu),
-            new UIPropertyMetadata(new SolidColorBrush(Colors.Blue)));
+            new UIPropertyMetadata(null));
 
         public static readonly DependencyProperty MenuIconFontFamityProperty = DependencyProperty.Register(
             nameof(MenuIconFontFamity),
@@ -71,8 +70,8 @@ namespace RainWPF.Controls
 
         public static readonly DependencyProperty MouseOverItemColorProperty = DependencyProperty.Register(
             nameof(MouseOverItemColor),
-            typeof(Brush),
+            typeof(SolidColorBrush),
             typeof(SideMenu),
-            new UIPropertyMetadata(new SolidColorBrush(Colors.AliceBlue)));
+            new UIPropertyMetadata(null));
     }
 }

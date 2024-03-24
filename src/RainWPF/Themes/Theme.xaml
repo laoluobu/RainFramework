@@ -11,7 +11,6 @@
 
     <FontFamily x:Key="Misans">Assest/Fonts/#MiSans</FontFamily>
     <Converters:IEnumerable2VisibilityConverter x:Key="IEnumerable2VisibilityConverter" />
-    <Converters:Bool2VisibilityReConverter x:Key="Bool2VisibilityReConverter" />
 
     <Style x:Key="Window.Universal" TargetType="Window">
         <Setter Property="WindowChrome.WindowChrome">
@@ -39,5 +38,17 @@
             </Setter.Value>
         </Setter>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+    </Style>
+
+    <Style
+        x:Key="ButtonLogin"
+        BasedOn="{StaticResource ButtonCustom}"
+        TargetType="Button">
+        <Setter Property="Margin" Value="7" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Cursor" Value="Hand" />
     </Style>
 </ResourceDictionary>
