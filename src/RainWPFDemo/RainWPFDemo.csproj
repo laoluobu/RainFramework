@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\iconfont.ttf" />
     <None Remove="Assets\Images\engineer.png" />
     <None Remove="engineer.png" />
   </ItemGroup>
@@ -19,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\iconfont.ttf" />
     <Resource Include="Assets\Images\engineer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

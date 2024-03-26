@@ -18,17 +18,7 @@ namespace RainWPFDemo
         [ObservableProperty]
         private bool isOpenUserInfo;
 
-        [ObservableProperty]
-        private Menus currentMenu;
-
-        public List<Menus> Menus { get; set; } = new List<Menus>()
-        {
-            new() { CNName = "Home",IsHidden=true },
-            new Menus() { CNName = "Oder" },
-            new Menus() { CNName = "首页" },
-            new Menus() { CNName = "Home" },
-            new Menus() { CNName = "Oder" }
-        };
+        public List<Menus> Menus { get; set; } = new List<Menus>() { new Menus() { CNName = "Home" }, new Menus() { CNName = "Oder" } };
 
         [RelayCommand]
         private void UpdateSearchString()
@@ -46,6 +36,9 @@ namespace RainWPFDemo
         [RelayCommand]
         private void Login()
         {
+
+            
+          
             Logined = !Logined;
             Growl.Success(Logined + "");
         }
@@ -61,22 +54,5 @@ namespace RainWPFDemo
     {
         public string CNName { get; set; }
 
-        public bool IsHidden { get; set; }
-
-        public MenuMeta MenuMeta { get; set; } = new MenuMeta() { DefaultIcon = "\xe8b9" };
-}
-
-
-    public class MenuMeta
-    {
-        /// <summary>
-        /// 菜单图标
-        /// </summary>
-        public string? DefaultIcon { get; set; }
-
-        /// <summary>
-        /// 选中的图标
-        /// </summary>
-        public string? SelectedIcon { get; set; }
     }
 }

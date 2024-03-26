@@ -10,7 +10,7 @@
 
                 <ResourceDictionary Source="pack://application:,,,/RainWPF;component/Themes/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <FontFamily x:Key="Icons">Assets/#iconfont</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

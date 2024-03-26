@@ -8,9 +8,9 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="./Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
     <FontFamily x:Key="Misans">Assest/Fonts/#MiSans</FontFamily>
     <Converters:IEnumerable2VisibilityConverter x:Key="IEnumerable2VisibilityConverter" />
+    <SolidColorBrush x:Key="MenuBoxSelectedBrush">#5CACEE</SolidColorBrush>
 
     <Style x:Key="Window.Universal" TargetType="Window">
         <Setter Property="WindowChrome.WindowChrome">
@@ -50,5 +50,116 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style x:Key="SideMenuListBoxItemContainer" TargetType="ListBoxItem">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="11,0,10,0" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4"
+                        SnapsToDevicePixels="true">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonMenuScale" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Margin" Value="0,10,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border
+                        Width="20"
+                        Height="20"
+                        Background="Transparent">
+                        <Viewbox Stretch="UniformToFill">
+                            <Canvas Width="512" Height="512">
+                                <Path
+                                    x:Name="ico"
+                                    Margin="0,0,0,0"
+                                    Data="m32 0h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                    Fill="{TemplateBinding Background}" />
+                                <Path
+                                    x:Name="ico1"
+                                    Margin="0,20,0,0"
+                                    Data="m32 128h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                    Fill="{TemplateBinding Background}" />
+                                <Path
+                                    x:Name="ico2"
+                                    Margin="0,40,0,0"
+                                    Data="m32 256h448c17.671875 0 32 14.328125 32 32s-14.328125 32-32 32h-448c-17.671875 0-32-14.328125-32-32s14.328125-32 32-32zm0 0"
+                                    Fill="{TemplateBinding Background}" />
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding MouseOverItemColor, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="Black" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="ListBoxMenuBox"
+        BasedOn="{StaticResource ListBoxCustom}"
+        TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxMenuBoxItem}" />
+    </Style>
+
+    <Style x:Key="ListBoxMenuBoxItem" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Padding" Value="11,0,10,0" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        CornerRadius="6"
+                        SnapsToDevicePixels="true">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

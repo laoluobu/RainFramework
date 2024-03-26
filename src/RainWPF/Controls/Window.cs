@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.Intrinsics.X86;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace RainWPF.Controls
@@ -11,6 +8,12 @@ namespace RainWPF.Controls
         static Window()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(typeof(Window)));
+        }
+
+        public Window()
+        {
+            Width = (int)SystemParameters.PrimaryScreenWidth - 150;
+            Height = (int)SystemParameters.PrimaryScreenHeight - 150;
         }
 
         public string SearchPlaceholder

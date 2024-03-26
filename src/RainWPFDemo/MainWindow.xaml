@@ -1,4 +1,4 @@
-﻿<rfc:Window
+﻿<rf:Window
     x:Class="RainWPFDemo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,31 +7,30 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:RainWPFDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:rfc="clr-namespace:RainWPF.Controls;assembly=RainWPF"
+    xmlns:rf="https://rainwpf.github.io/rainwpf"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    d:Height="880"
+    d:Width="1720"
+    FontFamily="{StaticResource Misans}"
     NonClientAreaBackground="Gray"
-    NonClientAreaHeight="100"
+    NonClientAreaHeight="50"
     SearchCommnad="{Binding Serach1Command}"
     SearchPlaceholder="{Binding SearchString2}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <rfc:Window.Resources>
+    <rf:Window.Resources>
         <SolidColorBrush x:Key="ListViewBackground">#F1F7F9</SolidColorBrush>
         <SolidColorBrush x:Key="BackgroundColor1">#B9CED9</SolidColorBrush>
         <SolidColorBrush x:Key="SelectedColor">#5CACEE</SolidColorBrush>
         <SolidColorBrush x:Key="StatusColor">#008000</SolidColorBrush>
+    </rf:Window.Resources>
 
-    </rfc:Window.Resources>
-
-
-    <rfc:Window.DataContext>
+    <rf:Window.DataContext>
         <local:MainVM />
-    </rfc:Window.DataContext>
+    </rf:Window.DataContext>
 
-    <rfc:Window.TopRightAreaContent>
+    <rf:Window.TopRightAreaContent>
         <hc:SimplePanel>
             <Button
                 x:Name="user_info"
@@ -75,32 +74,27 @@
                     Background="Red" />
             </Popup>
         </hc:SimplePanel>
-    </rfc:Window.TopRightAreaContent>
+    </rf:Window.TopRightAreaContent>
 
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
 
-        <TextBlock
-            Width="100"
-            Height="100"
-            Text="{Binding SearchString2}" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-        <Button Command="{Binding UpdateSearchStringCommand}" Content="click" />
-
-        <Image
-            Width="40"
-            Height="40"
-            Margin="10"
-            Cursor="Hand"
-            Source="../Resources/Images/engineer.png" />
-
-
-        <rfc:SideMenu
-            Grid.Row="1"
+        <rf:SideMenu
             Grid.Column="0"
-            Background="{StaticResource ListViewBackground}"
+            Background="LightGray"
+            MenuIconFontFamity="{StaticResource Icons}"
             MenuItems="{Binding Menus}"
             MouseOverItemColor="{StaticResource ListViewBackground}"
             SelectItemColor="{StaticResource BackgroundColor1}"
             SelectedMenu="{Binding CurrentMenu}" />
-    </StackPanel>
-</rfc:Window>
+
+        <TextBlock
+            Grid.Column="1"
+            Style="{StaticResource TextBlockTitleBold}"
+            Text="{Binding CurrentMenu.CNName}" />
+    </Grid>
+</rf:Window>

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace RainWPF.Controls
+namespace RainWPF.Controls.UserControls
 {
     /// <summary>
     /// SideMenu.xaml 的交互逻辑
@@ -32,6 +32,13 @@ namespace RainWPF.Controls
             set => SetValue(SelectItemColorProperty, value);
         }
 
+
+        public static readonly DependencyProperty SelectItemColorProperty = DependencyProperty.Register(
+                nameof(SelectItemColor),
+                typeof(SolidColorBrush),
+                typeof(SideMenu),
+                new UIPropertyMetadata(null));
+
         public FontFamily MenuIconFontFamity
         {
             get => (FontFamily)GetValue(MenuIconFontFamityProperty);
@@ -56,11 +63,7 @@ namespace RainWPF.Controls
             typeof(SideMenu),
             new FrameworkPropertyMetadata(new object(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null));
 
-        public static readonly DependencyProperty SelectItemColorProperty = DependencyProperty.Register(
-            nameof(SelectItemColor),
-            typeof(SolidColorBrush),
-            typeof(SideMenu),
-            new UIPropertyMetadata(null));
+
 
         public static readonly DependencyProperty MenuIconFontFamityProperty = DependencyProperty.Register(
             nameof(MenuIconFontFamity),
