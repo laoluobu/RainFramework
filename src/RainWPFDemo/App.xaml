@@ -3,11 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:RainWPFDemo"
-    StartupUri="MainWindow.xaml">
+    StartupUri="MainWinodw.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary Source="pack://application:,,,/RainWPF;component/Themes/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Icons">Assets/#iconfont</FontFamily>

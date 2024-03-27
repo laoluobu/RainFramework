@@ -63,7 +63,6 @@
                 Content="Login"
                 Style="{StaticResource ButtonLogin}"
                 Visibility="{Binding Logined, Converter={StaticResource Boolean2VisibilityReConverter}}" />
-
             <Popup
                 x:Name="user_popup"
                 PlacementTarget="{Binding ElementName=user_info}"
@@ -79,7 +78,6 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
