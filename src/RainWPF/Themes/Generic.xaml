@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:hc="https://handyorg.github.io/handycontrol"
-    xmlns:local="clr-namespace:RainWPF.Controls">
+    xmlns:local="clr-namespace:RainWPF.Controls"
+    xmlns:uc="clr-namespace:RainWPF.Controls.UserControls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type local:Window}">
-
         <Setter Property="NonClientAreaHeight" Value="50" />
         <Setter Property="NonClientAreaContent">
             <Setter.Value>
@@ -23,7 +23,14 @@
                         Command="{Binding SearchCommnad, RelativeSource={RelativeSource AncestorType={x:Type local:Window}}}"
                         CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"
                         Style="{StaticResource SearchBarPlus}" />
-                    <ContentPresenter Content="{Binding TopRightAreaContent, RelativeSource={RelativeSource AncestorType=local:Window}}" WindowChrome.IsHitTestVisibleInChrome="True" />
+
+
+                    <uc:LoginButton
+                        HorizontalAlignment="Right"
+                        Command="{Binding LoginServiceCommand, RelativeSource={RelativeSource AncestorType={x:Type local:Window}}}"
+                        UserAvatar="{Binding UserAvatar, RelativeSource={RelativeSource AncestorType={x:Type local:Window}}}"
+                        UserName="{Binding UserName, RelativeSource={RelativeSource AncestorType={x:Type local:Window}}}"
+                        Visibility="{Binding LoginServiceCommand, Converter={StaticResource Object2VisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type local:Window}}}" />
                 </Grid>
             </Setter.Value>
         </Setter>

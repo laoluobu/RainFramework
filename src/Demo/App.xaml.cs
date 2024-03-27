@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace RainWPFDemo
+namespace Demo
 {
     /// <summary>
     /// Interaction logic for App.xaml

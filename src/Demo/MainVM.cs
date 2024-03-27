@@ -2,10 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using HandyControl.Controls;
 using RainDesktop.ViewModel;
-using System.Windows;
-using System.Windows.Input;
 
-namespace RainWPFDemo
+namespace Demo
 {
     public partial class MainVM : ViewModelBase
     {
@@ -13,7 +11,7 @@ namespace RainWPFDemo
         private string? searchString2;
 
         [ObservableProperty]
-        private bool logined;
+        private string userName = "";
 
         [ObservableProperty]
         private bool isOpenUserInfo;
@@ -43,11 +41,23 @@ namespace RainWPFDemo
             System.Windows.MessageBox.Show(searchString1);
         }
 
+    
+
         [RelayCommand]
-        private void Login()
+        private void Login(string msg)
         {
-            Logined = !Logined;
-            Growl.Success(Logined + "");
+           switch(msg)
+            {
+                case "Login":
+                    UserName = "Admin";
+
+                    break;
+                case "Logout":
+                    UserName = "";
+                    break;
+            }
+
+            Growl.Success(UserName + ":" + msg);
         }
 
         [RelayCommand]
@@ -64,8 +74,7 @@ namespace RainWPFDemo
         public bool IsHidden { get; set; }
 
         public MenuMeta MenuMeta { get; set; } = new MenuMeta() { DefaultIcon = "\xe8b9" };
-}
-
+    }
 
     public class MenuMeta
     {
