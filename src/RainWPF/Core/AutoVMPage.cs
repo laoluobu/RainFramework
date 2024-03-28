@@ -5,16 +5,16 @@ namespace RainWPF.Core
 {
     public class AutoVMPage<T> : Page where T : class
     {
-        public new T DataContext { get; set; }
-
         public AutoVMPage()
         {
             DataContext = InitViewModel();
         }
 
-        protected virtual T InitViewModel()
+        protected virtual object? InitViewModel()
         {
-            return RWPF.ServicesProvider!.GetRequiredService<T>();
+            return RWPF.ServicesProvider?.GetRequiredService<T>();
         }
+
+        public T ViewModel => (T)DataContext;
     }
 }

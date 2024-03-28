@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	  <Authors>Andy</Authors>
-	  <Version>1.2.48</Version>
-	  <Description>Provide DI、Background Service、MultiProgram、Serilog、DialogProxy、NotificationProxy</Description>
+	  <Version>1.2.52</Version>
+	  <Description>Provide DI、Background Service、MultiProgram、Serilog、DialogProxy、NotificationProxy...</Description>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

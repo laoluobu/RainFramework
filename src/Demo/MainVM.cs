@@ -21,10 +21,10 @@ namespace Demo
 
         public List<Menus> Menus { get; set; } = new List<Menus>()
         {
-            new Menus() { CNName = "Oder" },
-            new Menus() { CNName = "首页" },
-            new Menus() { CNName = "Home",Path="/Pages/Home.xaml" },
-            new Menus() { CNName = "Oder" }
+            new Menus() { Name = "Oder" },
+            new Menus() { Name = "首页" },
+            new Menus() { Name = "Home",Path="/Pages/Home.xaml" },
+            new Menus() { Name = "Oder" }
         };
 
         [RelayCommand]
@@ -74,7 +74,7 @@ namespace Demo
 
     public class Menus
     {
-        public string CNName { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         public string Path { get; set; } = null!;
 
