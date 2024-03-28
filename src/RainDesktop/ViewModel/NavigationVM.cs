@@ -6,7 +6,7 @@ namespace RainDesktop.ViewModel
     public partial class NavigationVM : ViewModelBase
     {
         [ObservableProperty]
-        private Uri currentPage;
+        private Uri currentPage = null!;
 
         public void NavigationTo(string path)
         {

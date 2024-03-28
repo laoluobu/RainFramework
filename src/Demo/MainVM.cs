@@ -5,7 +5,7 @@ using RainDesktop.ViewModel;
 
 namespace Demo
 {
-    public partial class MainVM : ViewModelBase
+    public partial class MainVM : NavigationVM
     {
         [ObservableProperty]
         private string? searchString2;
@@ -21,10 +21,9 @@ namespace Demo
 
         public List<Menus> Menus { get; set; } = new List<Menus>()
         {
-            new() { CNName = "Home",IsHidden=true },
             new Menus() { CNName = "Oder" },
             new Menus() { CNName = "首页" },
-            new Menus() { CNName = "Home" },
+            new Menus() { CNName = "Home",Path="/Pages/Home.xaml" },
             new Menus() { CNName = "Oder" }
         };
 
@@ -35,23 +34,29 @@ namespace Demo
             SearchString2 = DateTime.Now.ToString();
         }
 
+
+        partial void OnCurrentMenuChanged(Menus value)
+        {
+            if(value.Path==null) return;
+            NavigationTo(value.Path);
+        }
+
         [RelayCommand]
         private void Serach1(string searchString1)
         {
             System.Windows.MessageBox.Show(searchString1);
         }
 
-    
-
         [RelayCommand]
         private void Login(string msg)
         {
-           switch(msg)
+            switch (msg)
             {
                 case "Login":
                     UserName = "SuperAdministrator";
 
                     break;
+
                 case "Logout":
                     UserName = "";
                     break;
@@ -69,7 +74,9 @@ namespace Demo
 
     public class Menus
     {
-        public string CNName { get; set; }
+        public string CNName { get; set; } = null!;
+
+        public string Path { get; set; } = null!;
 
         public bool IsHidden { get; set; }
 

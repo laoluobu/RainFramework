@@ -16,4 +16,5 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Controls")]
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Core")]
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Controls.UserControls")]
+[assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Extension")]
 [assembly: XmlnsPrefix("https://rainwpf.github.io/rainwpf", "rf")]
