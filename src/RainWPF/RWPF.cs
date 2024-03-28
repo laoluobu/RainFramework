@@ -31,13 +31,13 @@ namespace RainWPF
             return new RainWPFApplicationBuilder<T>();
         }
 
-        public readonly IServiceProvider ServiceProvider;
+        public static IServiceProvider? ServicesProvider;
 
         public Application Application { get; set; }
 
-        internal RWPF(IServiceProvider ServiceProvider, Application application)
+        internal RWPF(IServiceProvider serviceProvider, Application application)
         {
-            this.ServiceProvider = ServiceProvider;
+            ServicesProvider = serviceProvider;
             Application = application;
         }
 
@@ -49,8 +49,8 @@ namespace RainWPF
 
         private void UnhandledException()
         {
-            var notificationService = ServiceProvider.GetRequiredService<INotificationService>();
-            var logger = ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<RWPF>();
+            var notificationService = ServicesProvider!.GetRequiredService<INotificationService>();
+            var logger = ServicesProvider!.GetRequiredService<ILoggerFactory>().CreateLogger<RWPF>();
             ///´¦ÀíTask Exception
             TaskScheduler.UnobservedTaskException += (_, e) =>
             {

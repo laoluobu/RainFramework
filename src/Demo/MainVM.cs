@@ -49,7 +49,7 @@ namespace Demo
            switch(msg)
             {
                 case "Login":
-                    UserName = "Admin";
+                    UserName = "SuperAdministrator";
 
                     break;
                 case "Logout":

@@ -75,7 +75,7 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Column="0" Margin="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="6*" />
                             <RowDefinition Height="4*" />
@@ -96,7 +96,6 @@
                         </Image>
                         <TextBlock
                             Grid.Row="1"
-                            Width="50"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontWeight="Bold"
@@ -116,7 +115,9 @@
                             Command="{Binding Command, ElementName=root}"
                             CommandParameter="Profile"
                             Content="个人中心" />
+
                         <Button
+                            Name="btn_logout"
                             Grid.Row="1"
                             Height="50"
                             HorizontalAlignment="Stretch"
@@ -124,6 +125,15 @@
                             Command="{Binding Command, ElementName=root}"
                             CommandParameter="Logout"
                             Content="注销" />
+
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click" SourceName="btn_logout">
+                                <b:ChangePropertyAction
+                                    PropertyName="IsOpen"
+                                    TargetName="user_popup"
+                                    Value="False" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
                     </UniformGrid>
                 </Grid>
             </Border>
