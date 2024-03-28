@@ -9,7 +9,6 @@
     Title="MainWindow"
     d:Height="880"
     d:Width="1720"
-    FontFamily="{StaticResource Misans}"
     Icon="./Assets/Icons/logo.ico"
     LoginServiceCommand="{Binding LoginCommand}"
     NonClientAreaBackground="Gray"
@@ -30,7 +29,7 @@
         <rf:SideMenu
             Grid.Column="0"
             Background="LightGray"
-            MenuIconFontFamity="{StaticResource Icon}"
+            MenuIconFontFamity="{StaticResource Icon1}"
             MenuItems="{Binding Menus}"
             MouseOverItemColor="CadetBlue"
             SelectItemColor="Gray"

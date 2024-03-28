@@ -5,8 +5,9 @@
     xmlns:local="clr-namespace:Demo"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
+
         <ResourceDictionary>
-            <FontFamily x:Key="Icon">Assest/Fonts/#iconfont</FontFamily>
+            <FontFamily x:Key="Icon1">/Assets/Fonts1/#iconfont</FontFamily>
             <SolidColorBrush x:Key="ListViewBackground">#F1F7F9</SolidColorBrush>
             <SolidColorBrush x:Key="BackgroundColor1">#B9CED9</SolidColorBrush>
             <SolidColorBrush x:Key="SelectedColor">#5CACEE</SolidColorBrush>
@@ -15,5 +16,6 @@
                 <ResourceDictionary Source="pack://application:,,,/RainWPF;component/Themes/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

@@ -79,7 +79,7 @@
 
         <ListBox
             Grid.Row="1"
-            ItemsSource="{Binding MenuItems, ElementName=sideMenu}"
+            ItemsSource="{Binding MenuItems, ElementName=sideMenu, Mode=OneWay}"
             SelectedValue="{Binding SelectedMenu, ElementName=sideMenu}"
             Style="{StaticResource ListBoxMenuBox}">
             <ListBox.ItemContainerStyle>
@@ -105,16 +105,17 @@
 
                         <TextBlock
                             Grid.Column="0"
+                            Margin="1,0,0,0"
                             VerticalAlignment="Center"
                             FontFamily="{Binding MenuIconFontFamity, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                             FontSize="24"
-                            Text="{Binding MenuMeta.DefaultIcon}" />
+                            Text="{Binding MenuMeta.DefaultIcon, Mode=OneWay}" />
                         <TextBlock
                             Grid.Column="1"
                             Margin="10,0,0,0"
                             VerticalAlignment="Center"
                             FontSize="15"
-                            Text="{Binding Name}" />
+                            Text="{Binding Name, Mode=OneWay}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

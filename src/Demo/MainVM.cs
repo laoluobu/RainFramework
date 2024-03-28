@@ -21,10 +21,10 @@ namespace Demo
 
         public List<Menus> Menus { get; set; } = new List<Menus>()
         {
-            new Menus() { Name = "Oder" },
-            new Menus() { Name = "首页" },
-            new Menus() { Name = "Home",Path="/Pages/Home.xaml" },
-            new Menus() { Name = "Oder" }
+            new Menus() { Name = "Oder", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" } },
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "Home", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" },Path="/Pages/Home.xaml" },
+            new Menus() { Name = "Oder", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" } }
         };
 
         [RelayCommand]
@@ -34,10 +34,9 @@ namespace Demo
             SearchString2 = DateTime.Now.ToString();
         }
 
-
         partial void OnCurrentMenuChanged(Menus value)
         {
-            if(value.Path==null) return;
+            if (value.Path == null) return;
             NavigationTo(value.Path);
         }
 
@@ -80,7 +79,7 @@ namespace Demo
 
         public bool IsHidden { get; set; }
 
-        public MenuMeta MenuMeta { get; set; } = new MenuMeta() { DefaultIcon = "\xe8b9" };
+        public MenuMeta MenuMeta { get; set; }
     }
 
     public class MenuMeta
