@@ -28,7 +28,7 @@
 
         <rf:SideMenu
             Grid.Column="0"
-            Background="LightGray"
+            Background="Red"
             MenuIconFontFamity="{StaticResource Icon1}"
             MenuItems="{Binding Menus}"
             MouseOverItemColor="CadetBlue"

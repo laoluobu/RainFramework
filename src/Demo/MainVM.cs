@@ -23,6 +23,14 @@ namespace Demo
         {
             new Menus() { Name = "Oder", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" } },
             new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
+            new Menus() { Name = "首页" , MenuMeta=new MenuMeta() { DefaultIcon = "\xe860" }},
             new Menus() { Name = "Home", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" },Path="/Pages/Home.xaml" },
             new Menus() { Name = "Oder", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" } }
         };

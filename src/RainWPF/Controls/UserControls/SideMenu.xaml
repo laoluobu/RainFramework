@@ -24,7 +24,7 @@
         VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <ToggleButton Grid.Row="0" Style="{StaticResource ToggleButtonMenuScale}">
