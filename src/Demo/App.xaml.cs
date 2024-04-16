@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using RainWPF;
 using System.Windows;
 
 namespace Demo
@@ -9,6 +8,12 @@ namespace Demo
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            var builder = RWPF.CreateWPFAppBuilder(Current, false);            
+            //builder.AddSerilog(builder.Configuration);
+            var rwpf = builder.Build();
+            rwpf.Run();
+        }
     }
-
 }

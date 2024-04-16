@@ -1,14 +1,31 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RainWPF.Abstractions;
+using RainWPF.Core;
+using RainWPF.Helper;
+using Stocker.Helper.Dialog;
 using Stocker.Helper.Extensions;
 using Stocker.Helper.Notification;
-using System.Diagnostics;
 using System.Windows;
 
 namespace RainWPF
 {
-    public class RWPF
+    public class RWPF : IRWPF
     {
+        public static IServiceProvider ServicesProvider { private set; get; } = null!;
+
+        public Application Application { get; set; }
+
+        private readonly CancellationTokenSource backgroundHostCTS = new();
+
+        private readonly ILogger<RWPF> logger;
+
+        private static readonly string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+
+        private static bool isInstance;
+
         /// <summary>
         /// 构建WPFApp
         /// </summary>
@@ -19,32 +36,75 @@ namespace RainWPF
         {
             if (!isMultiProgram)
             {
-                string processName = Process.GetCurrentProcess().ProcessName;
-                Process[] processes = Process.GetProcessesByName(processName);
-                if (processes.Length > 1)
-                {
-                    Environment.Exit(1);
-                    MessageBox.Show($"{processName} 已在运行！", "Error", MessageBoxButton.OK, icon: MessageBoxImage.Error);
-                }
+                WPFHelper.NotAllowMultiProgram();
             }
-
-            return new RainWPFApplicationBuilder<T>();
+            return new RainWPFApplicationBuilder<T>(BuildConfiguration(), BuilderBasicsService());
         }
 
-        public static IServiceProvider? ServicesProvider;
+        /// <summary>
+        /// 构建WPFApp
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="isMultiProgram">是否支持多开</param>
+        /// <returns></returns>
+        public static RainWPFApplicationBuilder CreateWPFAppBuilder(Application application, bool isMultiProgram)
+        {
+            if (!isMultiProgram)
+            {
+                WPFHelper.NotAllowMultiProgram();
+            }
+            isInstance = true;
+            return new RainWPFApplicationBuilder(application, BuildConfiguration(), BuilderBasicsService());
+        }
 
-        public Application Application { get; set; }
+        private static ServiceCollection BuilderBasicsService()
+        {
+            var Services = new ServiceCollection();
+            Services.AddLogging(builder =>
+            {
+                builder.AddDebug();
+            });
+            Services.AddSingleton<IDialogService, DialogService>()
+                    .AddSingleton<INotificationService, NotificationService>();
+            return Services;
+        }
 
-        internal RWPF(IServiceProvider serviceProvider, Application application)
+        internal RWPF(IServiceProvider serviceProvider, Application application, Type[] IgnoreStartService)
         {
             ServicesProvider = serviceProvider;
+            var loggerFactory = ServicesProvider.GetRequiredService<ILoggerFactory>();
+            logger = loggerFactory.CreateLogger<RWPF>();
             Application = application;
+            application.Exit += Application_Exit;
+            UnhandledException();
+            _ = StartHostingService(IgnoreStartService);
+            ThreadPool.GetMaxThreads(out var workerThreads, out var completionPortThreads);
+            logger.LogInformation("App Start ThreadPool MaxThreads: workerThreads={WorkerThreads} ,completionPortThreads={CompletionPortThreads}", workerThreads, completionPortThreads);
+            logger.LogInformation("StartUp environment={Environment}", environment);
         }
 
         public void Run()
         {
-            UnhandledException();
+            if (isInstance)
+            {
+                return;
+            }
             Application.Run();
+        }
+
+        private async Task StartHostingService(params Type[] IgnoreStartService)
+        {
+            foreach (var hostedService in ServicesProvider!.GetServices<IHostedService>())
+            {
+                var type = hostedService.GetType();
+                if (IgnoreStartService.Contains(type))
+                {
+                    logger.LogDebug("[StartHosting] Ignore start {Type}", type);
+                    continue;
+                }
+                await hostedService.StartAsync(backgroundHostCTS.Token);
+                logger.LogInformation("[StartHosting] {Type} Started", type);
+            }
         }
 
         private void UnhandledException()
@@ -71,6 +131,28 @@ namespace RainWPF
                 MessageBox.Show($"{((Exception)e.ExceptionObject).GetOriginalException()}", "Error", MessageBoxButton.OK, icon: MessageBoxImage.Error);
                 return;
             };
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            try
+            {
+                backgroundHostCTS.Cancel();
+                backgroundHostCTS.Dispose();
+                logger.LogInformation("Cancel Background Host");
+                logger.LogInformation("App exit!");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Cancel Background Host Err: {Ex}", ex);
+            }
+        }
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            return new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true)
+                             .AddJsonFile($"appsettings.{environment}.json", optional: true)
+                             .Build();
         }
     }
 }

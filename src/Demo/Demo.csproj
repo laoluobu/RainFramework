@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RainDesktop\RainDesktop.csproj" />
+    <ProjectReference Include="..\RainWPF.Serilog\RainWPF.Serilog.csproj" />
     <ProjectReference Include="..\RainWPF\RainWPF.csproj" />
   </ItemGroup>
 
@@ -39,6 +40,12 @@
     <Resource Include="Assets\Images\engineer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
