@@ -14,7 +14,11 @@ namespace RainWPF
 {
     public class RWPF : IRWPF
     {
-        public static IServiceProvider ServicesProvider { private set; get; } = null!;
+        internal static IServiceProvider? ProxyServicesProvider;
+
+        public IServiceProvider ServicesProvider { get; private set; }
+
+        public IDialogService DialogService { get; private set; }
 
         public Application Application { get; set; }
 
@@ -71,7 +75,9 @@ namespace RainWPF
 
         internal RWPF(IServiceProvider serviceProvider, Application application, Type[] IgnoreStartService)
         {
+            ProxyServicesProvider = serviceProvider;
             ServicesProvider = serviceProvider;
+            DialogService = ServicesProvider.GetRequiredService<IDialogService>();
             var loggerFactory = ServicesProvider.GetRequiredService<ILoggerFactory>();
             logger = loggerFactory.CreateLogger<RWPF>();
             Application = application;
@@ -94,7 +100,7 @@ namespace RainWPF
 
         private async Task StartHostingService(params Type[] IgnoreStartService)
         {
-            foreach (var hostedService in ServicesProvider!.GetServices<IHostedService>())
+            foreach (var hostedService in ServicesProvider.GetServices<IHostedService>())
             {
                 var type = hostedService.GetType();
                 if (IgnoreStartService.Contains(type))
@@ -109,8 +115,8 @@ namespace RainWPF
 
         private void UnhandledException()
         {
-            var notificationService = ServicesProvider!.GetRequiredService<INotificationService>();
-            var logger = ServicesProvider!.GetRequiredService<ILoggerFactory>().CreateLogger<RWPF>();
+            var notificationService = ServicesProvider.GetRequiredService<INotificationService>();
+            var logger = ServicesProvider.GetRequiredService<ILoggerFactory>().CreateLogger<RWPF>();
             ///´¦ÀíTask Exception
             TaskScheduler.UnobservedTaskException += (_, e) =>
             {

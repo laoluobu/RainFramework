@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	  <Authors>Andy</Authors>
-	  <Version>1.2.55</Version>
+	  <Version>1.2.57</Version>
 	  <Description>Provide DI、Background Service、MultiProgram、DialogProxy、NotificationProxy...</Description>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
-    <PackageReference Include="Stocker.Helper" Version="1.1.24" />
   </ItemGroup>
 
   <ItemGroup>

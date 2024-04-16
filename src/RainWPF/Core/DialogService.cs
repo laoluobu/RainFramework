@@ -53,11 +53,12 @@ namespace RainWPF.Core
             OpenDialog(dialogType, callback, viewModel);
         }
 
-        public void Register<TViewMode, TDailog>()
+        public IDialogService Register<TViewMode, TDailog>()
             where TViewMode : class
             where TDailog : class
         {
             mapping.TryAdd(typeof(TViewMode), typeof(TDailog));
+            return this;
         }
 
         public void ShowDialog<TViewModel>(object? viewModel = null)

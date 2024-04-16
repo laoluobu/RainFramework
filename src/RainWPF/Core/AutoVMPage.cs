@@ -10,9 +10,9 @@ namespace RainWPF.Core
             DataContext = InitViewModel();
         }
 
-        protected virtual object? InitViewModel()
+        protected virtual object InitViewModel()
         {
-            return RWPF.ServicesProvider?.GetRequiredService<T>();
+            return RWPF.ProxyServicesProvider!.GetRequiredService<T>();
         }
 
         public T ViewModel => (T)DataContext;
