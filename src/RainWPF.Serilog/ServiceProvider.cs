@@ -8,10 +8,10 @@ namespace RainWPF.Serilog
 {
     public static class ServiceProvider
     {
-        public static RainWPFApplicationBuilderBase AddSerilog(this RainWPFApplicationBuilderBase builderBase, IConfigurationRoot configuration)
+        public static RainWPFApplicationBuilderBase AddSerilog(this RainWPFApplicationBuilderBase builderBase)
         {
             Log.Logger = new LoggerConfiguration()
-                            .ReadFrom.Configuration(configuration)
+                            .ReadFrom.Configuration(builderBase.Configuration)
                             .CreateBootstrapLogger();
 
             builderBase.Services.AddLogging(logBuiler =>
