@@ -16,8 +16,10 @@
     x:TypeArguments="vm:HomeVM"
     mc:Ignorable="d">
 
-    <StackPanel HorizontalAlignment="Center">
+    <StackPanel>
         <TextBlock Text="Home" />
         <ComboBox ItemsSource="{rf:EnumBinding {x:Type eunm:Language}}" SelectedValue="{Binding Language}" />
+        <rf:PropertyViewer Width="200" FontSize="20" />
+
     </StackPanel>
 </rf:AutoVMPage>

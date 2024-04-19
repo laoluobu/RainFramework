@@ -1,4 +1,6 @@
-﻿using RainWPF;
+﻿using Demo.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using RainWPF;
 using System.Windows;
 
 namespace Demo
@@ -10,8 +12,9 @@ namespace Demo
     {
         public App()
         {
-            var builder = RWPF.CreateWPFAppBuilder(Current, false);            
-            //builder.AddSerilog(builder.Configuration);
+            var builder = RWPF.CreateWPFAppBuilder(Current, false);
+            //builder.AddSerilog(builder.Configuration
+            builder.Services.AddSingleton<HomeVM>();
             var rwpf = builder.Build();
             rwpf.Run();
         }
