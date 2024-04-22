@@ -11,19 +11,29 @@
     mc:Ignorable="d">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="47.5*" />
-            <ColumnDefinition Width="5*" />
-            <ColumnDefinition Width="47.5*" />
+            <ColumnDefinition Width="48*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="48*" />
         </Grid.ColumnDefinitions>
         <TextBlock
             Grid.Column="0"
-            HorizontalAlignment="Center"
-            d:Text="Title"
-            Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}" />
-        <TextBlock
-            Grid.Column="2"
-            HorizontalAlignment="Center"
-            d:Text="Contect"
-            Text="Contect" />
+            HorizontalAlignment="Left"
+            Foreground="{Binding PropertyNameColor, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+            Text="{Binding PropertyName, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}" />
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <TextBlock
+                HorizontalAlignment="Left"
+                Foreground="{Binding ValueColor, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Text="{Binding Value, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}" />
+
+            <TextBlock
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                Foreground="{Binding ValueColor1, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Text="{Binding Value1, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Visibility="{Binding Text, RelativeSource={RelativeSource self}, Converter={StaticResource Object2VisibilityConverter}}" />
+        </StackPanel>
+
+
     </Grid>
 </UserControl>

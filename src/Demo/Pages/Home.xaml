@@ -19,7 +19,38 @@
     <StackPanel>
         <TextBlock Text="Home" />
         <ComboBox ItemsSource="{rf:EnumBinding {x:Type eunm:Language}}" SelectedValue="{Binding Language}" />
-        <rf:PropertyViewer Width="200" FontSize="20" />
+
+        <UniformGrid Columns="2" Rows="2">
+
+            <rf:PropertyViewer
+                Width="300"
+                FontSize="20"
+                PropertyName="HSMS STATE"
+                Value="ONLINE" />
+
+            <rf:PropertyViewer
+                Width="300"
+                FontSize="20"
+                PropertyName="MS STATE"
+                Value="NLINE" />
+            <rf:PropertyViewer
+                Width="300"
+                FontSize="20"
+                PropertyName="HSMS STATE"
+                Value="ONLINE" />
+
+            <rf:PropertyViewer
+                Width="400"
+                FontSize="20"
+                PropertyName="MS STATE"
+                Value1="ooo"
+                ValueColor1="Red"
+                Value="NLINE" />
+
+
+        </UniformGrid>
+
+
 
     </StackPanel>
 </rf:AutoVMPage>
