@@ -160,4 +160,11 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="PrimaryPropertyViewer" TargetType="{x:Type local:PropertyViewer}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="ValueColor" Value="Green" />
+    </Style>
 </ResourceDictionary>
