@@ -27,7 +27,7 @@ namespace RainWPF
         private readonly Application application;
 
         internal RainWPFApplicationBuilder(Application application, IConfigurationRoot configuration, ServiceCollection services)
-        {
+        {            
             Services = services;
             this.application = application;
             Configuration = configuration;

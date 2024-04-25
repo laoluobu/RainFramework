@@ -1,3 +1,4 @@
+using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +9,6 @@ using RainWPF.Helper;
 using Stocker.Helper.Dialog;
 using Stocker.Helper.Extensions;
 using Stocker.Helper.Notification;
-using System.Windows;
 
 namespace RainWPF
 {
@@ -26,7 +26,7 @@ namespace RainWPF
 
         private readonly ILogger<RWPF> logger;
 
-        private static readonly string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+        public static string Environment => System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 
         private static bool isInstance;
 
@@ -86,7 +86,7 @@ namespace RainWPF
             _ = StartHostingService(IgnoreStartService);
             ThreadPool.GetMaxThreads(out var workerThreads, out var completionPortThreads);
             logger.LogInformation("App Start ThreadPool MaxThreads: workerThreads={WorkerThreads} ,completionPortThreads={CompletionPortThreads}", workerThreads, completionPortThreads);
-            logger.LogInformation("StartUp environment={Environment}", environment);
+            logger.LogInformation("StartUp environment={Environment}", Environment);
         }
 
         public void Run()
@@ -157,7 +157,7 @@ namespace RainWPF
         private static IConfigurationRoot BuildConfiguration()
         {
             return new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true)
-                             .AddJsonFile($"appsettings.{environment}.json", optional: true)
+                             .AddJsonFile($"appsettings.{Environment}.json", optional: true)
                              .Build();
         }
     }

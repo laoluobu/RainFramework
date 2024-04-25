@@ -32,7 +32,9 @@ namespace RainFramework.AspNetCore
 #endif
             builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
+
             builder.Services.AddSwagger()
+
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
                             .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"), builder.Configuration["Mysql.Version"])
