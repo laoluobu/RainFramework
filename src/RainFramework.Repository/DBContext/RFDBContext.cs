@@ -33,8 +33,6 @@ public class RFDBContext : DbContext
         {
             Roles.HasIndex(Role => Role.RoleName).IsUnique();
 
-            Roles.Property(Role => Role.CreateTime).ValueGeneratedOnAdd();
-            Roles.Property(Role => Role.UpdateTime).ValueGeneratedOnUpdate();
 
             Roles.HasData(new Role() { Id = 2, RoleName = "Administrator", IsDisable = false },
                               new Role() { Id = 3, RoleName = "Customer", IsDisable = false });
@@ -44,8 +42,6 @@ public class RFDBContext : DbContext
         modelBuilder.Entity<UserAuth>(UserAuth =>
         {
             UserAuth.HasIndex(UserAuth => UserAuth.Username).IsUnique();
-            UserAuth.Property(UserAuth => UserAuth.CreateTime).ValueGeneratedOnAdd();
-            UserAuth.Property(UserAuth => UserAuth.UpdateTime).ValueGeneratedOnUpdate();
             UserAuth.HasData(new UserAuth()
             {
                 Id = 20,
@@ -58,13 +54,6 @@ public class RFDBContext : DbContext
                 },
                 Roles = new List<Role>() 
             });
-        });
-
-        //UserInfo Table
-        modelBuilder.Entity<UserInfo>(UserInfo =>
-        {
-            UserInfo.Property(UserInfo => UserInfo.CreateTime).ValueGeneratedOnAdd();
-            UserInfo.Property(UserInfo => UserInfo.UpdateTime).ValueGeneratedOnUpdate();
         });
     }
 }

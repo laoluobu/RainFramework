@@ -1,17 +1,10 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using RainFramework.Common.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using RainFramework.EFCore.Base;
 
 namespace RainFramework.Repository.Entity;
 
 public class UserInfo : EntityBase
 {
-    /// <summary>
-    /// 用户ID
-    /// </summary>
-    public int Id { get; set; }
-
 
     public int UserAuthId { get; set; }
 
@@ -19,27 +12,16 @@ public class UserInfo : EntityBase
     /// 邮箱
     /// </summary>
     [MaxLength(50)]
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
     /// <summary>
     /// 用户昵称
     /// </summary>
     [MaxLength(50)]
-    public string Nickname { get; set; }
+    public string Nickname { get; set; } = null!;
 
     /// <summary>
     /// 是否禁用
     /// </summary>
     public bool IsDisable { get; set; }
-
-    /// <summary>
-    /// 创建时间
-    /// </summary>
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime CreateTime { get; set; }
-
-    /// <summary>
-    /// 更新时间
-    /// </summary>
-    public DateTime? UpdateTime { get; set; }
 }

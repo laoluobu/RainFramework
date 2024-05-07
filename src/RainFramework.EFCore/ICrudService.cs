@@ -1,6 +1,8 @@
-﻿namespace RainFramework.Common.Base
+﻿using RainFramework.EFCore.Base;
+
+namespace RainFramework.Common.Base
 {
-    public interface ICrudService<TEntity> where TEntity : class
+    public interface ICrudService<TEntity> where TEntity : EntityBase
     {
         Task AddAsync(TEntity entity);
 

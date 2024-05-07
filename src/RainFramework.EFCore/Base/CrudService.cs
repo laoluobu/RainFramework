@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RainFramework.Common.CoreException;
+using RainFramework.Efcore.Exceptions;
+using RainFramework.EFCore.Base;
 
 namespace RainFramework.Common.Base
 {
@@ -53,4 +54,5 @@ namespace RainFramework.Common.Base
             return await dbSet.AsNoTracking().ToListAsync();
         }
     }
+
 }

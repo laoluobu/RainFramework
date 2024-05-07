@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.Common.Base;
-using RainFramework.Common.Moudel.VO;
+using RainFramework.EFCore.Base;
 using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Base

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Base;
 using RainFramework.Common.CoreException;
+using RainFramework.EFCore.Base;
 
 namespace RainFramework.AspNetCore.Base
 {

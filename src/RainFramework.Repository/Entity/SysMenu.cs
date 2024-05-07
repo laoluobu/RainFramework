@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using RainFramework.Common.Base;
+using RainFramework.EFCore.Base;
 
 namespace RainFramework.Repository.Entity
 {
@@ -11,7 +12,6 @@ namespace RainFramework.Repository.Entity
     /// </summary>
     public class SysMenu : EntityBase
     {
-        public int Id { get; set; }
 
         /// <summary>
         /// 路由路径
@@ -23,13 +23,13 @@ namespace RainFramework.Repository.Entity
         /// 菜单名称
         /// </summary>
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [MaxLength(100)]
-        public string Component { get; set; }
+        public string Component { get; set; } = null!;
 
         [Column(TypeName = "json")]
-        public Meta Meta { get; set; }
+        public Meta Meta { get; set; } = null!;
 
         /// <summary>
         /// 可用角色

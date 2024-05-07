@@ -1,4 +1,4 @@
-﻿using RainFramework.Common.Base;
+﻿using RainFramework.EFCore.Base;
 
 namespace RainFramework.Repository.Entity
 {
@@ -7,11 +7,6 @@ namespace RainFramework.Repository.Entity
     /// </summary>
     public class AppConfig : EntityBase
     {
-        /// <summary>
-        /// 主键
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// UI是否显示Tags
         /// </summary>
