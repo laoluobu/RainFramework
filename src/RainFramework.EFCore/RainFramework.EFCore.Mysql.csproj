@@ -9,8 +9,14 @@
 		<Description>RF EFcore Mysql</Description>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Json.Newtonsoft" Version="8.0.2" />
 	</ItemGroup>
-
+	
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Json.Newtonsoft" Version="7.0.0" />
+	</ItemGroup>
+	
 </Project>
