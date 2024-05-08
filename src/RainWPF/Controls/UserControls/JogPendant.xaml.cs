@@ -14,7 +14,9 @@ namespace RainWPF.Controls.UserControls
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Name Coord
+        /// </summary>
         public IEnumerable<object> AxisSource
         {
             get { return (IEnumerable<object>)GetValue(ItemsSourceProperty); }

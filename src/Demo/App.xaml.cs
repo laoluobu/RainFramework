@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RainWPF;
 using System.Windows;
+using RainWPF.Serilog;
 
 namespace Demo
 {
@@ -13,7 +14,7 @@ namespace Demo
         public App()
         {
             var builder = RWPF.CreateWPFAppBuilder(Current, false);
-            //builder.AddSerilog(builder.Configuration
+            builder.AddSerilog();
             builder.Services.AddSingleton<HomeVM>();
             var rwpf = builder.Build();
             rwpf.Run();

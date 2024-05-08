@@ -9,7 +9,7 @@ namespace Demo.ViewModel
     {
         public string Context { get; } = "Home";
 
-        public string[] Axias { get; set; } = ["x", "y", "z", "r"];
+        public Axis[] Axias { get; set; } = [ new Axis { Name = "X"} , new Axis { Name = "Y" }, new Axis { Name = "Z" }, new Axis { Name = "R" }];
 
         [ObservableProperty]
         private string selectAxis = "r";
@@ -22,7 +22,14 @@ namespace Demo.ViewModel
         private void MoveToLeft()
         {
 
-            SelectAxis += "1"; 
+            SelectAxis += "1";
         }
+    }
+
+    public class Axis
+    {
+        public string Name { get; set; }
+
+        public double Coord { get; set; }
     }
 }
