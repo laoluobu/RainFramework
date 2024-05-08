@@ -17,7 +17,9 @@ namespace Demo
         private bool isOpenUserInfo;
 
         [ObservableProperty]
-        private Menus currentMenu;
+        private Menus currentMenu = null!;
+
+        
 
         public List<Menus> Menus { get; set; } = new List<Menus>()
         {

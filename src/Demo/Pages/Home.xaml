@@ -50,7 +50,13 @@
 
         </UniformGrid>
 
-
+        <TextBlock Text="{Binding SelectAxis}" />
+        <rf:JogPendant
+            Width="500"
+            Height="250"
+            AxisSource="{Binding Axias}"
+            MoveToLeftCommand="{Binding MoveToLeftCommand}"
+            SelectedAxis="{Binding SelectAxis}" />
 
     </StackPanel>
 </rf:AutoVMPage>
