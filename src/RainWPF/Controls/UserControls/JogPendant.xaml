@@ -45,7 +45,10 @@
                                 <RowDefinition  Height="5*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource TextBlockSubTitle}"/>
-                            <TextBox Margin="0 5 0 0" Grid.Row="1"  Text="{Binding Coord}" />
+                            <TextBox  IsReadOnly="True" 
+                                      Margin="0 5 0 0" 
+                                      Grid.Row="1"  
+                                      Text="{Binding Coord,StringFormat={}{0:F3} ,Mode=OneWay}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -116,7 +119,7 @@
                     Style="{StaticResource RepeatButtonPrimary}" />
                 </Grid>
                 <Slider Margin="0 20 0 0" Maximum="100" Value="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}" />
-                <TextBlock Style="{StaticResource TextBlockSubTitle}" Text="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}, StringFormat={}速度：{0:F3}%}" />
+                <TextBlock  Style="{StaticResource TextBlockSubTitle}" Text="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}, StringFormat={}速度：{0:F3}%}" />
             </StackPanel>
         </Grid>
     </Grid>
