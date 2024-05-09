@@ -77,5 +77,15 @@ namespace RainWPF.Controls.UserControls
             DependencyProperty.Register("Speed", typeof(double), typeof(JogPendant), new PropertyMetadata(default(double)));
 
 
+        public int CommandInterval
+        {
+            get { return (int)GetValue(CommandIntervalProperty); }
+            set { SetValue(CommandIntervalProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CommandInterval.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandIntervalProperty =
+            DependencyProperty.Register("CommandInterval", typeof(int), typeof(JogPendant), new PropertyMetadata(default(int)));
+
     }
 }

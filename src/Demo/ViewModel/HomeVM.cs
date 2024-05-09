@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Demo.Enum;
+using Microsoft.Extensions.Logging;
 using RainDesktop.ViewModel;
+using Serilog.Core;
 
 namespace Demo.ViewModel
 {
@@ -16,12 +18,18 @@ namespace Demo.ViewModel
 
         [ObservableProperty]
         private Language language;
+        private readonly ILogger<HomeVM> logger;
+
+        public HomeVM(ILogger<HomeVM> logger)
+        {
+            this.logger = logger;
+        }
 
 
         [RelayCommand]
         private void MoveToLeft()
         {
-
+            logger.LogDebug(DateTime.Now+"");
             SelectAxis += "1";
         }
     }
