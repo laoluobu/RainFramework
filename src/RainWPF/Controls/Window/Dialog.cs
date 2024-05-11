@@ -11,14 +11,14 @@ namespace RainWPF.Controls
             ShowInTaskbar = false;
         }
 
-        public bool IsClose
+        public bool? IsClose
         {
             get { return (bool)GetValue(IsCloseProperty); }
             set { SetValue(IsCloseProperty, value); }
         }
 
         public static readonly DependencyProperty IsCloseProperty =
-            DependencyProperty.Register("IsClose", typeof(bool), typeof(Dialog), new PropertyMetadata(default(bool), OnIsCloseChanged));
+            DependencyProperty.Register("IsClose", typeof(bool?), typeof(Dialog), new PropertyMetadata(default(bool?), OnIsCloseChanged));
 
 
         private static void OnIsCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
