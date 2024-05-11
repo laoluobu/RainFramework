@@ -5,6 +5,6 @@ namespace RainDesktop.ViewModel
     public partial class DialogVMBase : ViewModelBase
     {
         [ObservableProperty]
-        private bool? dialogResult;
+        private bool dialogResult;
     }
 }

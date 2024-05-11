@@ -28,5 +28,7 @@ namespace RainWPF.Controls
                 window.DialogResult = e.NewValue as bool?;
             }
         }
+
+
     }
 }
