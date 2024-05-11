@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using RainWPF;
 using System.Windows;
 using RainWPF.Serilog;
+using Stocker.Helper.Dialog;
+using Demo.Dialogs;
 
 namespace Demo
 {
@@ -18,6 +20,12 @@ namespace Demo
             builder.Services.AddSingleton<HomeVM>();
             var rwpf = builder.Build();
             rwpf.Run();
+            RegisterDialog(rwpf.ServicesProvider.GetRequiredService<IDialogService>());
+        }
+
+        private void RegisterDialog(IDialogService dialogService)
+        {
+            dialogService.Register<LoginDialogVM, LoginDialog>();
         }
     }
 }

@@ -18,24 +18,19 @@ namespace RainFramework.Common.Base
         public async Task UpdatesAsync(TEntity entity)
         {
             dbSet.Update(entity);
-            if (await dbContext.SaveChangesAsync() < 1)
-            {
-                throw new EntityUpdateException($"The {entity} Update error!");
-            }
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task AddAsync(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-            if (await dbContext.SaveChangesAsync() < 1)
-            {
-                throw new EntityUpdateException($"The {entity} insert error!");
-            }
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await dbSet.AddRangeAsync(entities);
+            await dbContext.SaveChangesAsync();      
         }
 
         public async Task RemoveAsync(TEntity entity)
@@ -43,7 +38,6 @@ namespace RainFramework.Common.Base
             dbSet.Remove(entity);
             await dbContext.SaveChangesAsync();
         }
-
 
 
         public async Task<TEntity> FindAsync(object key)

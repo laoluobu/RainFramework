@@ -9,6 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
         <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="{x:Type local:Window}">
         <Setter Property="NonClientAreaHeight" Value="50" />
         <Setter Property="NonClientAreaContent">
@@ -35,5 +36,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

@@ -1,0 +1,16 @@
+﻿<rf:Dialog x:Class="Demo.Dialogs.LoginDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rf="https://rainwpf.github.io/rainwpf"
+        xmlns:local="clr-namespace:Demo.Dialogs" 
+        xmlns:viewmodel="clr-namespace:Demo.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:LoginDialogVM}"
+        mc:Ignorable="d"
+        IsClose="{Binding DialogResult}"
+        Title="LoginDialog" Height="450" Width="800">
+    <Grid>
+        <Button Content="Close" Command="{Binding CloseCommand}"/>
+    </Grid>
+</rf:Dialog>

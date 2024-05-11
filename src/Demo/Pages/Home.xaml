@@ -60,5 +60,7 @@
             MoveToLeftCommand="{Binding MoveToLeftCommand}"
             SelectedAxis="{Binding SelectAxis}" />
 
+        <Button Content="ShowDialog" Command="{Binding ShowDialogCommand}"/>
+
     </StackPanel>
 </rf:AutoVMPage>

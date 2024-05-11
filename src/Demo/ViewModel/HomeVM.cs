@@ -4,6 +4,7 @@ using Demo.Enum;
 using Microsoft.Extensions.Logging;
 using RainDesktop.ViewModel;
 using Serilog.Core;
+using Stocker.Helper.Dialog;
 
 namespace Demo.ViewModel
 {
@@ -27,25 +28,31 @@ namespace Demo.ViewModel
         partial void OnSpeedChanged(double value)
         {
 
-            Console.WriteLine(  value);
+            Console.WriteLine(value);
 
         }
-
-
-
         private readonly ILogger<HomeVM> logger;
+        
+        private readonly IDialogService dialogService;
 
-        public HomeVM(ILogger<HomeVM> logger)
+        public HomeVM(ILogger<HomeVM> logger, IDialogService dialogService)
         {
             this.logger = logger;
+            this.dialogService = dialogService;
         }
 
 
         [RelayCommand]
         private void MoveToLeft()
         {
-            logger.LogDebug(DateTime.Now+"");
+            logger.LogDebug(DateTime.Now + "");
             SelectAxis += "1";
+        }
+
+        [RelayCommand]
+        private void ShowDialog()
+        {
+            dialogService.ShowDialog<LoginDialogVM>(null,new LoginDialogVM() { });
         }
     }
 
