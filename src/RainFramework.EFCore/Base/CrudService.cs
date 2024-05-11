@@ -33,11 +33,18 @@ namespace RainFramework.Common.Base
             }
         }
 
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await dbSet.AddRangeAsync(entities);
+        }
+
         public async Task RemoveAsync(TEntity entity)
         {
             dbSet.Remove(entity);
             await dbContext.SaveChangesAsync();
         }
+
+
 
         public async Task<TEntity> FindAsync(object key)
         {

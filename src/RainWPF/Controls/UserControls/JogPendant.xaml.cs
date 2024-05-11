@@ -74,7 +74,10 @@ namespace RainWPF.Controls.UserControls
 
         // Using a DependencyProperty as the backing store for Speed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SpeedProperty =
-            DependencyProperty.Register("Speed", typeof(double), typeof(JogPendant), new PropertyMetadata(default(double)));
+            DependencyProperty.Register("Speed", typeof(double), typeof(JogPendant),
+
+
+                new FrameworkPropertyMetadata(default(double), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null));
 
 
         public int CommandInterval

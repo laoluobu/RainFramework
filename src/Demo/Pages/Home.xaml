@@ -54,7 +54,8 @@
         <rf:JogPendant
             Width="500"
             Height="450"
-            CommandInterval="1000"
+            CommandInterval="1000"            
+            Speed="{Binding Speed}"
             AxisSource="{Binding Axias}"
             MoveToLeftCommand="{Binding MoveToLeftCommand}"
             SelectedAxis="{Binding SelectAxis}" />

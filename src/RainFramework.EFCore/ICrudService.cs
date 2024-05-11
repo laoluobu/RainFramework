@@ -6,6 +6,8 @@ namespace RainFramework.Common.Base
     {
         Task AddAsync(TEntity entity);
 
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
+
         /// <summary>
         /// 查找全表
         /// </summary>

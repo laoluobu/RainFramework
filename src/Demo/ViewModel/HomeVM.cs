@@ -18,6 +18,21 @@ namespace Demo.ViewModel
 
         [ObservableProperty]
         private Language language;
+
+
+        [ObservableProperty]
+        private double speed;
+
+
+        partial void OnSpeedChanged(double value)
+        {
+
+            Console.WriteLine(  value);
+
+        }
+
+
+
         private readonly ILogger<HomeVM> logger;
 
         public HomeVM(ILogger<HomeVM> logger)
