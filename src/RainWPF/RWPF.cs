@@ -58,6 +58,8 @@ namespace RainWPF
                 WPFHelper.NotAllowMultiProgram();
             }
             isInstance = true;
+            
+
             return new RainWPFApplicationBuilder(application, BuildConfiguration(), BuilderBasicsService());
         }
 
