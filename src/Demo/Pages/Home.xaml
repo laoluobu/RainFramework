@@ -24,25 +24,25 @@
             <rf:PropertyViewer
                 Width="300"
                 FontSize="20"
-                PropertyName="HSMS STATE"
+                PropertyName="HSMS STATE1"
                 Style="{StaticResource PrimaryPropertyViewer}"
                 Value="ONLINE" />
 
             <rf:PropertyViewer
                 Width="300"
                 FontSize="20"
-                PropertyName="MS STATE"
+                PropertyName="MS STAT2E"
                 Value="NLINE" />
             <rf:PropertyViewer
                 Width="300"
                 FontSize="20"
-                PropertyName="HSMS STATE"
+                PropertyName="HSMS STAT3E"
                 Value="ONLINE" />
 
             <rf:PropertyViewer
-                Width="400"
+                Width="300"
                 FontSize="20"
-                PropertyName="MS STATE"
+                PropertyName="MS STAT12E"
                 Value1="ooo"
                 ValueColor1="Red"
                 Value="NLINE" />
@@ -54,13 +54,15 @@
         <rf:JogPendant
             Width="500"
             Height="450"
-            CommandInterval="1000"            
-            Speed="{Binding Speed}"
             AxisSource="{Binding Axias}"
+            CommandInterval="1000"
             MoveToLeftCommand="{Binding MoveToLeftCommand}"
-            SelectedAxis="{Binding SelectAxis}" />
+            SelectedAxis="{Binding SelectAxis}"
+            Speed="{Binding Speed}" />
+        <rf:Sensor Width="15" Height="15" />
 
-        <Button Content="ShowDialog" Command="{Binding ShowDialogCommand}"/>
+        <RadioButton Width="20" />
+        <Button Command="{Binding ShowDialogCommand}" Content="ShowDialog" />
 
     </StackPanel>
 </rf:AutoVMPage>

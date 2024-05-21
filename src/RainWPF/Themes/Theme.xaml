@@ -7,6 +7,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="./Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
     <FontFamily x:Key="Misans">Assest/Fonts/#MiSans</FontFamily>
     <Converters:IEnumerable2VisibilityConverter x:Key="IEnumerable2VisibilityConverter" />
     <SolidColorBrush x:Key="MenuBoxSelectedBrush">#5CACEE</SolidColorBrush>
@@ -163,8 +164,15 @@
 
     <Style x:Key="PrimaryPropertyViewer" TargetType="{x:Type local:PropertyViewer}">
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="Width" Value="200" />
+
+        <Setter Property="Width" Value="auto" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="ValueColor" Value="Green" />
     </Style>
+
+    <Style x:Key="DefaultPropertyViewer" TargetType="{x:Type local:PropertyViewer}">
+
+        <Setter Property="Width" Value="auto" />
+    </Style>
+
 </ResourceDictionary>

@@ -13,6 +13,7 @@ using System.Windows.Markup;
 
 [assembly: Guid("6b8b704f-84d6-4420-b952-1afe70694b6f")]
 
+[assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Controls.CustomControls")]
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Controls")]
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Core")]
 [assembly: XmlnsDefinition("https://rainwpf.github.io/rainwpf", "RainWPF.Controls.UserControls")]

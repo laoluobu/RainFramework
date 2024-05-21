@@ -11,9 +11,9 @@
     mc:Ignorable="d">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="48*" />
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="48*" />
+            <ColumnDefinition Width="40*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="60*" />
         </Grid.ColumnDefinitions>
         <TextBlock
             Grid.Column="0"
