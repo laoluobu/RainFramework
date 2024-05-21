@@ -3,20 +3,16 @@ using System.Windows.Data;
 
 namespace RainWPF.Converters
 {
-    public class ICollectionSkipConverter : IValueConverter
+    public class IEnumerableTakeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter is not int startIdex)
+            int startIndex = int.Parse(parameter.ToString()!);
+            if (value is not IEnumerable<object> array)
             {
                 return Binding.DoNothing;
             }
-
-            if (value is not ICollection<object> array)
-            {
-                return Binding.DoNothing;
-            }
-            return array.Skip(startIdex);
+            return array.Take(startIndex);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

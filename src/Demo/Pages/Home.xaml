@@ -61,7 +61,15 @@
             Speed="{Binding Speed}" />
         <rf:Sensor Width="15" Height="15" />
 
-        <RadioButton Width="20" />
+        <ListBox Height="100" ItemsSource="{Binding Strings, Converter={StaticResource ICollectionTakeConverter}, ConverterParameter=1}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
         <Button Command="{Binding ShowDialogCommand}" Content="ShowDialog" />
 
     </StackPanel>

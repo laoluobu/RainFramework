@@ -14,6 +14,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <cv:Status2ColorConverter x:Key="Status2ColorConverter" />
+    <cv:IEnumerableSkipConverter x:Key="IEnumerableSkipConverter" />
+    <cv:IEnumerableTakeConverter x:Key="IEnumerableTakeConverter" />
 
     <Style TargetType="{x:Type local:Window}">
         <Setter Property="NonClientAreaHeight" Value="50" />

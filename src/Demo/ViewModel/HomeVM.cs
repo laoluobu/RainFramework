@@ -25,6 +25,8 @@ namespace Demo.ViewModel
         private double speed;
 
 
+        public List<string> Strings { get; set; } = new List<string>() { "A", "B", "C" };
+
         partial void OnSpeedChanged(double value)
         {
 
@@ -32,7 +34,7 @@ namespace Demo.ViewModel
 
         }
         private readonly ILogger<HomeVM> logger;
-        
+
         private readonly IDialogService dialogService;
 
         public HomeVM(ILogger<HomeVM> logger, IDialogService dialogService)
@@ -52,7 +54,7 @@ namespace Demo.ViewModel
         [RelayCommand]
         private void ShowDialog()
         {
-            dialogService.ShowDialog<LoginDialogVM>(null,new LoginDialogVM() { });
+            dialogService.ShowDialog<LoginDialogVM>(null, new LoginDialogVM() { });
         }
     }
 
