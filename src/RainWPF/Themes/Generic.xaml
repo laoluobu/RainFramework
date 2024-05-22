@@ -56,7 +56,7 @@
                         StrokeThickness="1" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Background" Value="Red" />
+                            <Setter Property="Background" Value="Gray" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" Value="Green" />
