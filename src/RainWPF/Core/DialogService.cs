@@ -76,5 +76,16 @@ namespace RainWPF.Core
             bool? result = saveFileDialog.ShowDialog();
             callback?.Invoke(result.ToString() ?? "False", saveFileDialog.FileName);
         }
+
+        public void ShowOpenFileDialog(string tiele, string filter, Action<string, string>? callback)
+        {
+            var openFileDialog = new OpenFileDialog()
+            {
+                Title = tiele,
+                Filter = filter
+            };
+            var result = openFileDialog.ShowDialog();
+            callback?.Invoke(result.ToString() ?? "False", openFileDialog.FileName);
+        }
     }
 }
