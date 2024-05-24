@@ -46,11 +46,11 @@
                 Value1="ooo"
                 ValueColor1="Red"
                 Value="NLINE" />
-
-
         </UniformGrid>
-
         <TextBlock Text="{Binding SelectAxis}" />
+
+
+
         <rf:JogPendant
             Width="500"
             Height="450"
@@ -59,9 +59,11 @@
             MoveToLeftCommand="{Binding MoveToLeftCommand}"
             SelectedAxis="{Binding SelectAxis}"
             Speed="{Binding Speed}" />
+
+
         <rf:Sensor Width="15" Height="15" />
 
-        <ListBox Height="100" ItemsSource="{Binding Strings, Converter={StaticResource ICollectionTakeConverter}, ConverterParameter=1}">
+        <ListBox Height="100" ItemsSource="{Binding Strings, Converter={StaticResource IEnumerableTakeConverter}, ConverterParameter=1}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" />

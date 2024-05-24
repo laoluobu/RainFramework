@@ -10,24 +10,28 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
-        <local:AxisPostionInput Grid.Row="0" 
-                                Grid.Column="0" 
-                                Grid.ColumnSpan="2"
-                                Title="当前坐标"
-                                IsReadOnly="True"
-                                AxisSource="{Binding AxisSource,RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"/>
+        <local:AxisPostionInput
+            Title="当前坐标"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            AxisSource="{Binding AxisSource, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
+            IsReadOnly="True" />
 
-        <Grid Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="8*" />
@@ -52,7 +56,7 @@
             </ListBox>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="8*" />
@@ -62,9 +66,7 @@
                 Grid.Row="0"
                 Style="{StaticResource TextBlockSubTitleBold}"
                 Text="控制" />
-            <StackPanel
-                Grid.Row="1"                
-                Orientation="Vertical">
+            <StackPanel Grid.Row="1" Orientation="Vertical">
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -72,25 +74,34 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
                     <RepeatButton
-                        Grid.Column="0"
                         Width="100"
-                        Interval="{Binding CommandInterval,RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
                         Height="50"
-                        hc:IconElement.Geometry="{StaticResource LeftGeometry}"
+                        HorizontalAlignment="Center"
                         Command="{Binding MoveToLeftCommand, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
-                        FontSize="40"
+                        Content="-"
+                        FontSize="25"
+                        Interval="{Binding CommandInterval, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
                         Style="{StaticResource RepeatButtonPrimary}" />
+
                     <RepeatButton
                         Grid.Column="1"
-                        Interval="{Binding CommandInterval,RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
                         Width="100"
                         Height="50"
-                        hc:IconElement.Geometry="{StaticResource RightGeometry}"
+                        HorizontalAlignment="Center"
                         Command="{Binding MoveToRightCommand, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
+                        Content="+"
+                        FontSize="25"
+                        Interval="{Binding CommandInterval, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}"
                         Style="{StaticResource RepeatButtonPrimary}" />
                 </Grid>
-                <Slider Margin="0 20 0 0" Maximum="100" Value="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}" />
-                <TextBlock  Style="{StaticResource TextBlockSubTitle}" Text="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}, StringFormat={}速度：{0:F3}%}" />
+                <Slider
+                    Margin="0,20,0,0"
+                    Maximum="100"
+                    Value="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}}" />
+                <TextBlock Style="{StaticResource TextBlockSubTitle}" Text="{Binding Speed, RelativeSource={RelativeSource AncestorType={x:Type local:JogPendant}}, StringFormat={}速度：{0:F3}%}" />
+
+
+
             </StackPanel>
         </Grid>
     </Grid>
