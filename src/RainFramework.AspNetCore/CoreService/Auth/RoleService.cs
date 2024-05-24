@@ -9,10 +9,10 @@ using static RainFramework.Repository.DBContext.RFDBContext;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class RoleService : CrudService<RFDBContext, Role>, IRoleService
+    internal class RoleService<TDbContext> : CrudService<RFDBContext, Role>, IRoleService where TDbContext : RFDBContext
     {
-        private IMenuService? menuService;
-        public RoleService(RFDBContext daseDBContext, IMenuService menuService) : base(daseDBContext)
+        private IMenuService menuService;
+        public RoleService(TDbContext daseDBContext, IMenuService menuService) : base(daseDBContext)
         {
             this.menuService = menuService;
         }
@@ -29,7 +29,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task DeleteRoleById(int id)
         {
-            var count=await dbSet.Where(role => role.Id == id).ExecuteDeleteAsync()>0;
+            var count = await dbSet.Where(role => role.Id == id).ExecuteDeleteAsync() > 0;
             if (!count)
             {
                 throw new NotFoundException($"The roles id is {id} not found!");
@@ -56,9 +56,6 @@ namespace RainFramework.AspNetCore.CoreService.Auth
                 await dbContext.SaveChangesAsync();
                 return;
             }
-
-            
-
             foreach (var menId in menuIds)
             {
                 sysMenus.Add(await menuService.FindAsync(menId));

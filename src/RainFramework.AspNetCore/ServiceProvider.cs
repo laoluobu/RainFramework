@@ -8,6 +8,7 @@ using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
+using RainFramework.Repository.DBContext;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -17,7 +18,7 @@ namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static WebApplication UseRainFrameworkCore(this WebApplicationBuilder builder, LogEventLevel httpRequestLogL, params Type[] profileAssemblyMarkerTypes)
+        public static WebApplication UseRainFrameworkCore<TDbContext> (this WebApplicationBuilder builder, LogEventLevel httpRequestLogL, params Type[] profileAssemblyMarkerTypes) where TDbContext : RFDBContext
         {
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
 
@@ -37,11 +38,11 @@ namespace RainFramework.AspNetCore
 
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql")!, builder.Configuration["Mysql.Version"])
-                            .AddTransient<IUserAuthService, UserAuthService>()
-                            .AddTransient<IUserInfoService, UserInfoService>()
-                            .AddTransient<IMenuService, MenuService>()
-                            .AddTransient<IRoleService, RoleService>()
+                            //.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql")!, builder.Configuration["Mysql.Version"])
+                            .AddTransient<IUserAuthService, UserAuthService<TDbContext>>()
+                            .AddTransient<IUserInfoService, UserInfoService<TDbContext>>()
+                            .AddTransient<IMenuService, MenuService<TDbContext>>()
+                            .AddTransient<IRoleService, RoleService<TDbContext>>()
                             .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>()!)
                             .AddAutoMapper(profiles);
 

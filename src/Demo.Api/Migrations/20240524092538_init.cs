@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RainFramework.Repository.Migrations
+namespace Demo.Api.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration
@@ -16,6 +16,27 @@ namespace RainFramework.Repository.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "AppConfigs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IsShowTagsView = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsFixedHeader = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsShowLogo = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppConfigs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -24,9 +45,10 @@ namespace RainFramework.Repository.Migrations
                     RoleName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -51,7 +73,11 @@ namespace RainFramework.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ParentId = table.Column<int>(type: "int", nullable: true),
                     Hidden = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    OrderNum = table.Column<int>(type: "int", nullable: false)
+                    OrderNum = table.Column<int>(type: "int", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -75,12 +101,13 @@ namespace RainFramework.Repository.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IpAddress = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
+                    IpAddress = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    LastLoginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastLoginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -148,14 +175,15 @@ namespace RainFramework.Repository.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserAuthId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Nickname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
+                    Nickname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -187,12 +215,6 @@ namespace RainFramework.Repository.Migrations
                 column: "UserAuthsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SysMenus_Name",
-                table: "SysMenus",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SysMenus_ParentId",
                 table: "SysMenus",
                 column: "ParentId");
@@ -213,6 +235,9 @@ namespace RainFramework.Repository.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppConfigs");
+
             migrationBuilder.DropTable(
                 name: "RoleSysMenu");
 

@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RainFramework.AspNetCore;
@@ -26,7 +27,30 @@ namespace Demo.Api
                 //空值处理
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
-            builder.UseRainFrameworkCore(Serilog.Events.LogEventLevel.Information).Run();
+
+            var dbConnectString = builder.Configuration.GetConnectionString("MySql");
+            var version = "8.0.33-mysql";
+
+            builder.Services.AddDbContext<WMSDBContext>(
+            options =>
+                {
+                    options.UseMySql(dbConnectString, ServerVersion.Parse(version),
+                   optionsBuilder => optionsBuilder.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null).UseNewtonsoftJson());
+                    //打印sql参数
+                    options.EnableSensitiveDataLogging();
+                    options.EnableDetailedErrors();
+                });
+
+            var app = builder.UseRainFrameworkCore<WMSDBContext>(Serilog.Events.LogEventLevel.Information);
+
+            if (app.Environment.IsDevelopment())
+            {
+                using var scope = app.Services.CreateScope();
+            }
+            app.Run();
         }
     }
 }

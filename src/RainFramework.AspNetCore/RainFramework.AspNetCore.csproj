@@ -21,12 +21,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
-    <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
+    <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
   </ItemGroup>
 
 

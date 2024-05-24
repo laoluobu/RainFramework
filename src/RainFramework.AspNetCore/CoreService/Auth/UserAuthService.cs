@@ -9,13 +9,13 @@ using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class UserAuthService : CrudService<RFDBContext, UserAuth>, IUserAuthService
+    internal class UserAuthService<TDbContext> : CrudService<RFDBContext, UserAuth>, IUserAuthService where TDbContext : RFDBContext
     {
         private readonly IJWTService jWTService;
         private readonly IMapper mapper;
         private readonly IRoleService roleService;
 
-        public UserAuthService(RFDBContext daseDBContext, IJWTService jWTService, IMapper mapper
+        public UserAuthService(TDbContext daseDBContext, IJWTService jWTService, IMapper mapper
             , IRoleService roleService) : base(daseDBContext)
         {
             this.jWTService = jWTService;

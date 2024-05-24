@@ -9,11 +9,11 @@ using RainFramework.Repository.Entity;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class MenuService : CrudService<RFDBContext, SysMenu>, IMenuService
+    internal class MenuService<TDbContext> : CrudService<RFDBContext, SysMenu>, IMenuService where TDbContext : RFDBContext
     {
         private readonly IMapper mapper;
 
-        public MenuService(RFDBContext daseDBContext, IMapper mapper) : base(daseDBContext)
+        public MenuService(TDbContext daseDBContext, IMapper mapper) : base(daseDBContext)
         {
             this.mapper = mapper;
         }

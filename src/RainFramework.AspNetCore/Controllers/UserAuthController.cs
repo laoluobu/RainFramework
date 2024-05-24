@@ -10,6 +10,7 @@ using static RainFramework.Common.Moudel.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
+    [Route("api/[controller]/")]
     [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
     public class UserAuthController : CrudControllerBase<UserAuth>
     {

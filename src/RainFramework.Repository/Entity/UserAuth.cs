@@ -24,7 +24,7 @@ public class UserAuth : EntityBase
     /// 用户登录ip
     /// </summary>
     [MaxLength(50)]
-    public string IpAddress { get; set; } = null!;
+    public string? IpAddress { get; set; }
 
     /// <summary>
     /// 上次登录时间

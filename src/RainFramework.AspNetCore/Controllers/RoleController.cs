@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace RainFramework.AspNetCore.Controllers
 {
+    [Route("api/[controller]/")]
     [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
     public class RoleController : CrudControllerBase<Role>
     {
