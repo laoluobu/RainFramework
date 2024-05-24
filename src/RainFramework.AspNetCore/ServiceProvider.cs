@@ -37,12 +37,12 @@ namespace RainFramework.AspNetCore
 
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"), builder.Configuration["Mysql.Version"])
+                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql")!, builder.Configuration["Mysql.Version"])
                             .AddTransient<IUserAuthService, UserAuthService>()
                             .AddTransient<IUserInfoService, UserInfoService>()
                             .AddTransient<IMenuService, MenuService>()
                             .AddTransient<IRoleService, RoleService>()
-                            .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>())
+                            .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>()!)
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
