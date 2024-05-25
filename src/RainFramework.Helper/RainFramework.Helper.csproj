@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<Authors>Andy</Authors>
+	<Version>1.0.0</Version>
+	<Description>RF Helper</Description>
   </PropertyGroup>
 
 </Project>

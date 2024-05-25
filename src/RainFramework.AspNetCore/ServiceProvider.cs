@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,14 +8,17 @@ using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
 using RainFramework.Repository;
+using RainFramework.Repository.DBContext;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
+using System.Security.Claims;
 
 namespace RainFramework.AspNetCore
 {
     public static class ServiceProvider
     {
-        public static WebApplication UseRainFrameworkCore(this WebApplicationBuilder builder, params Type[] profileAssemblyMarkerTypes)
+        public static WebApplication UseRainFrameworkCore<TDbContext> (this WebApplicationBuilder builder, LogEventLevel httpRequestLogL, params Type[] profileAssemblyMarkerTypes) where TDbContext : RFDBContext
         {
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.BaseType == typeof(Profile)).ToArray();
 
@@ -32,15 +33,17 @@ namespace RainFramework.AspNetCore
 #endif
             builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
+
             builder.Services.AddSwagger()
+
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            .AddBaseDBContext(builder.Configuration.GetConnectionString("MySql"), builder.Configuration["Mysql.Version"])
-                            .AddTransient<IUserAuthService, UserAuthService>()
-                            .AddTransient<IUserInfoService, UserInfoService>()
-                            .AddTransient<IMenuService, MenuService>()
-                            .AddTransient<IRoleService, RoleService>()
-                            .AddRFMemoryCache(builder.Configuration.GetValue<int>("MemoryCache.SizeLimit"))
+                            //.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql")!, builder.Configuration["Mysql.Version"])
+                            .AddTransient<IUserAuthService, UserAuthService<TDbContext>>()
+                            .AddTransient<IUserInfoService, UserInfoService<TDbContext>>()
+                            .AddTransient<IMenuService, MenuService<TDbContext>>()
+                            .AddTransient<IRoleService, RoleService<TDbContext>>()
+                            .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>()!)
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
@@ -50,7 +53,7 @@ namespace RainFramework.AspNetCore
              {
                  option.MessageTemplate = "[ApiOperate] User {UserName} ClientIp {ClientIp} " + option.MessageTemplate;
 
-                 option.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;
+                 option.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Information;
 
                  option.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                  {

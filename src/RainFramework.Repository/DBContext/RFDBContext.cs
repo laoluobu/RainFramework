@@ -6,21 +6,21 @@ namespace RainFramework.Repository.DBContext;
 /// <summary>
 /// 框架共用层DBContext
 /// </summary>
-public class RFDBContext : DbContext
+public abstract class RFDBContext : DbContext
 {
-    public RFDBContext(DbContextOptions<RFDBContext> options) : base(options)
+    public RFDBContext(DbContextOptions options) : base(options)
     {
     }
 
-    public DbSet<Role> Roles { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
-    public DbSet<UserAuth> UserAuths { get; set; }
+    public virtual DbSet<UserAuth> UserAuths { get; set; }
 
-    public DbSet<UserInfo> UserInfos { get; set; }
+    public virtual DbSet<UserInfo> UserInfos { get; set; }
 
-    public DbSet<SysMenu> SysMenus { get; set; }
+    public virtual DbSet<SysMenu> SysMenus { get; set; }
 
-    public DbSet<AppConfig> AppConfigs { get; set; }
+    public virtual DbSet<AppConfig> AppConfigs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,24 +32,12 @@ public class RFDBContext : DbContext
         modelBuilder.Entity<Role>(Roles =>
         {
             Roles.HasIndex(Role => Role.RoleName).IsUnique();
-            Roles.Property(Role => Role.CreateTime).ValueGeneratedOnAdd();
-            Roles.Property(Role => Role.UpdateTime).ValueGeneratedOnUpdate();
         });
 
         //UserAuth Table
         modelBuilder.Entity<UserAuth>(UserAuth =>
         {
             UserAuth.HasIndex(UserAuth => UserAuth.Username).IsUnique();
-            UserAuth.Property(UserAuth=>UserAuth.CreateTime).ValueGeneratedOnAdd();
-            UserAuth.Property(UserAuth=>UserAuth.UpdateTime).ValueGeneratedOnUpdate();
-        });
-
-
-        //UserInfo Table
-        modelBuilder.Entity<UserInfo>(UserInfo =>
-        {
-            UserInfo.Property(UserInfo => UserInfo.CreateTime).ValueGeneratedOnAdd();
-            UserInfo.Property(UserInfo => UserInfo.UpdateTime).ValueGeneratedOnUpdate();
         });
     }
 }

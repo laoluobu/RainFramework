@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="RainWPF.Controls.PropertyViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:RainWPF.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="50"
+    d:DesignWidth="150"
+    Background="White"
+    mc:Ignorable="d">
+    <Grid VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="60*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            Foreground="{Binding PropertyNameColor, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+            Text="{Binding PropertyName, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}" />
+        <StackPanel Grid.Column="2" Orientation="Horizontal">
+            <TextBlock
+                HorizontalAlignment="Left"
+                Foreground="{Binding ValueColor, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Text="{Binding Value, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}" />
+
+            <TextBlock
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                Foreground="{Binding ValueColor1, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Text="{Binding Value1, RelativeSource={RelativeSource AncestorType={x:Type local:PropertyViewer}}}"
+                Visibility="{Binding Text, RelativeSource={RelativeSource self}, Converter={StaticResource Object2VisibilityConverter}}" />
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

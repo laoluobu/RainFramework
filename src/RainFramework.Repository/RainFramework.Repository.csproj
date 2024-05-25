@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.Common\RainFramework.Common.csproj" />
+    <ProjectReference Include="..\RainFramework.EFCore\RainFramework.EFCore.Mysql.csproj" />
   </ItemGroup>
 
 </Project>
