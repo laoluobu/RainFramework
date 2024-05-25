@@ -1,18 +1,16 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using System.Security.Claims;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
-using RainFramework.Repository;
 using RainFramework.Repository.DBContext;
 using Serilog;
 using Serilog.Events;
-using System.Reflection;
-using System.Security.Claims;
 
 namespace RainFramework.AspNetCore
 {
@@ -38,7 +36,6 @@ namespace RainFramework.AspNetCore
 
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            //.AddBaseDBContext(builder.Configuration.GetConnectionString("MySql")!, builder.Configuration["Mysql.Version"])
                             .AddTransient<IUserAuthService, UserAuthService<TDbContext>>()
                             .AddTransient<IUserInfoService, UserInfoService<TDbContext>>()
                             .AddTransient<IMenuService, MenuService<TDbContext>>()
