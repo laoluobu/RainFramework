@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RainFramework.Repository.Entity;
+using RainFramework.Model.Entities;
 
-namespace RainFramework.Repository.DBContext;
+namespace RainFramework.Dao;
 
 /// <summary>
 /// 框架共用层DBContext
@@ -18,7 +18,7 @@ public abstract class RFDBContext : DbContext
 
     public virtual DbSet<UserInfo> UserInfos { get; set; }
 
-    public virtual DbSet<SysMenu> SysMenus { get; set; }
+    public virtual DbSet<Menu> Menus { get; set; }
 
     public virtual DbSet<AppConfig> AppConfigs { get; set; }
 
@@ -31,7 +31,7 @@ public abstract class RFDBContext : DbContext
         //Roles Table
         modelBuilder.Entity<Role>(Roles =>
         {
-            Roles.HasIndex(Role => Role.RoleName).IsUnique();
+            Roles.HasIndex(Role => Role.Name).IsUnique();
         });
 
         //UserAuth Table

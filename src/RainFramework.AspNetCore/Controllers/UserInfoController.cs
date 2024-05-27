@@ -5,14 +5,14 @@ using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Configurer;
-using RainFramework.Repository.Entity;
+using RainFramework.Model.Entities;
 using System.Data;
-using static RainFramework.Common.Moudel.VO.ResultTool;
+using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
     [Route("api/[controller]/")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASICS))]
     public class UserInfoController : CrudControllerBase<UserInfo>
     {
         private IUserInfoService userInfoService;

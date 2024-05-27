@@ -2,14 +2,15 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RainFramework.AspNetCore.Model.VO;
-using RainFramework.Common.Base;
-using RainFramework.Common.CoreException;
-using RainFramework.Repository.DBContext;
-using RainFramework.Repository.Entity;
+using RainFramework.Common.Exceptions;
+using RainFramework.Dao;
+using RainFramework.EFCore.Mysql.Base;
+using RainFramework.Model.Constant;
+using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
-    internal class MenuService<TDbContext> : CrudService<RFDBContext, SysMenu>, IMenuService where TDbContext : RFDBContext
+    internal class MenuService<TDbContext> : CrudService<RFDBContext, Menu>, IMenuService where TDbContext : RFDBContext
     {
         private readonly IMapper mapper;
 
@@ -18,47 +19,68 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<SysMenu>> FindEenuByRoleName(string RoleName)
+        public async Task<List<Menu>> FindMenuByRoleName(string RoleName)
         {
-            var rootMenus = await FindRoleMenus(RoleName);
-            return rootMenus;
-        }
+            var orderBy = dbSet.OrderBy(menu => menu.OrderNum);
 
-        private async Task<List<SysMenu>> FindRoleMenus(string RoleName)
-        {
-            var root = dbSet.OrderBy(menu => menu.OrderNum).Where(menu => menu.Roles.Any(role => role.RoleName == RoleName) && menu.ParentId == null).ToList();
-            await LoopLoadMenu(root, RoleName);
+            IQueryable<Menu> root;
+
+            if (RoleName == RoleConst.ADMINISTRATOR)
+            {
+                root = orderBy.Where(menu => menu.ParentId == null);
+            }
+            else
+            {
+                root = orderBy.Where(menu => menu.Roles.Any(role => role.Name == RoleName) && menu.ParentId == null);
+            }
+            await LoopLoadMenu(root.ToList(), RoleName);
             return root.ToList();
         }
 
-        private async Task LoopLoadMenu(List<SysMenu> menus, string? RoleName)
+        private async Task LoopLoadMenu(List<Menu> menus, string? roleName)
         {
-            if (!menus.Any())
+            if (menus.Count == 0)
+            {
                 return;
+            }
             foreach (var menu in menus)
             {
                 var entry = dbContext.Entry(menu).Collection(root => root.Children);
-                if (RoleName == null)
+                if (roleName == null)
                 {
                     await entry.LoadAsync();
                     await LoopLoadMenu(menu.Children, null);
                 }
-                await entry.Query().OrderBy(menu => menu.OrderNum).Where(menu => menu.Roles.Any(roles => roles.RoleName == RoleName)).LoadAsync();
-                await LoopLoadMenu(menu.Children, RoleName);
+                if (roleName == RoleConst.ADMINISTRATOR)
+                {
+                    await entry.Query().OrderBy(menu => menu.OrderNum).LoadAsync();
+                }
+                else
+                {
+                    await entry.Query().OrderBy(menu => menu.OrderNum).Where(menu => menu.Roles.Any(roles => roles.Name == roleName)).LoadAsync();
+                }
+                await LoopLoadMenu(menu.Children, roleName);
             }
         }
 
-        public async Task<IEnumerable<SysMenu>> FindEenuByRoleNames(IEnumerable<string> RoleNames)
+        public async Task<IEnumerable<Menu>> FindMenuByRoleNames(IEnumerable<string> roleNames)
         {
-            if (RoleNames == null || !RoleNames.Any())
+            if (roleNames == null || !roleNames.Any())
             {
-                throw new ArgumentNullException(nameof(RoleNames));
+                throw new ArgumentNullException(nameof(roleNames));
             }
-            var userEmunes = new List<SysMenu>();
-            foreach (var roleName in RoleNames)
+            var userEmunes = new List<Menu>();
+            if (roleNames.Contains(RoleConst.ADMINISTRATOR))
             {
-                var emuns = await FindEenuByRoleName(roleName);
-                userEmunes.AddRange(emuns);
+                userEmunes = await FindMenuByRoleName(RoleConst.ADMINISTRATOR);
+            }
+            else
+            {
+                foreach (var roleName in roleNames)
+                {
+                    var emuns = await FindMenuByRoleName(roleName);
+                    userEmunes.AddRange(emuns);
+                }
             }
             var distinctItems = userEmunes.OrderBy(menu => menu.OrderNum).GroupBy(x => x.Id).Select(y => y.First());
             return distinctItems;
@@ -68,7 +90,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         {
             var root = dbSet.OrderBy(menu => menu.OrderNum).Where(menu => menu.ParentId == null).ToList();
             await LoopLoadMenu(root, null);
-            return mapper.Map<List<SysMenu>, List<MenuVO>>(root);
+            return mapper.Map<List<Menu>, List<MenuVO>>(root);
         }
 
         public async Task DeleteMenuById(int id)

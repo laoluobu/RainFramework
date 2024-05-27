@@ -1,18 +1,19 @@
-﻿using RainFramework.EFCore.Base;
+﻿using RainFramework.Model.Entities;
 
-namespace RainFramework.Common.Base
+namespace RainFramework.EFCore.Mysql
 {
     public interface ICrudService<TEntity> where TEntity : EntityBase
     {
         Task AddAsync(TEntity entity);
 
         Task AddRangeAsync(IEnumerable<TEntity> entities);
+        Task<bool> AnyAsync();
 
         /// <summary>
         /// 查找全表
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity?>> FindAll();
+        Task<IEnumerable<TEntity?>> FindAllAsync();
 
         /// <summary>
         /// 根据主键查找实体

@@ -5,10 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
-    <Version>1.0.48</Version>
-    <Description>RF 系统仓储层</Description>
+    <Version>1.0.0</Version>
+    <Description>RF Dao</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.Common\RainFramework.Common.csproj" />
     <ProjectReference Include="..\RainFramework.EFCore\RainFramework.EFCore.Mysql.csproj" />
+    <ProjectReference Include="..\RainFramework.Model\RainFramework.Model.csproj" />
   </ItemGroup>
 
 </Project>

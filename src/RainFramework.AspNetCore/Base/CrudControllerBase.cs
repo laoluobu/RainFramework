@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RainFramework.Common.Base;
-using RainFramework.EFCore.Base;
-using static RainFramework.Common.Moudel.VO.ResultTool;
+using RainFramework.EFCore.Mysql;
+using RainFramework.Model.Entities;
+using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Base
 {
@@ -35,7 +35,7 @@ namespace RainFramework.AspNetCore.Base
         [HttpGet, Route("all")]
         public async Task<ResultVO<IEnumerable<TEntity?>>> FindAllAsync()
         {
-            var entity = await crudService.FindAll();
+            var entity = await crudService.FindAllAsync();
             return Success(entity);
         }
 

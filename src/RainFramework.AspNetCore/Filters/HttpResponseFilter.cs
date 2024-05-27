@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using RainFramework.Common.CoreException;
-using RainFramework.Common.Moudel.VO;
+using RainFramework.Common.Exceptions;
+using RainFramework.Model.VO;
 
 namespace RainFramework.AspNetCore.Filters
 {

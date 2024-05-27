@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RainFramework.Efcore.Exceptions;
-using RainFramework.EFCore.Base;
+using RainFramework.Common.Exceptions;
+using RainFramework.Model.Entities;
 
-namespace RainFramework.Common.Base
+namespace RainFramework.EFCore.Mysql.Base
 {
     public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
     {
@@ -30,7 +30,7 @@ namespace RainFramework.Common.Base
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await dbSet.AddRangeAsync(entities);
-            await dbContext.SaveChangesAsync();      
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task RemoveAsync(TEntity entity)
@@ -50,10 +50,16 @@ namespace RainFramework.Common.Base
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity?>> FindAll()
+        public async Task<IEnumerable<TEntity?>> FindAllAsync()
         {
             return await dbSet.AsNoTracking().ToListAsync();
         }
+
+        public async Task<bool> AnyAsync()
+        {
+            return await dbSet.AnyAsync();
+        }
+
     }
 
 }

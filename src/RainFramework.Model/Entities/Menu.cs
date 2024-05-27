@@ -1,23 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json;
-using RainFramework.Common.Base;
-using RainFramework.EFCore.Base;
 
-namespace RainFramework.Repository.Entity
+namespace RainFramework.Model.Entities
 {
     /// <summary>
     /// 系统菜单
     /// </summary>
-    public class SysMenu : EntityBase
+    public class Menu : EntityBase
     {
 
         /// <summary>
         /// 路由路径
         /// </summary>
         [MaxLength(100)]
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         /// <summary>
         /// 菜单名称
@@ -34,13 +30,12 @@ namespace RainFramework.Repository.Entity
         /// <summary>
         /// 可用角色
         /// </summary>
-        [JsonIgnore]
         public List<Role> Roles { get; set; } = new();
 
         /// <summary>
         /// 父菜单
         /// </summary>
-        public SysMenu? Parent { get; set; }
+        public Menu? Parent { get; set; }
 
         /// <summary>
         /// 父菜单ID
@@ -50,10 +45,10 @@ namespace RainFramework.Repository.Entity
         /// <summary>
         /// 子菜单
         /// </summary>
-        public List<SysMenu> Children { get; set; } = new();
+        public List<Menu> Children { get; set; } = new();
 
         /// <summary>
-        /// 是否显示
+        /// 是否隐藏
         /// </summary>
         public bool Hidden { get; set; }
 

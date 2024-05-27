@@ -24,9 +24,9 @@ namespace Demo.Api.Migrations
                     IsShowTagsView = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsFixedHeader = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsShowLogo = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
@@ -37,28 +37,7 @@ namespace Demo.Api.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
             migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
-
-            migrationBuilder.CreateTable(
-                name: "SysMenus",
+                name: "Menus",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -74,19 +53,40 @@ namespace Demo.Api.Migrations
                     ParentId = table.Column<int>(type: "int", nullable: true),
                     Hidden = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     OrderNum = table.Column<int>(type: "int", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SysMenus", x => x.Id);
+                    table.PrimaryKey("PK_Menus", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SysMenus_SysMenus_ParentId",
+                        name: "FK_Menus_Menus_ParentId",
                         column: x => x.ParentId,
-                        principalTable: "SysMenus",
+                        principalTable: "Menus",
                         principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
@@ -104,9 +104,9 @@ namespace Demo.Api.Migrations
                     IpAddress = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LastLoginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
@@ -117,7 +117,7 @@ namespace Demo.Api.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
             migrationBuilder.CreateTable(
-                name: "RoleSysMenu",
+                name: "MenuRole",
                 columns: table => new
                 {
                     RolesId = table.Column<int>(type: "int", nullable: false),
@@ -125,17 +125,17 @@ namespace Demo.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleSysMenu", x => new { x.RolesId, x.SysMenusId });
+                    table.PrimaryKey("PK_MenuRole", x => new { x.RolesId, x.SysMenusId });
                     table.ForeignKey(
-                        name: "FK_RoleSysMenu_Roles_RolesId",
-                        column: x => x.RolesId,
-                        principalTable: "Roles",
+                        name: "FK_MenuRole_Menus_SysMenusId",
+                        column: x => x.SysMenusId,
+                        principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoleSysMenu_SysMenus_SysMenusId",
-                        column: x => x.SysMenusId,
-                        principalTable: "SysMenus",
+                        name: "FK_MenuRole_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -175,14 +175,14 @@ namespace Demo.Api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserAuthId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
+                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nickname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_0900_ai_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDisable = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间")
+                    CreatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间")
+                    UpdatedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
@@ -199,25 +199,25 @@ namespace Demo.Api.Migrations
                 .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_RoleName",
-                table: "Roles",
-                column: "RoleName",
-                unique: true);
+                name: "IX_MenuRole_SysMenusId",
+                table: "MenuRole",
+                column: "SysMenusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleSysMenu_SysMenusId",
-                table: "RoleSysMenu",
-                column: "SysMenusId");
+                name: "IX_Menus_ParentId",
+                table: "Menus",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roles_Name",
+                table: "Roles",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleUserAuth_UserAuthsId",
                 table: "RoleUserAuth",
                 column: "UserAuthsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SysMenus_ParentId",
-                table: "SysMenus",
-                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAuths_Username",
@@ -239,7 +239,7 @@ namespace Demo.Api.Migrations
                 name: "AppConfigs");
 
             migrationBuilder.DropTable(
-                name: "RoleSysMenu");
+                name: "MenuRole");
 
             migrationBuilder.DropTable(
                 name: "RoleUserAuth");
@@ -248,7 +248,7 @@ namespace Demo.Api.Migrations
                 name: "UserInfos");
 
             migrationBuilder.DropTable(
-                name: "SysMenus");
+                name: "Menus");
 
             migrationBuilder.DropTable(
                 name: "Roles");

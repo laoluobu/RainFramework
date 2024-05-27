@@ -1,4 +1,4 @@
-﻿using RainFramework.Repository.Entity;
+﻿using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.Model.VO
 {

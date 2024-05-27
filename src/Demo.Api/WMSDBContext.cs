@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RainFramework.Repository.DBContext;
+using RainFramework.Dao;
 
 namespace Demo.Api
 {

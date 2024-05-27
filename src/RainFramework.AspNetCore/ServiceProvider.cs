@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Cahce;
 using RainFramework.Common.Configurer;
-using RainFramework.Repository.DBContext;
+using RainFramework.Dao;
 using Serilog;
 using Serilog.Events;
 

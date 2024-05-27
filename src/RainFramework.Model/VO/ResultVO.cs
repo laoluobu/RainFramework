@@ -1,4 +1,4 @@
-﻿namespace RainFramework.Common.Moudel.VO
+﻿namespace RainFramework.Model.VO
 {
     public class ResultTool
     {

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RainFramework.EFCore.Base;
 
-namespace RainFramework.Repository.Entity;
+namespace RainFramework.Model.Entities;
 
 public class UserInfo : EntityBase
 {
@@ -12,7 +11,7 @@ public class UserInfo : EntityBase
     /// 邮箱
     /// </summary>
     [MaxLength(50)]
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; } = null!;
 
     /// <summary>
     /// 用户昵称

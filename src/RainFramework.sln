@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.AspNetCore", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Common", "RainFramework.Common\RainFramework.Common.csproj", "{65412D10-8420-4264-AEFA-106C0D4112F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Repository", "RainFramework.Repository\RainFramework.Repository.csproj", "{B04CEFB6-FCDF-4FF9-A385-B0724D553E40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Dao", "RainFramework.Repository\RainFramework.Dao.csproj", "{B04CEFB6-FCDF-4FF9-A385-B0724D553E40}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.Api", "Demo.Api\Demo.Api.csproj", "{795A5E8B-6FFC-447F-94D6-1F4FAF93484D}"
 EndProject
@@ -40,9 +40,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainWPF.Serilog", "RainWPF.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainWPF.Abstractions", "RainWPF.Abstractions\RainWPF.Abstractions.csproj", "{8F647B69-4BB7-4F7D-971A-F60AF56C7614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.EFCore.Mysql", "RainFramework.EFCore\RainFramework.EFCore.Mysql.csproj", "{081BF6F3-77F1-4631-A450-406A9B793B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.EFCore.Mysql", "RainFramework.EFCore\RainFramework.EFCore.Mysql.csproj", "{081BF6F3-77F1-4631-A450-406A9B793B63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dao", "Dao", "{B1842046-487E-4EC5-A42C-4F6BB4B4202E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Model", "RainFramework.Model\RainFramework.Model.csproj", "{06E43D93-89AA-4CE1-BC8A-46306B17E245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +108,10 @@ Global
 		{081BF6F3-77F1-4631-A450-406A9B793B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{081BF6F3-77F1-4631-A450-406A9B793B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{081BF6F3-77F1-4631-A450-406A9B793B63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{52062EDE-0B00-4C67-9A6C-93BDC6555E64} = {46818926-75D5-479C-862B-DD7F10B9E53B}
 		{8F647B69-4BB7-4F7D-971A-F60AF56C7614} = {46818926-75D5-479C-862B-DD7F10B9E53B}
 		{081BF6F3-77F1-4631-A450-406A9B793B63} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
+		{06E43D93-89AA-4CE1-BC8A-46306B17E245} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B149F34-D9A3-4604-BCA2-78BAFC4C4C9F}

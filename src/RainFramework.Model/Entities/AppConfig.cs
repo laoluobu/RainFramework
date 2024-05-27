@@ -1,6 +1,4 @@
-﻿using RainFramework.EFCore.Base;
-
-namespace RainFramework.Repository.Entity
+﻿namespace RainFramework.Model.Entities
 {
     /// <summary>
     /// UI 设置

@@ -1,21 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Common.Configurer;
-using RainFramework.Common.Moudel.VO;
-using static RainFramework.Common.Moudel.VO.ResultTool;
+using RainFramework.Model.VO;
+using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASICS))]
     public class LoginController : ControllerBase
     {
         private readonly IUserAuthService userAuthServices;
+        private readonly ILogger<LoginController> logger;
 
-        public LoginController(IUserAuthService userAuthServices)
+        public LoginController(IUserAuthService userAuthServices, ILogger<LoginController> logger)
         {
             this.userAuthServices = userAuthServices;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -26,12 +29,16 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPost]
         public async Task<ResultVO<string>> Login(UserVO userVO)
         {
-            var token = await userAuthServices.LoginService(userVO);
-            if(string.IsNullOrEmpty(token))
+            try
             {
+                var token = await userAuthServices.LoginService(userVO);
+                return Success(token);
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Login Err: {Message}", e.Message);
                 return TFail("User name or password error!");
             }
-            return Success(token);
         }
     }
 }

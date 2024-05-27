@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using RainFramework.Common.Base;
-using RainFramework.Common.CoreException;
-using RainFramework.Repository.DBContext;
-using RainFramework.Repository.Entity;
-using System.Data;
-using static RainFramework.Repository.DBContext.RFDBContext;
+﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
+using RainFramework.Common.Exceptions;
+using RainFramework.Dao;
+using RainFramework.EFCore.Mysql.Base;
+using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
@@ -19,11 +17,11 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public async Task<Role?> FindRoleByName(string name)
         {
-            return await dbSet.SingleOrDefaultAsync(role => role.RoleName == name);
+            return await dbSet.SingleOrDefaultAsync(role => role.Name == name);
         }
         public IEnumerable<Role> FindMutilRolesByRoleName(string rolename)
         {
-            return dbContext.Roles.Where(p => p.RoleName.Contains(rolename)).ToArray();
+            return dbContext.Roles.Where(p => p.Name.Contains(rolename)).ToArray();
         }
 
 
@@ -48,11 +46,11 @@ namespace RainFramework.AspNetCore.CoreService.Auth
         {
             var role = await dbSet.Include(role => role.SysMenus).SingleAsync(role => role.Id == roleId);
 
-            List<SysMenu> sysMenus = new List<SysMenu>();
+            List<Menu> sysMenus = new List<Menu>();
 
             if (menuIds == null)
             {
-                role.SysMenus = new List<SysMenu>();
+                role.SysMenus = new List<Menu>();
                 await dbContext.SaveChangesAsync();
                 return;
             }

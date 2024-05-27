@@ -1,4 +1,4 @@
-﻿namespace RainFramework.Common.Moudel.DTO
+﻿namespace RainFramework.Model.DTO
 {
     /// <summary>
     /// 分页

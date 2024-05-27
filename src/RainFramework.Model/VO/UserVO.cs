@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RainFramework.Common.Moudel.VO
+namespace RainFramework.Model.VO
 {
     public class UserVO
     {

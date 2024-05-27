@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.Api.Migrations
 {
     [DbContext(typeof(WMSDBContext))]
-    [Migration("20240524092538_init")]
+    [Migration("20240527033829_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -25,7 +25,22 @@ namespace Demo.Api.Migrations
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.AppConfig", b =>
+            modelBuilder.Entity("MenuRole", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SysMenusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesId", "SysMenusId");
+
+                    b.HasIndex("SysMenusId");
+
+                    b.ToTable("MenuRole");
+                });
+
+            modelBuilder.Entity("RainFramework.Model.Entities.AppConfig", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,8 +48,7 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsFixedHeader")
                         .HasColumnType("tinyint(1)");
@@ -47,46 +61,14 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("UpdatedTime")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
                     b.ToTable("AppConfigs");
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
-
-                    b.Property<bool>("IsDisable")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("RoleName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<DateTime>("UpdatedTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleName")
-                        .IsUnique();
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+            modelBuilder.Entity("RainFramework.Model.Entities.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,8 +81,7 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Hidden")
                         .HasColumnType("tinyint(1)");
@@ -127,17 +108,16 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("UpdatedTime")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("SysMenus");
+                    b.ToTable("Menus");
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.UserAuth", b =>
+            modelBuilder.Entity("RainFramework.Model.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,8 +125,37 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDisable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("RainFramework.Model.Entities.UserAuth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("IpAddress")
                         .HasMaxLength(50)
@@ -162,8 +171,7 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("UpdatedTime")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -178,7 +186,7 @@ namespace Demo.Api.Migrations
                     b.ToTable("UserAuths");
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.UserInfo", b =>
+            modelBuilder.Entity("RainFramework.Model.Entities.UserInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,11 +194,9 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
@@ -204,8 +210,7 @@ namespace Demo.Api.Migrations
 
                     b.Property<DateTime>("UpdatedTime")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("UserAuthId")
                         .HasColumnType("int");
@@ -216,21 +221,6 @@ namespace Demo.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("UserInfos");
-                });
-
-            modelBuilder.Entity("RoleSysMenu", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SysMenusId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RolesId", "SysMenusId");
-
-                    b.HasIndex("SysMenusId");
-
-                    b.ToTable("RoleSysMenu");
                 });
 
             modelBuilder.Entity("RoleUserAuth", b =>
@@ -248,60 +238,60 @@ namespace Demo.Api.Migrations
                     b.ToTable("RoleUserAuth");
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+            modelBuilder.Entity("MenuRole", b =>
                 {
-                    b.HasOne("RainFramework.Repository.Entity.SysMenu", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("RainFramework.Repository.Entity.UserInfo", b =>
-                {
-                    b.HasOne("RainFramework.Repository.Entity.UserAuth", null)
-                        .WithOne("UserInfo")
-                        .HasForeignKey("RainFramework.Repository.Entity.UserInfo", "UserAuthId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RoleSysMenu", b =>
-                {
-                    b.HasOne("RainFramework.Repository.Entity.Role", null)
+                    b.HasOne("RainFramework.Model.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RainFramework.Repository.Entity.SysMenu", null)
+                    b.HasOne("RainFramework.Model.Entities.Menu", null)
                         .WithMany()
                         .HasForeignKey("SysMenusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RainFramework.Model.Entities.Menu", b =>
+                {
+                    b.HasOne("RainFramework.Model.Entities.Menu", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("RainFramework.Model.Entities.UserInfo", b =>
+                {
+                    b.HasOne("RainFramework.Model.Entities.UserAuth", null)
+                        .WithOne("UserInfo")
+                        .HasForeignKey("RainFramework.Model.Entities.UserInfo", "UserAuthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RoleUserAuth", b =>
                 {
-                    b.HasOne("RainFramework.Repository.Entity.Role", null)
+                    b.HasOne("RainFramework.Model.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RainFramework.Repository.Entity.UserAuth", null)
+                    b.HasOne("RainFramework.Model.Entities.UserAuth", null)
                         .WithMany()
                         .HasForeignKey("UserAuthsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.SysMenu", b =>
+            modelBuilder.Entity("RainFramework.Model.Entities.Menu", b =>
                 {
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("RainFramework.Repository.Entity.UserAuth", b =>
+            modelBuilder.Entity("RainFramework.Model.Entities.UserAuth", b =>
                 {
                     b.Navigation("UserInfo");
                 });

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using RainFramework.AspNetCore.Model.VO;
-using RainFramework.Common.Base;
-using RainFramework.Repository.DBContext;
-using RainFramework.Repository.Entity;
+using RainFramework.Dao;
+using RainFramework.EFCore.Mysql.Base;
+using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {

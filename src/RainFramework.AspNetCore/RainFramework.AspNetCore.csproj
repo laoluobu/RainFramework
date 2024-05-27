@@ -7,7 +7,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Andy</Authors>
-    <Version>1.0.497</Version>
+    <Version>1.1.0</Version>
 	<Description>RF 核心</Description>
 	<PackageReadmeFile></PackageReadmeFile>
   </PropertyGroup>
@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
-    <ProjectReference Include="..\RainFramework.Repository\RainFramework.Repository.csproj" />
+    <ProjectReference Include="..\RainFramework.Repository\RainFramework.Dao.csproj" />
   </ItemGroup>
 
 

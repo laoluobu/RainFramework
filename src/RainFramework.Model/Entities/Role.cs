@@ -1,9 +1,8 @@
-﻿#nullable disable
+﻿
 
 using System.ComponentModel.DataAnnotations;
-using RainFramework.EFCore.Base;
 
-namespace RainFramework.Repository.Entity;
+namespace RainFramework.Model.Entities;
 
 public class Role : EntityBase
 {
@@ -12,7 +11,7 @@ public class Role : EntityBase
     /// 角色名
     /// </summary>
     [MaxLength(50)]
-    public string RoleName { get; set; }
+    public string Name { get; set; } = null!;
 
     /// <summary>
     /// 是否禁用  0否 1是
@@ -28,5 +27,5 @@ public class Role : EntityBase
     /// <summary>
     /// 用户
     /// </summary>
-    public List<SysMenu> SysMenus { get; set; } = new();
+    public List<Menu> SysMenus { get; set; } = new();
 }

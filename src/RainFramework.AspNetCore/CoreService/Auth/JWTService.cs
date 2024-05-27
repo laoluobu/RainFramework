@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using RainFramework.Repository.Entity;
+using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {
@@ -19,7 +19,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
             foreach (var role in userAuth.Roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+                claims.Add(new Claim(ClaimTypes.Role, role.Name));
             }
             return CreateToken(claims);
         }

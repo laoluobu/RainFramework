@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RainFramework.EFCore.Base;
 
-namespace RainFramework.Repository.Entity;
+namespace RainFramework.Model.Entities;
 
 public class UserAuth : EntityBase
 {

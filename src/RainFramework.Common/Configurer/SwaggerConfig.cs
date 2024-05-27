@@ -61,6 +61,7 @@ namespace RainFramework.Common.Configurer
                     options.SwaggerEndpoint($"/swagger/{field.Name}/swagger.json", field.Name);
                 }
             });
+            
         }
     }
 }

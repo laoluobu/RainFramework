@@ -5,13 +5,14 @@ using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Configurer;
-using RainFramework.Repository.Entity;
-using static RainFramework.Common.Moudel.VO.ResultTool;
+using RainFramework.Model.Constant;
+using RainFramework.Model.Entities;
+using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
-    public class MenuController : CrudControllerBase<SysMenu>
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASICS))]
+    public class MenuController : CrudControllerBase<Menu>
     {
         private readonly IMenuService menuService;
 
@@ -25,9 +26,9 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("myself")]
-        public async Task<ResultVO<IEnumerable<SysMenu>>> GetCurrentUserMenus()
+        public async Task<ResultVO<IEnumerable<Menu>>> GetCurrentUserMenus()
         {
-            return Success(await menuService.FindEenuByRoleNames(RequestUser.Roles));
+            return Success(await menuService.FindMenuByRoleNames(RequestUser.Roles));
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete, Route("{id}"), Authorize(Roles = "Administrator")]
+        [HttpDelete, Route("{id}"), Authorize(Roles = RoleConst.ADMINISTRATOR)]
         public async Task<ResultVO> DeleteMenus(int id)
         {
             await menuService.DeleteMenuById(id);
@@ -59,7 +60,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="patchDoc"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
-        public async Task<ResultVO> UpdateMenus(int id, [FromBody] JsonPatchDocument<SysMenu> patchDoc)
+        public async Task<ResultVO> UpdateMenus(int id, [FromBody] JsonPatchDocument<Menu> patchDoc)
         {
             var sysMenu = await menuService.FindAsync(id);
             patchDoc.ApplyTo(sysMenu);

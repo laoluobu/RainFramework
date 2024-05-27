@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
-using RainFramework.Common.Base;
-using RainFramework.Common.Moudel.VO;
-using RainFramework.Repository.Entity;
+using RainFramework.EFCore.Mysql;
+using RainFramework.Model.Entities;
+using RainFramework.Model.VO;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {

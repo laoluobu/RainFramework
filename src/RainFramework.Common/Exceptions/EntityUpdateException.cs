@@ -1,4 +1,4 @@
-﻿namespace RainFramework.Efcore.Exceptions
+﻿namespace RainFramework.Common.Exceptions
 {
     public class EntityUpdateException : Exception
     {

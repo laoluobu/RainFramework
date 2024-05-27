@@ -1,5 +1,5 @@
-﻿using RainFramework.Common.Base;
-using RainFramework.Repository.Entity;
+﻿using RainFramework.EFCore.Mysql;
+using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth
 {

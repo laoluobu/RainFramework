@@ -5,13 +5,13 @@ using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Configurer;
-using RainFramework.Repository.Entity;
-using static RainFramework.Common.Moudel.VO.ResultTool;
+using RainFramework.Model.Entities;
+using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers
 {
     [Route("api/[controller]/")]
-    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASE))]
+    [ApiExplorerSettings(GroupName = nameof(ApiGroup.BASICS))]
     public class UserAuthController : CrudControllerBase<UserAuth>
     {
         private IUserAuthService userAuthService;
