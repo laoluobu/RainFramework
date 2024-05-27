@@ -23,7 +23,7 @@ namespace RainFramework.Dao
                 if (!await dbContext.Menus.AnyAsync())
                 {
                     await dbContext.Menus.AddRangeAsync(GetPreconfiguredUserMenu());
-                    await dbContext.SaveChangesAsync();
+                    
                 }
             }
             catch (Exception ex)

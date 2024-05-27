@@ -10,8 +10,6 @@ using RainFramework.Dao;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 builder.Services.AddControllers(options => options.Filters.Add<HttpResponseFilter>())
 .AddNewtonsoftJson(options =>
 {
@@ -56,7 +54,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
-    app.Run();
+app.Run();
 
 
