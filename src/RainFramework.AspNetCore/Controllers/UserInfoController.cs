@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.AspNetCore.Model.VO;
-using RainFramework.Common.Configurer;
 using RainFramework.Model.Entities;
+using RainFramework.Preconfigured.Configurer;
 using System.Data;
 using static RainFramework.Model.VO.ResultTool;
 

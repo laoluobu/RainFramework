@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace RainFramework.Common.Configurer
+namespace RainFramework.Preconfigured.Configurer
 {
     public static class SwaggerConfig
     {
@@ -21,12 +21,17 @@ namespace RainFramework.Common.Configurer
                 }
 
                 var directory = new DirectoryInfo(AppContext.BaseDirectory);
-                foreach (var file in directory.GetFiles())
+                foreach (var file in directory.GetFiles("*.xml"))
                 {
-                    if ((file.Name.StartsWith("RainFramework.") && file.Name.EndsWith(".xml")) || file.Name.EndsWith("Api.xml"))
+                    try
                     {
                         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, file.Name), true);
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Add Swagger Doc Err {file.Name} :{ex.Message}");
+                    }
+
                 }
                 //增加JWT Header
                 var scheme = new OpenApiSecurityScheme()
@@ -61,7 +66,7 @@ namespace RainFramework.Common.Configurer
                     options.SwaggerEndpoint($"/swagger/{field.Name}/swagger.json", field.Name);
                 }
             });
-            
+
         }
     }
 }

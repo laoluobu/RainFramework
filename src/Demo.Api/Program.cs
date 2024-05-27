@@ -54,6 +54,9 @@ if (app.Environment.IsDevelopment())
     var loggerFactory = scopeServices.GetRequiredService<ILoggerFactory>();
     await RFDbContextSeed.SeedAsync(wMSDBContext, loggerFactory.CreateLogger<WMSDBContext>(), 1);
 }
-app.Run();
+
+
+
+    app.Run();
 
 

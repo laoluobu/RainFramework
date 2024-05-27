@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RainFramework.AspNetCore.CoreService.Auth;
-using RainFramework.Common.Configurer;
 using RainFramework.Model.VO;
+using RainFramework.Preconfigured.Configurer;
 using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Controllers

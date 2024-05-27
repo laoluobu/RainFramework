@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace RainFramework.Common.Configurer
+namespace RainFramework.Preconfigured.Configurer
 {
     public static class CorsConfig
     {
@@ -14,7 +14,7 @@ namespace RainFramework.Common.Configurer
                            .SetPreflightMaxAge(TimeSpan.FromHours(5))
                            .AllowAnyHeader()
                            .AllowAnyMethod();
-                           
+
                 });
             });
         }

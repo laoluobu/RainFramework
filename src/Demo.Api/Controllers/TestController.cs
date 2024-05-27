@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RainFramework.Cahce;
-using RainFramework.Common.Configurer;
+using RainFramework.Preconfigured.Configurer;
 
 namespace Demo.Api.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace RainFramework.Common.Configurer
+﻿namespace RainFramework.Preconfigured.Configurer
 {
     public class ApiGroup
     {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 
-namespace RainFramework.Common.Configurer
+namespace RainFramework.Preconfigured.Configurer
 {
     public static class JwtConfig
     {
@@ -21,7 +21,7 @@ namespace RainFramework.Common.Configurer
                 {
                     ValidateIssuer = false,
 
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("11111111111111111111111111")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("111111ssDDDDDD11111111111111asdasdd111111asdasdas")),
 
                     ValidateAudience = false,
                 };

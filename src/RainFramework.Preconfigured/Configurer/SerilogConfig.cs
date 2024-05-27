@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Serilog;
 
-namespace RainFramework.Common.Configurer
+namespace RainFramework.Preconfigured.Configurer
 {
     public static class SerilogConfig
     {

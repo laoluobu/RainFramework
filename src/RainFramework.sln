@@ -44,7 +44,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.EFCore.Mysql"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dao", "Dao", "{B1842046-487E-4EC5-A42C-4F6BB4B4202E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Model", "RainFramework.Model\RainFramework.Model.csproj", "{06E43D93-89AA-4CE1-BC8A-46306B17E245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Model", "RainFramework.Model\RainFramework.Model.csproj", "{06E43D93-89AA-4CE1-BC8A-46306B17E245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Preconfigured", "RainFramework.Preconfigured\RainFramework.Preconfigured.csproj", "{53B18B15-BA76-41EB-9CBD-2708AD61D321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +114,10 @@ Global
 		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06E43D93-89AA-4CE1-BC8A-46306B17E245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,10 +3,10 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.AspNetCore.Base;
 using RainFramework.AspNetCore.CoreService.Auth;
-using RainFramework.Common.Configurer;
 using static RainFramework.Model.VO.ResultTool;
 using Microsoft.AspNetCore.JsonPatch;
 using RainFramework.Model.Entities;
+using RainFramework.Preconfigured.Configurer;
 
 namespace RainFramework.AspNetCore.Controllers
 {

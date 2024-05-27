@@ -37,7 +37,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
         public SymmetricSecurityKey GeneralKey()
         {
-            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes("11111111111111111111111111"));
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes("111111ssDDDDDD11111111111111asdasdd111111asdasdas"));
         }
     }
 }

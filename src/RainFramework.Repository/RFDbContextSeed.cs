@@ -7,7 +7,7 @@ namespace RainFramework.Dao
 {
     public class RFDbContextSeed
     {
-        public static async Task SeedAsync<TDbContext>(TDbContext dbContext, ILogger logger, int retry = 0) where TDbContext : RFDBContext
+        public  static async Task SeedAsync<TDbContext>(TDbContext dbContext, ILogger logger, int retry = 0) where TDbContext : RFDBContext
         {
             var retryForAvailability = retry;
             try
