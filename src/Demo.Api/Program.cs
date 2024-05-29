@@ -26,11 +26,10 @@ builder.Services.AddControllers(options => options.Filters.Add<HttpResponseFilte
 });
 
 var dbConnectString = builder.Configuration.GetConnectionString("MySql");
-var version = "8.0.33-mysql";
-
+var version = ServerVersion.AutoDetect(dbConnectString);
 builder.Services.AddDbContextPool<WMSDBContext>(options =>
 {
-    options.UseMySql(dbConnectString, ServerVersion.Parse(version),
+    options.UseMySql(dbConnectString, version,
        optionsBuilder => optionsBuilder.EnableRetryOnFailure(
         maxRetryCount: 5,
         maxRetryDelay: TimeSpan.FromSeconds(30),
@@ -50,7 +49,7 @@ if (app.Environment.IsDevelopment())
     var scopeServices = scope.ServiceProvider;
     var wMSDBContext = scopeServices.GetRequiredService<WMSDBContext>();
     var loggerFactory = scopeServices.GetRequiredService<ILoggerFactory>();
-    await RFDbContextSeed.SeedAsync(wMSDBContext, loggerFactory.CreateLogger<WMSDBContext>(), 1);
+    await RFDBContextSeed.SeedAsync(wMSDBContext, loggerFactory.CreateLogger<WMSDBContext>(), 1);
 }
 
 
