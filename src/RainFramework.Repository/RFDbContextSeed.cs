@@ -5,9 +5,17 @@ using RainFramework.Model.Entities;
 
 namespace RainFramework.Dao
 {
-    public class RFDbContextSeed
+    public class RFDBContextSeed
     {
-        public  static async Task SeedAsync<TDbContext>(TDbContext dbContext, ILogger logger, int retry = 0) where TDbContext : RFDBContext
+        /// <summary>
+        /// SeedAsynv
+        /// </summary>
+        /// <typeparam name="TDbContext"></typeparam>
+        /// <param name="dbContext"></param>
+        /// <param name="logger"></param>
+        /// <param name="retry"></param>
+        /// <returns>是否已经初始化</returns>
+        public static async Task<bool> SeedAsync<TDbContext>(TDbContext dbContext, ILogger logger, int retry = 0) where TDbContext : RFDBContext
         {
             var retryForAvailability = retry;
             try
@@ -23,8 +31,9 @@ namespace RainFramework.Dao
                 if (!await dbContext.Menus.AnyAsync())
                 {
                     await dbContext.Menus.AddRangeAsync(GetPreconfiguredUserMenu());
-                    
+                    return true;
                 }
+                return false;
             }
             catch (Exception ex)
             {

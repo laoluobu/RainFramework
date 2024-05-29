@@ -7,8 +7,11 @@ namespace Demo.Api
 
         public static async Task SeedAsnc(WMSDBContext context, ILogger logger, int retry)
         {
-            await RFDbContextSeed.SeedAsync(context, logger, retry);
-            await context.SaveChangesAsync();
+            if (await RFDBContextSeed.SeedAsync(context, logger, retry))
+            {
+                await context.SaveChangesAsync();
+            }
+
         }
     }
 }
