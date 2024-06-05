@@ -8,6 +8,5 @@ namespace RainWPF.Abstractions
 
         IDialogService DialogService { get; }
 
-        void Run();
     }
 }

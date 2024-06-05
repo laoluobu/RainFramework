@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RainWPF.Abstractions;
 using Serilog;
@@ -18,6 +17,7 @@ namespace RainWPF.Serilog
             {
                 logBuiler.ClearProviders();
                 logBuiler.AddSerilog();
+                
             });
             return builderBase;
         }

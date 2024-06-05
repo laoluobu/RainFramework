@@ -20,7 +20,6 @@ namespace RainWPF
 
         public IDialogService DialogService { get; private set; }
 
-        public Application Application { get; set; }
 
         private readonly CancellationTokenSource backgroundHostCTS = new();
 
@@ -28,7 +27,6 @@ namespace RainWPF
 
         public static string Environment => System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
 
-        private static bool isInstance;
 
         /// <summary>
         /// 构建WPFApp
@@ -36,31 +34,13 @@ namespace RainWPF
         /// <typeparam name="T"></typeparam>
         /// <param name="isMultiProgram">是否支持多开</param>
         /// <returns></returns>
-        public static RainWPFApplicationBuilder<T> CreateWPFAppBuilder<T>(bool isMultiProgram) where T : Application, new()
+        public static RainWPFApplicationBuilder CreateWPFAppBuilder(bool isMultiProgram)
         {
             if (!isMultiProgram)
             {
                 WPFHelper.NotAllowMultiProgram();
             }
-            return new RainWPFApplicationBuilder<T>(BuildConfiguration(), BuilderBasicsService());
-        }
-
-        /// <summary>
-        /// 构建WPFApp
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="isMultiProgram">是否支持多开</param>
-        /// <returns></returns>
-        public static RainWPFApplicationBuilder CreateWPFAppBuilder(Application application, bool isMultiProgram)
-        {
-            if (!isMultiProgram)
-            {
-                WPFHelper.NotAllowMultiProgram();
-            }
-            isInstance = true;
-            
-
-            return new RainWPFApplicationBuilder(application, BuildConfiguration(), BuilderBasicsService());
+            return new RainWPFApplicationBuilder(BuildConfiguration(), BuilderBasicsService());
         }
 
         private static ServiceCollection BuilderBasicsService()
@@ -75,29 +55,19 @@ namespace RainWPF
             return Services;
         }
 
-        internal RWPF(IServiceProvider serviceProvider, Application application, Type[] IgnoreStartService)
+        internal RWPF(IServiceProvider serviceProvider, Type[] IgnoreStartService)
         {
             ProxyServicesProvider = serviceProvider;
             ServicesProvider = serviceProvider;
             DialogService = ServicesProvider.GetRequiredService<IDialogService>();
             var loggerFactory = ServicesProvider.GetRequiredService<ILoggerFactory>();
             logger = loggerFactory.CreateLogger<RWPF>();
-            Application = application;
-            application.Exit += Application_Exit;
+            Application.Current.Exit += Application_Exit;
             UnhandledException();
             _ = StartHostingService(IgnoreStartService);
             ThreadPool.GetMaxThreads(out var workerThreads, out var completionPortThreads);
             logger.LogInformation("App Start ThreadPool MaxThreads: workerThreads={WorkerThreads} ,completionPortThreads={CompletionPortThreads}", workerThreads, completionPortThreads);
             logger.LogInformation("StartUp environment={Environment}", Environment);
-        }
-
-        public void Run()
-        {
-            if (isInstance)
-            {
-                return;
-            }
-            Application.Run();
         }
 
         private async Task StartHostingService(params Type[] IgnoreStartService)
@@ -126,7 +96,7 @@ namespace RainWPF
                 notificationService.ErrorGlobal("[Task] " + e.Exception.GetOriginalException().Message);
             };
             ///处理UI线程Exception
-            Application.DispatcherUnhandledException += (_, e) =>
+            Application.Current.DispatcherUnhandledException += (_, e) =>
             {
                 logger?.LogError("UI Exception: {GetOriginalException}", e.Exception.GetOriginalException());
                 notificationService.ErrorGlobal("[UI] " + e.Exception.Message);

@@ -15,11 +15,10 @@ namespace Demo
     {
         public App()
         {
-            var builder = RWPF.CreateWPFAppBuilder(Current, false);
+            var builder = RWPF.CreateWPFAppBuilder( false);
             builder.AddSerilog();
             builder.Services.AddSingleton<HomeVM>();
             var rwpf = builder.Build();
-            rwpf.Run();
             RegisterDialog(rwpf.ServicesProvider.GetRequiredService<IDialogService>());
         }
 
