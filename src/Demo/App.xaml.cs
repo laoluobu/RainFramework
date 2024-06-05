@@ -1,10 +1,9 @@
-﻿using Demo.ViewModel;
+﻿using System.Windows;
+using Demo.Dialogs;
+using Demo.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using RainWPF;
-using System.Windows;
 using RainWPF.Serilog;
-using Stocker.Helper.Dialog;
-using Demo.Dialogs;
 
 namespace Demo
 {
@@ -18,13 +17,8 @@ namespace Demo
             var builder = RWPF.CreateWPFAppBuilder( false);
             builder.AddSerilog();
             builder.Services.AddSingleton<HomeVM>();
-            var rwpf = builder.Build();
-            RegisterDialog(rwpf.ServicesProvider.GetRequiredService<IDialogService>());
-        }
-
-        private void RegisterDialog(IDialogService dialogService)
-        {
-            dialogService.Register<LoginDialogVM, LoginDialog>();
+            var app = builder.Build();
+            app.Dialogs.Register<LoginDialogVM, LoginDialog>();
         }
     }
 }
