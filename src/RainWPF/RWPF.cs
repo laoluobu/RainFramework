@@ -18,8 +18,7 @@ namespace RainWPF
 
         public IServiceProvider ServicesProvider { get; private set; }
 
-        public IDialogService DialogService { get; private set; }
-
+        public IDialogService Dialogs { get; private set; }
 
         private readonly CancellationTokenSource backgroundHostCTS = new();
 
@@ -59,7 +58,7 @@ namespace RainWPF
         {
             ProxyServicesProvider = serviceProvider;
             ServicesProvider = serviceProvider;
-            DialogService = ServicesProvider.GetRequiredService<IDialogService>();
+            Dialogs = ServicesProvider.GetRequiredService<IDialogService>();
             var loggerFactory = ServicesProvider.GetRequiredService<ILoggerFactory>();
             logger = loggerFactory.CreateLogger<RWPF>();
             Application.Current.Exit += Application_Exit;

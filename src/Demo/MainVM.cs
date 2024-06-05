@@ -5,40 +5,31 @@ using RainDesktop.ViewModel;
 
 namespace Demo
 {
-    public partial class MainVM : NavigationVM
+    public partial class MainVM : MainVMBase
     {
         [ObservableProperty]
-        private string? searchString2;
+        private string? searchString2 = string.Empty;
 
         [ObservableProperty]
-        private string userName = "";
+        private string userName = string.Empty;
 
         [ObservableProperty]
         private bool isOpenUserInfo;
 
-        [ObservableProperty]
-        private Menus currentMenu = null!;
 
-        
-
-        public List<Menus> Menus { get; set; } = new List<Menus>()
+        public MainVM()
         {
-
-            new Menus() { Name = "Home", MenuMeta=new MenuMeta() { DefaultIcon = "\xe8b9" },Path="/Pages/Home.xaml" },
-
-        };
+            MenusList = new List<MenusVM>()
+            {
+                new () { Name = "Home", MenuMeta=new MenuMetaVM() { DefaultIcon = "\xe8b9" },Path="/Pages/Home.xaml" },
+            };
+        }
 
         [RelayCommand]
         private void UpdateSearchString()
 
         {
             SearchString2 = DateTime.Now.ToString();
-        }
-
-        partial void OnCurrentMenuChanged(Menus value)
-        {
-            if (value.Path == null) return;
-            NavigationTo(value.Path);
         }
 
         [RelayCommand]
@@ -70,29 +61,5 @@ namespace Demo
         {
             IsOpenUserInfo = !IsOpenUserInfo;
         }
-    }
-
-    public class Menus
-    {
-        public string Name { get; set; } = null!;
-
-        public string Path { get; set; } = null!;
-
-        public bool IsHidden { get; set; }
-
-        public MenuMeta MenuMeta { get; set; }
-    }
-
-    public class MenuMeta
-    {
-        /// <summary>
-        /// 菜单图标
-        /// </summary>
-        public string? DefaultIcon { get; set; }
-
-        /// <summary>
-        /// 选中的图标
-        /// </summary>
-        public string? SelectedIcon { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace RainWPF.Abstractions
     {
         IServiceProvider ServicesProvider { get; }
 
-        IDialogService DialogService { get; }
+        IDialogService Dialogs { get; }
 
     }
 }

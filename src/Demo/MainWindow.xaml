@@ -30,7 +30,7 @@
             Grid.Column="0"
             Background="Red"
             MenuIconFontFamity="{StaticResource Icon1}"
-            MenuItems="{Binding Menus}"
+            MenuItems="{Binding MenusList}"
             MouseOverItemColor="CadetBlue"
             SelectItemColor="Gray"
             SelectedMenu="{Binding CurrentMenu}" />
