@@ -8,7 +8,6 @@ namespace RainFramework.Helper
         public static string ToMD5Str(string text)
         {
             using MD5 md5 = MD5.Create();
-
             byte[] bytes = Encoding.ASCII.GetBytes(text+"12x@#!#$!@$!$");
             byte[] hashBytes = md5.ComputeHash(bytes);
             StringBuilder sb = new();

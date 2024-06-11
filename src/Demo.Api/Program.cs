@@ -12,7 +12,6 @@ using RainFramework.Helper;
 
 
 var list = new List<bool>() { false, false, false };
-
 var value1 = list.AllTrue();
 var value2 = list.AnyTrue();
 Debug.Assert(!(value1 || value2), "AllTrue AnyTrue Error");
@@ -34,7 +33,6 @@ Debug.Assert(!(value31 || value41), "AnyFalse AllFalse Error");
 var list11 = new List<bool>() { false, true, true };
 var value111 = list11.AllTrue();
 Debug.Assert(!value111, "AllTrue Error");
-
 var value211 = list11.AnyTrue();
 Debug.Assert(!value111, "AnyTrue Error");
 var value311 = list11.AnyFalse();
