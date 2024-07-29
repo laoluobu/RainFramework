@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace RainFramework.EventBus
+namespace RainFramework.Mq
 {
     internal class SimpleBlockingMq<E>
     {

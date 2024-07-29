@@ -1,7 +1,6 @@
-﻿using RainFramework.Mq;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
-namespace RainFramework.EventBus
+namespace RainFramework.Mq
 {
     internal class SimpleMq<M> : ISimpleMq<M>
     {
@@ -58,7 +57,7 @@ namespace RainFramework.EventBus
 
         public IEnumerable<Queueinfo> QueryQueueinfos()
         {
-            var ququeInfos=new List<Queueinfo>();
+            var ququeInfos = new List<Queueinfo>();
             foreach (var item in queueMap)
             {
                 ququeInfos.Add(new Queueinfo() { QueueName = item.Key, Backlog = item.Value.Count() });

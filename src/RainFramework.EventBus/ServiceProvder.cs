@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RainFramework.EventBus;
 
 namespace RainFramework.Mq
 {
