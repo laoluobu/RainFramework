@@ -5,7 +5,7 @@ namespace RainFramework.Mq.DTO
     {
         public string Name { get; set; } = null!;
 
-        public object Context { private get; set; } = null!;
+        public object Context { get; set; } = null!;
 
         public DateTime CreationTime { get; } = DateTime.Now;
 
