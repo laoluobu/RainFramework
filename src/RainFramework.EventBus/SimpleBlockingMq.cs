@@ -10,5 +10,10 @@ namespace RainFramework.Mq
         {
             bc = new BlockingCollection<E>(backlog < 1 ? 1 : backlog);
         }
+
+        public void BasicPublish(string queueName, E message)
+        {
+            bc.Add(message);
+        }
     }
 }
