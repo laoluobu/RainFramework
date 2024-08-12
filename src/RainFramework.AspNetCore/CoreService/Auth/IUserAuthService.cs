@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
-using RainFramework.EFCore.Mysql;
+using RainFramework.EFCore;
 using RainFramework.Model.Entities;
 using RainFramework.Model.VO;
 

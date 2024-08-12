@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.Model.Entities
 {
@@ -58,6 +59,10 @@ namespace RainFramework.Model.Entities
         public int OrderNum { get; set; }
     }
 
+
+    /// <summary>
+    ///  标签
+    /// </summary>
     public class Meta
     {
         /// <summary>

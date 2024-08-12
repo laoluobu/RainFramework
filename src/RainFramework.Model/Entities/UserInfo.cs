@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.Model.Entities;
 

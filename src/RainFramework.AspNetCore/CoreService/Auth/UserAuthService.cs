@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Exceptions;
 using RainFramework.Dao;
-using RainFramework.EFCore.Mysql.Base;
+using RainFramework.EFCore.Base;
 using RainFramework.Model.Entities;
 using RainFramework.Model.VO;
 

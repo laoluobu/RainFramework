@@ -26,13 +26,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Cache", "Rain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Mq", "RainFramework.EventBus\RainFramework.Mq.csproj", "{F8860F70-3E04-4095-B21B-04D3A60439AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.EFCore.Mysql", "RainFramework.EFCore\RainFramework.EFCore.Mysql.csproj", "{081BF6F3-77F1-4631-A450-406A9B793B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.EFCore", "RainFramework.EFCore\RainFramework.EFCore.csproj", "{081BF6F3-77F1-4631-A450-406A9B793B63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dao", "Dao", "{B1842046-487E-4EC5-A42C-4F6BB4B4202E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Model", "RainFramework.Model\RainFramework.Model.csproj", "{06E43D93-89AA-4CE1-BC8A-46306B17E245}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Preconfigured", "RainFramework.Preconfigured\RainFramework.Preconfigured.csproj", "{53B18B15-BA76-41EB-9CBD-2708AD61D321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Entities.Abstractions", "RainFramework.Entities.Abstractions\RainFramework.Entities.Abstractions.csproj", "{32A2785F-0F52-4C21-AA71-E64E114480A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,10 @@ Global
 		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53B18B15-BA76-41EB-9CBD-2708AD61D321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A2785F-0F52-4C21-AA71-E64E114480A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A2785F-0F52-4C21-AA71-E64E114480A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A2785F-0F52-4C21-AA71-E64E114480A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A2785F-0F52-4C21-AA71-E64E114480A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{BFBB348B-9B39-4C27-8E84-24E1A2E13715} = {0BA96158-3EFC-4057-A9E1-2347A4B9C523}
 		{081BF6F3-77F1-4631-A450-406A9B793B63} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 		{06E43D93-89AA-4CE1-BC8A-46306B17E245} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
+		{32A2785F-0F52-4C21-AA71-E64E114480A2} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B149F34-D9A3-4604-BCA2-78BAFC4C4C9F}

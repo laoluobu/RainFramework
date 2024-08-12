@@ -1,6 +1,6 @@
-﻿using RainFramework.Model.Entities;
+﻿using RainFramework.Entities.Abstractions;
 
-namespace RainFramework.EFCore.Mysql
+namespace RainFramework.EFCore
 {
     public interface ICrudService<TEntity> where TEntity : EntityBase
     {

@@ -1,4 +1,6 @@
-﻿namespace RainFramework.Model.Entities
+﻿using RainFramework.Entities.Abstractions;
+
+namespace RainFramework.Model.Entities
 {
     /// <summary>
     /// UI 设置

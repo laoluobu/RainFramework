@@ -1,36 +1,57 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Andy</Authors>
-    <Version>1.1.5</Version>
-	<Description>RF 核心</Description>
-	<PackageReadmeFile></PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Andy</Authors>
+		<Version>1.1.6</Version>
+		<Description>RF Core</Description>
+		<PackageReadmeFile></PackageReadmeFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;1591;0270</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;1591;0270</NoWarn>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;1591;</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<NoWarn>1701;1702;1591;</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\**" />
+		<EmbeddedResource Remove="Properties\**" />
+		<None Remove="Properties\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
-    <ProjectReference Include="..\RainFramework.Preconfigured\RainFramework.Preconfigured.csproj" />
-    <ProjectReference Include="..\RainFramework.Repository\RainFramework.Dao.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
+			<Version>6.0.32</Version>
+		</PackageReference>
+
+
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
+			<Version>8.0.7</Version>
+		</PackageReference>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\RainFramework.Cahce\RainFramework.Cache.csproj" />
+		<ProjectReference Include="..\RainFramework.Preconfigured\RainFramework.Preconfigured.csproj" />
+		<ProjectReference Include="..\RainFramework.Repository\RainFramework.Dao.csproj" />
+	</ItemGroup>
 
 
 </Project>

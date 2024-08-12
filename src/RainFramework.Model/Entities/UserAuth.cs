@@ -1,10 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.Model.Entities;
 
+/// <summary>
+/// 
+/// </summary>
 public class UserAuth : EntityBase
 {
 
+    /// <summary>
+    /// 用户信息
+    /// </summary>
     public UserInfo? UserInfo { get; set; }
 
     /// <summary>

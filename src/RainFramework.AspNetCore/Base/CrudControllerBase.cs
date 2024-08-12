@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RainFramework.EFCore.Mysql;
-using RainFramework.Model.Entities;
+using RainFramework.EFCore;
+using RainFramework.Entities.Abstractions;
 using static RainFramework.Model.VO.ResultTool;
 
 namespace RainFramework.AspNetCore.Base

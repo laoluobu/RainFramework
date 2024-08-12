@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Exceptions;
 using RainFramework.Dao;
-using RainFramework.EFCore.Mysql.Base;
+using RainFramework.EFCore.Base;
 using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth

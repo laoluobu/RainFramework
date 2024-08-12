@@ -1,9 +1,13 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations;
+using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.Model.Entities;
 
+/// <summary>
+/// 角色
+/// </summary>
 public class Role : EntityBase
 {
 

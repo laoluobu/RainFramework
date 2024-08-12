@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Exceptions;
-using RainFramework.Model.Entities;
+using RainFramework.Entities.Abstractions;
 
-namespace RainFramework.EFCore.Mysql.Base
+namespace RainFramework.EFCore.Base
 {
     public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
     {

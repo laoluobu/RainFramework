@@ -1,4 +1,4 @@
-﻿using RainFramework.EFCore.Mysql;
+﻿using RainFramework.EFCore;
 using RainFramework.Model.Entities;
 
 namespace RainFramework.AspNetCore.CoreService.Auth

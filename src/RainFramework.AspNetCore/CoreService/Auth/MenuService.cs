@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Common.Exceptions;
 using RainFramework.Dao;
-using RainFramework.EFCore.Mysql.Base;
+using RainFramework.EFCore.Base;
 using RainFramework.Model.Constant;
 using RainFramework.Model.Entities;
 
