@@ -1,7 +1,10 @@
 using System.Diagnostics;
 using System.Globalization;
 using Demo.Api;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RainFramework.AspNetCore;
@@ -86,8 +89,4 @@ if (app.Environment.IsDevelopment())
     var loggerFactory = scopeServices.GetRequiredService<ILoggerFactory>();
     await RFDBContextSeed.SeedAsync(wMSDBContext, loggerFactory.CreateLogger<WMSDBContext>(), 1);
 }
-
-
-app.Run();
-
-
+await app.RunAsync();

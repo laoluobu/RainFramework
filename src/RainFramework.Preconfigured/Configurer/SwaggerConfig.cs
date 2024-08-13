@@ -54,6 +54,7 @@ namespace RainFramework.Preconfigured.Configurer
                 };
                 options.AddSecurityRequirement(requirement);
             });
+
             return services;
         }
         public static void UseSwaggerPkg(this IApplicationBuilder app)
