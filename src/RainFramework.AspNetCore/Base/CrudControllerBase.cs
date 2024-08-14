@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RainFramework.EFCore;
 using RainFramework.Entities.Abstractions;
-using static RainFramework.Model.VO.ResultTool;
+using static RainFramework.Common.Moudels.VO.HttpResult;
 
 namespace RainFramework.AspNetCore.Base
 {

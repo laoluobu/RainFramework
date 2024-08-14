@@ -7,7 +7,7 @@ using RainFramework.AspNetCore.Model.VO;
 using RainFramework.Model.Constant;
 using RainFramework.Model.Entities;
 using RainFramework.Preconfigured.Configurer;
-using static RainFramework.Model.VO.ResultTool;
+using static RainFramework.Common.Moudels.VO.HttpResult;
 
 namespace RainFramework.AspNetCore.Controllers
 {

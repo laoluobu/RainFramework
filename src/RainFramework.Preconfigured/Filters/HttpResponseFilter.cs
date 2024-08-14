@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RainFramework.Common.Exceptions;
-using RainFramework.Model.VO;
+using RainFramework.Common.Moudels.VO;
 
-namespace RainFramework.AspNetCore.Filters
+namespace RainFramework.Preconfigured.Filters
 {
     public class HttpResponseFilter : IAsyncActionFilter, IOrderedFilter
     {
@@ -25,15 +24,12 @@ namespace RainFramework.AspNetCore.Filters
             {
                 afer.Result = afer.Exception switch
                 {
-                    NotFoundException notFoundException => new ObjectResult(ResultTool.NotFound(notFoundException.Message))
+                    NotFoundException notFoundException => new ObjectResult(HttpResult.NotFound(notFoundException.Message))
                     {
                         StatusCode = 404
                     },
-                    DbUpdateException dbUpdateException => new ObjectResult(ResultTool.Fail(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message))
-                    {
-                        StatusCode = 500
-                    },
-                    _ => new ObjectResult(ResultTool.Fail(afer.Exception))
+
+                    _ => new ObjectResult(HttpResult.Fail(afer.Exception))
                     {
                         StatusCode = 500
                     },
@@ -43,4 +39,12 @@ namespace RainFramework.AspNetCore.Filters
             }
         }
     }
+
+    public static class HttpResponseFilterProvider
+    {
+        public static void AddHttpResponseFilter(this MvcOptions option)
+        {
+            option.Filters.Add<HttpResponseFilter>();
+        }
+    } 
 }

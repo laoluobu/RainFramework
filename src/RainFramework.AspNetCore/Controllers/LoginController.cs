@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Model.VO;
 using RainFramework.Preconfigured.Configurer;
-using static RainFramework.Model.VO.ResultTool;
+using static RainFramework.Common.Moudels.VO.HttpResult;
 
 namespace RainFramework.AspNetCore.Controllers
 {
@@ -27,7 +27,7 @@ namespace RainFramework.AspNetCore.Controllers
         /// <param name="userVO"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResultVO<string>> Login(UserVO userVO)
+        public async Task<ResultVO> Login(UserVO userVO)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace RainFramework.AspNetCore.Controllers
             catch (Exception e)
             {
                 logger.LogError("Login Err: {Message}", e.Message);
-                return TFail("User name or password error!");
+                return Fail("User name or password error!");
             }
         }
     }

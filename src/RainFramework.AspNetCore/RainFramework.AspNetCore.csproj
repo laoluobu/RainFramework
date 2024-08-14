@@ -7,7 +7,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>Andy</Authors>
-		<Version>1.1.6</Version>
+		<Version>1.1.7</Version>
 		<Description>RF Core</Description>
 		<PackageReadmeFile></PackageReadmeFile>
 	</PropertyGroup>
@@ -30,21 +30,6 @@
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-			<Version>6.0.32</Version>
-		</PackageReference>
-
-
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson">
-			<Version>8.0.7</Version>
-		</PackageReference>
-	</ItemGroup>
 
 
 	<ItemGroup>

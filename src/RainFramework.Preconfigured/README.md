@@ -20,3 +20,20 @@
  builder.Host.UseSerilogger();
 
 ```
+
+
+## Json
+
+```C#
+
+builder.Services.AddControllers()
+                .AddNewtonsoftJsonConfig();
+
+```
+
+## HttpResposeFilter
+
+```
+builder.Services.AddControllers(options => options.AddHttpResponseFilter());
+
+```

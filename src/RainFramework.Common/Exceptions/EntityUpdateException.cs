@@ -1,8 +1,8 @@
 ﻿namespace RainFramework.Common.Exceptions
 {
-    public class EntityUpdateException : Exception
+    public class EntityUpdateException1 : Exception
     {
-        public EntityUpdateException(string Message) : base(Message)
+        public EntityUpdateException1(string Message) : base(Message)
         {
         }
     }
