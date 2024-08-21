@@ -5,9 +5,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>Andy</Authors>
-		<Version>1.1.7</Version>
+		<Version>1.1.8</Version>
 		<Description>RF Core</Description>
 		<PackageReadmeFile></PackageReadmeFile>
 	</PropertyGroup>

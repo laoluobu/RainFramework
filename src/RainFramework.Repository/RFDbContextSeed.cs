@@ -20,10 +20,7 @@ namespace RainFramework.Dao
             var retryForAvailability = retry;
             try
             {
-                if (dbContext.Database.IsMySql())
-                {
-                    dbContext.Database.Migrate();
-                }
+                dbContext.Database.Migrate();
                 if (!await dbContext.Roles.AnyAsync())
                 {
                     await dbContext.Roles.AddRangeAsync(GetPreconfiguredRols());
@@ -31,6 +28,7 @@ namespace RainFramework.Dao
                 if (!await dbContext.Menus.AnyAsync())
                 {
                     await dbContext.Menus.AddRangeAsync(GetPreconfiguredUserMenu());
+                    await dbContext.SaveChangesAsync();
                     return true;
                 }
                 return false;
@@ -67,8 +65,6 @@ namespace RainFramework.Dao
                       }
                    }
                 }
-
-
             };
         }
 

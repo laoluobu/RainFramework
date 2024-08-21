@@ -12,22 +12,22 @@ namespace RainFramework.AspNetCore.Model.VO
         /// <summary>
         /// 菜单路径
         /// </summary>
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         /// <summary>
         /// 菜单名称
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// 组件
         /// </summary>
-        public string Component { get; set; }
+        public string Component { get; set; } = null!;
 
         /// <summary>
         /// 元数据
         /// </summary>
-        public Meta Meta { get; set; }
+        public Meta? Meta { get; set; } 
 
         /// <summary>
         /// 父菜单Id

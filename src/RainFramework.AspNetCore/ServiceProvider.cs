@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +8,6 @@ using RainFramework.AspNetCore.CoreService.Auth;
 using RainFramework.Cahce;
 using RainFramework.Dao;
 using RainFramework.Preconfigured.Configurer;
-using Serilog;
 using Serilog.Events;
 
 namespace RainFramework.AspNetCore
@@ -35,10 +33,10 @@ namespace RainFramework.AspNetCore
             builder.Services.AddSwagger()
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
-                            .AddTransient<IUserAuthService, UserAuthService<TDbContext>>()
-                            .AddTransient<IUserInfoService, UserInfoService<TDbContext>>()
-                            .AddTransient<IMenuService, MenuService<TDbContext>>()
-                            .AddTransient<IRoleService, RoleService<TDbContext>>()
+                            .AddScoped<IUserAuthService, UserAuthService<TDbContext>>()
+                            .AddScoped<IUserInfoService, UserInfoService<TDbContext>>()
+                            .AddScoped<IMenuService, MenuService<TDbContext>>()
+                            .AddScoped<IRoleService, RoleService<TDbContext>>()
                             .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>()!)
                             .AddAutoMapper(profiles);
 

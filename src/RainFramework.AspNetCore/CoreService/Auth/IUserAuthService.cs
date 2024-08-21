@@ -8,10 +8,15 @@ namespace RainFramework.AspNetCore.CoreService.Auth
     public interface IUserAuthService : ICrudService<UserAuth>
     {
         Task<string> LoginService(UserVO userVO);
+
         IEnumerable<UserAuth> ListUsers();
+        
         Task DeleteUserById(int id);
+        
         Task PatchUserAuth(int id, JsonPatchDocument<UserAuth> patchDoc);
+        
         Task UpadteRoleByUserId(int id, List<int> roleIds);
+        
         Task<UserAuth> FindUserAuthIncludeInfoById(int id);
 
         /// <summary>
