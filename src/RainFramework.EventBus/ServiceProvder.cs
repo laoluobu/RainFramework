@@ -7,11 +7,16 @@ namespace RainFramework.Mq
     public static class ServiceProvder
     {
         public static IServiceCollection AddSimpeMq<E>(this IServiceCollection services,
-                                                            IConfigurationRoot configRoot)
+                                                            IConfiguration configRoot)
         {
+            var option = configRoot.GetSection("RFSimpeMq");
+            if (option.Value == null)
+            {
+                throw new NullReferenceException("in configuration 'RFSimpeMq' is null");
+            }
             return services.AddSingleton<ISimpleMq<E>, SimpleMq<E>>()
                            .AddOptions()
-                           .Configure<EventBusOption>(e => configRoot.GetSection("RFSimpeMq").Bind(e));
+                           .Configure<EventBusOption>(e => option.Bind(e));
         }
     }
 }

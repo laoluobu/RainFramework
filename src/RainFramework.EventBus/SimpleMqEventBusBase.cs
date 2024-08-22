@@ -6,13 +6,13 @@ using RainFramework.Mq.TO;
 
 namespace RainFramework.Mq
 {
-    internal class SimpleMqEventBusBase
+    public abstract class SimpleMqEventBusBase
     {
         protected readonly ILogger<SimpleMqEventBusBase> logger;
         protected readonly ISimpleMq<MessageTO> mq;
         protected readonly EventBusOption option;
 
-        public SimpleMqEventBusBase(ILogger<SimpleMqEventBusBase> logger, IOptions<EventBusOption> options, ISimpleMq<MessageTO> mq)
+        protected SimpleMqEventBusBase(ILogger<SimpleMqEventBusBase> logger, IOptions<EventBusOption> options, ISimpleMq<MessageTO> mq)
         {
             this.logger = logger;
             this.mq = mq;
