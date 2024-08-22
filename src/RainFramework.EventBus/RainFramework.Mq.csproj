@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Andy</Authors>
-		<Version>1.1.32</Version>
+		<Version>1.1.33</Version>
 		<Description>RF Mq</Description>
 	</PropertyGroup>
 

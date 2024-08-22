@@ -10,13 +10,16 @@ namespace RainFramework.Mq
                                                             IConfiguration configRoot)
         {
             var option = configRoot.GetSection("RFSimpeMq");
-            if (option.Value == null)
-            {
-                throw new NullReferenceException("in configuration 'RFSimpeMq' is null");
-            }
             return services.AddSingleton<ISimpleMq<E>, SimpleMq<E>>()
                            .AddOptions()
-                           .Configure<EventBusOption>(e => option.Bind(e));
+                           .Configure<EventBusOption>(e =>
+                           {
+                               option.Bind(e);
+                               if (e == null)
+                               {
+                                   throw new NullReferenceException("in configuration 'RFSimpeMq' is null");
+                               }
+                           });
         }
     }
 }
