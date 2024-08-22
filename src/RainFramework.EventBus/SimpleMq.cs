@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
+using RainFramework.Mq.Exceptions;
 
 namespace RainFramework.Mq
 {
@@ -52,6 +53,10 @@ namespace RainFramework.Mq
 
         public M? NextDelivery(string queueName)
         {
+            if (queueMap.ContainsKey(queueName))
+            {
+                throw new NotFindQueueException(queueName);
+            }
 
             if (queueMap.TryGetValue(queueName, out var queue))
             {
@@ -63,7 +68,7 @@ namespace RainFramework.Mq
             return default;
         }
 
-        public async void ConsumingMessage(string queueName, Func<M?, Task> actions, int interval = 1000)
+        public async void ConsumingMessage(string queueName, Func<M, Task> actions, int interval = 1000)
         {
             using PeriodicTimer timer = new(TimeSpan.FromMilliseconds(interval));
             while (await timer.WaitForNextTickAsync())
