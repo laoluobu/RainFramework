@@ -14,6 +14,7 @@ namespace RainFramework.Mq
         public void BasicPublish(string queueName, E message)
         {
             bc.Add(message);
+            //bc.GetConsumingEnumerable
         }
     }
 }

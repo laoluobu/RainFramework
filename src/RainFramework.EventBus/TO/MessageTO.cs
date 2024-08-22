@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-namespace RainFramework.Mq.DTO
+namespace RainFramework.Mq.TO
 {
-    public class MessageDTO
+    public class MessageTO
     {
         public string Name { get; set; } = null!;
 

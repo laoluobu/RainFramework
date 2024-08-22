@@ -1,10 +1,18 @@
 ﻿using System.Collections.Concurrent;
+using Microsoft.Extensions.Logging;
 
 namespace RainFramework.Mq
 {
     internal class SimpleMq<M> : ISimpleMq<M>
     {
         private ConcurrentDictionary<string, ConcurrentQueue<M>> queueMap = new();
+
+        private readonly ILogger<SimpleMq<M>> logger;
+
+        public SimpleMq(ILogger<SimpleMq<M>> logger)
+        {
+            this.logger = logger;
+        }
 
         public void QueueDeclare(string queueName)
         {
@@ -54,6 +62,29 @@ namespace RainFramework.Mq
             }
             return default;
         }
+
+        public async void ConsumingMessage(string queueName, Func<M?, Task> actions, int interval = 1000)
+        {
+            using PeriodicTimer timer = new(TimeSpan.FromMilliseconds(interval));
+            while (await timer.WaitForNextTickAsync())
+            {
+                try
+                {
+                    var message = NextDelivery(queueName);
+                    if (message == null)
+                    {
+                        continue;
+                    }
+                    await actions.Invoke(message);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "ConsumingMessage Err: {queueName}",queueName);
+                }
+            }
+        }
+
+
 
         public IEnumerable<Queueinfo> QueryQueueinfos()
         {
