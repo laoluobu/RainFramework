@@ -47,13 +47,27 @@ namespace RainFramework.Mq
             {
                 throw new RFMqException($"{string.Join(",", queueNames)} :Message Publish failed");
             }
+        }
 
+        public void AllPublish(M message)
+        {
+            try
+            {
+                foreach (var queueName in queueMap.Keys)
+                {
+                    BasicPublish(queueName, message);
+                }
+            }
+            catch
+            {
+                throw new RFMqException($"Message All Publish failed");
+            }
         }
 
 
         public M? NextDelivery(string queueName)
         {
-            if (queueMap.ContainsKey(queueName))
+            if (!queueMap.ContainsKey(queueName))
             {
                 throw new NotFindQueueException(queueName);
             }
@@ -88,8 +102,6 @@ namespace RainFramework.Mq
                 }
             }
         }
-
-
 
         public IEnumerable<Queueinfo> QueryQueueinfos()
         {

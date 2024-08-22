@@ -3,6 +3,7 @@ namespace RainFramework.Mq
 {
     public interface ISimpleMq<M>
     {
+        void AllPublish(M message);
         void BasicPublish(string queueName, M message);
 
         void ConsumingMessage(string queueName, Func<M, Task> actions, int interval = 1000);
