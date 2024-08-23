@@ -25,5 +25,15 @@ namespace RainFramework.Helper.Extensions
             var strArray = value.Split(":");
             return new IPEndPoint(IPAddress.Parse(strArray[0]), int.Parse(strArray[1]));
         }
+
+        public static byte[] ToUTF8ByteArray(this string value)
+        {
+            return Encoding.UTF8.GetBytes(value);
+        }
+
+        public static ArraySegment<byte> ToUTF8ByteArraySegment(this string value)
+        {
+            return new ArraySegment<byte>(value.ToUTF8ByteArray());
+        }
     }
 }
