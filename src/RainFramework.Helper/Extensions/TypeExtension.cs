@@ -1,4 +1,4 @@
-﻿namespace RainWPF.Controls.Tools.Extension
+﻿namespace RainFramework.Helper.Extensions
 {
     public static class TypeExtension
     {
@@ -46,7 +46,7 @@
         /// <returns></returns>
         public static bool IsCustomType(this Type type)
         {
-           
+
             if (type.IsPrimitive) // 判断是否为原始类型，如 int, bool 等
                 return false;
 
@@ -64,7 +64,7 @@
         /// <param name="type"></param>
         /// <param name="genericType"></param>
         /// <returns></returns>
-        public static bool IsListOfCustomType(this Type type,out Type? genericType)
+        public static bool IsListOfCustomType(this Type type, out Type? genericType)
         {
             if (type.IsList())
             {
