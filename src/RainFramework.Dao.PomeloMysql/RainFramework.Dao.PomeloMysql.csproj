@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-	  <Authors>Andy</Authors>
-	  <Version>1.1.0</Version>
+	  <Authors>AndyLuo</Authors>
+	  <Version>1.1.1</Version>
 	  <Description>RF Dao.PomeloMysql</Description>
   </PropertyGroup>
 
