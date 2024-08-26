@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{BFBB348B-9B39-4C27-8E84-24E1A2E13715}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Helper", "RainFramework.Helper\RainFramework.Helper.csproj", "{E34DAA8C-8188-49F1-8F64-025CD28BC107}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Cache", "RainFramework.Cahce\RainFramework.Cache.csproj", "{6B844FF2-AF14-401C-9170-0BCFA7FB8203}"
@@ -38,7 +36,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Entities.Abst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Dao.PomeloMysql", "RainFramework.Dao.PomeloMysql\RainFramework.Dao.PomeloMysql.csproj", "{FB0A0EB8-F563-4BDB-B9D0-9889933EF83C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.Redis", "RainFramework.Helper.Redis\RainFramework.Redis.csproj", "{8278F4FB-B421-4D0A-906C-2FD185D46AFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RainFramework.Redis", "RainFramework.Helper.Redis\RainFramework.Redis.csproj", "{8278F4FB-B421-4D0A-906C-2FD185D46AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RainFramework.RedisTests", "RainFramework.RedisTests\RainFramework.RedisTests.csproj", "{B0306782-A7FD-4708-B59D-ED8CDF158547}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +62,6 @@ Global
 		{795A5E8B-6FFC-447F-94D6-1F4FAF93484D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{795A5E8B-6FFC-447F-94D6-1F4FAF93484D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{795A5E8B-6FFC-447F-94D6-1F4FAF93484D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFBB348B-9B39-4C27-8E84-24E1A2E13715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFBB348B-9B39-4C27-8E84-24E1A2E13715}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFBB348B-9B39-4C27-8E84-24E1A2E13715}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFBB348B-9B39-4C27-8E84-24E1A2E13715}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E34DAA8C-8188-49F1-8F64-025CD28BC107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E34DAA8C-8188-49F1-8F64-025CD28BC107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E34DAA8C-8188-49F1-8F64-025CD28BC107}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,17 +98,21 @@ Global
 		{8278F4FB-B421-4D0A-906C-2FD185D46AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8278F4FB-B421-4D0A-906C-2FD185D46AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8278F4FB-B421-4D0A-906C-2FD185D46AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0306782-A7FD-4708-B59D-ED8CDF158547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0306782-A7FD-4708-B59D-ED8CDF158547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0306782-A7FD-4708-B59D-ED8CDF158547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0306782-A7FD-4708-B59D-ED8CDF158547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B04CEFB6-FCDF-4FF9-A385-B0724D553E40} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
-		{BFBB348B-9B39-4C27-8E84-24E1A2E13715} = {0BA96158-3EFC-4057-A9E1-2347A4B9C523}
 		{081BF6F3-77F1-4631-A450-406A9B793B63} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 		{06E43D93-89AA-4CE1-BC8A-46306B17E245} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 		{32A2785F-0F52-4C21-AA71-E64E114480A2} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
 		{FB0A0EB8-F563-4BDB-B9D0-9889933EF83C} = {B1842046-487E-4EC5-A42C-4F6BB4B4202E}
+		{B0306782-A7FD-4708-B59D-ED8CDF158547} = {0BA96158-3EFC-4057-A9E1-2347A4B9C523}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B149F34-D9A3-4604-BCA2-78BAFC4C4C9F}
