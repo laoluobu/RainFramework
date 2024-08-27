@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RainFramework.Common.Moudels.TO;
 using RainFramework.Mq.Options;
-using RainFramework.Mq.TO;
 
 namespace RainFramework.Mq
 {

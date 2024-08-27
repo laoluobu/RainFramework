@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Andy</Authors>
-		<Version>1.1.33</Version>
+		<Version>1.1.34</Version>
 		<Description>RF Mq</Description>
 	</PropertyGroup>
 
@@ -15,6 +15,14 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\RainFramework.Common\RainFramework.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="TO\" />
 	</ItemGroup>
 
 </Project>

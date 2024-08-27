@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-namespace RainFramework.Mq.TO
+namespace RainFramework.Common.Moudels.TO
 {
     public class MessageTO
     {
