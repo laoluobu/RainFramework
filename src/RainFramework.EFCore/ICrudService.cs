@@ -25,7 +25,7 @@ namespace RainFramework.EFCore
         Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity?> FirstOrDefaultAsync(int key);
         Task RemoveAsync(TEntity entity);
-
+        Task SaveChangesAsync();
         Task UpdatesAsync(TEntity entity);
     }
 }

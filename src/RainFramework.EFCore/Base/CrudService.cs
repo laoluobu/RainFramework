@@ -19,25 +19,30 @@ namespace RainFramework.EFCore.Base
         public async Task UpdatesAsync(TEntity entity)
         {
             dbSet.Update(entity);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task AddAsync(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await dbSet.AddRangeAsync(entities);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
+        }
+
+        public Task SaveChangesAsync()
+        {
+            return dbContext.SaveChangesAsync();
         }
 
         public async Task RemoveAsync(TEntity entity)
         {
             dbSet.Remove(entity);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
 
