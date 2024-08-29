@@ -1,4 +1,5 @@
-﻿using RainFramework.Entities.Abstractions;
+﻿using System.Linq.Expressions;
+using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.EFCore
 {
@@ -21,7 +22,8 @@ namespace RainFramework.EFCore
         /// <param name="key"></param>
         /// <returns></returns>
         Task<TEntity> FindAsync(object key);
-
+        Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity?> FirstOrDefaultAsync(int key);
         Task RemoveAsync(TEntity entity);
 
         Task UpdatesAsync(TEntity entity);

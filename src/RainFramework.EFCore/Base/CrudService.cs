@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Exceptions;
 using RainFramework.Entities.Abstractions;
 
@@ -58,6 +59,18 @@ namespace RainFramework.EFCore.Base
         public async Task<bool> AnyAsync()
         {
             return await dbSet.AnyAsync();
+        }
+
+
+        public Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return dbSet.FirstOrDefaultAsync(predicate);
+        }
+
+
+        public Task<TEntity?> FirstOrDefaultAsync(int key)
+        {
+            return FirstOrDefaultAsync(s => s.Id == key);
         }
 
     }
