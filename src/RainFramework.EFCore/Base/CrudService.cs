@@ -8,6 +8,7 @@ namespace RainFramework.EFCore.Base
     public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
     {
         protected TDbContext dbContext;
+
         protected readonly DbSet<TEntity> dbSet;
 
         public CrudService(TDbContext dbContext)
@@ -76,6 +77,18 @@ namespace RainFramework.EFCore.Base
         public Task<TEntity?> FirstOrDefaultAsync(int key)
         {
             return FirstOrDefaultAsync(s => s.Id == key);
+        }
+
+
+        public Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return dbSet.FirstAsync(predicate);
+        }
+
+
+        public Task<TEntity> FirstAsync(int key)
+        {
+            return FirstAsync(s => s.Id == key);
         }
 
     }

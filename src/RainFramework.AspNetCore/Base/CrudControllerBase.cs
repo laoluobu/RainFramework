@@ -7,7 +7,7 @@ using static RainFramework.Common.Moudels.VO.HttpResult;
 namespace RainFramework.AspNetCore.Base
 {
     [Route("api/[controller]")]
-    public class CrudControllerBase<TEntity> : AuthControllerBase where TEntity : EntityBase
+    public abstract class CrudControllerBase<TEntity> : AuthControllerBase where TEntity : EntityBase
     {
         private ICrudService<TEntity> crudService;
 

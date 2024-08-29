@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Authors>Andy</Authors>
-		<Version>1.1.10</Version>
+		<Version>1.1.11</Version>
 		<Description>RF Core</Description>
 		<PackageReadmeFile></PackageReadmeFile>
 	</PropertyGroup>
