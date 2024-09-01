@@ -30,6 +30,7 @@ namespace RainFramework.AspNetCore
             builder.Services.AddMyCors();
             builder.Host.UseSerilogger();
 
+
             builder.Services.AddSwagger()
                             .AddJwtBearerPkg()
                             .AddSingleton<IJWTService, JWTService>()
@@ -38,6 +39,7 @@ namespace RainFramework.AspNetCore
                             .AddScoped<IMenuService, MenuService<TDbContext>>()
                             .AddScoped<IRoleService, RoleService<TDbContext>>()
                             .AddRFMemoryCache(builder.Configuration.GetSection("RFMemoryCache").Get<RFCacheOption>()!)
+                            .AddResourceMonitoring()
                             .AddAutoMapper(profiles);
 
             var application = builder.Build();
