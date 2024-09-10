@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Andy</Authors>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 		<Description>RF EFcore Mysql</Description>
 	</PropertyGroup>
 
@@ -25,6 +25,5 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\RainFramework.Common\RainFramework.Common.csproj" />
-	  <ProjectReference Include="..\RainFramework.Model\RainFramework.Model.csproj" />
 	</ItemGroup>	
 </Project>

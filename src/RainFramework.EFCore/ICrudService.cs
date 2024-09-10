@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.EFCore
 {
-    public interface ICrudService<TEntity> where TEntity : EntityBase
+    public interface ICrudService<TEntity> where TEntity : class
     {
         /// <summary>
         /// 创建实体
@@ -18,7 +17,7 @@ namespace RainFramework.EFCore
         /// <param name="entities"></param>
         /// <returns></returns>
         Task AddRangeAsync(IEnumerable<TEntity> entities);
-        
+
         Task<bool> AnyAsync();
 
         /// <summary>
@@ -33,16 +32,18 @@ namespace RainFramework.EFCore
         /// <param name="key"></param>
         /// <returns></returns>
         Task<TEntity> FindAsync(object key);
-        Task<TEntity> FirstAsync(int key);
+        
+        ValueTask<TEntity?> GetByIdAsync<Tid>(Tid id) where Tid : notnull;
+
+        
         Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate);
 
         ///
         Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
-        
-        Task<TEntity?> FirstOrDefaultAsync(int key);
-        
+
+
         Task RemoveAsync(TEntity entity);
-        
+
         Task SaveChangesAsync();
 
         Task UpdatesAsync(TEntity entity);

@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
+using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using RainFramework.Common.Exceptions;
-using RainFramework.Entities.Abstractions;
 
 namespace RainFramework.EFCore.Base
 {
-    public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : EntityBase
+    public class CrudService<TDbContext, TEntity> : ICrudService<TEntity> where TDbContext : DbContext where TEntity : class
     {
         protected TDbContext dbContext;
 
@@ -74,11 +74,6 @@ namespace RainFramework.EFCore.Base
         }
 
 
-        public Task<TEntity?> FirstOrDefaultAsync(int key)
-        {
-            return FirstOrDefaultAsync(s => s.Id == key);
-        }
-
 
         public Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate)
         {
@@ -86,9 +81,9 @@ namespace RainFramework.EFCore.Base
         }
 
 
-        public Task<TEntity> FirstAsync(int key)
+        public ValueTask<TEntity?> GetByIdAsync<Tid>(Tid id) where Tid : notnull
         {
-            return FirstAsync(s => s.Id == key);
+            return dbSet.FindAsync(id);
         }
 
     }
