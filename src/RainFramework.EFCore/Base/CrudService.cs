@@ -46,16 +46,6 @@ namespace RainFramework.EFCore.Base
         }
 
 
-        public async Task<TEntity> FindAsync(object key)
-        {
-            var entity = await dbSet.FindAsync(key);
-            if (entity == null)
-            {
-                throw new NotFoundException($"The Entity id is {key} inexistence!");
-            }
-            return entity;
-        }
-
         public async Task<IEnumerable<TEntity?>> FindAllAsync()
         {
             return await dbSet.AsNoTracking().ToListAsync();
@@ -85,6 +75,16 @@ namespace RainFramework.EFCore.Base
             return dbSet.FindAsync(id);
         }
 
+
+        public async ValueTask<TEntity> GetOrThrowByIdAsync<Tid>(Tid key) where Tid : notnull
+        {
+            var entity = await dbSet.FindAsync(key);
+            if (entity == null)
+            {
+                throw new NotFoundException($"The Entity id is {key} inexistence!");
+            }
+            return entity;
+        }
     }
 
 }

@@ -71,7 +71,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
 
             foreach (var RoleId in roleIds)
             {
-                roles.Add(await roleService.FindAsync(RoleId));
+                roles.Add(await roleService.GetOrThrowByIdAsync(RoleId));
             }
             user.Roles = roles;
             await dbContext.SaveChangesAsync();

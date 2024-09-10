@@ -24,7 +24,7 @@ namespace RainFramework.AspNetCore.Base
         [HttpGet, Route("{id}")]
         public async Task<ResultVO<TEntity>> FindAsync(int id)
         {
-            var entity = await crudService.FindAsync(id);
+            var entity = await crudService.GetOrThrowByIdAsync(id);
             return Success(entity);
         }
 

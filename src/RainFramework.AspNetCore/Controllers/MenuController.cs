@@ -62,7 +62,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPatch("{id}")]
         public async Task<ResultVO> UpdateMenus(int id, [FromBody] JsonPatchDocument<Menu> patchDoc)
         {
-            var sysMenu = await menuService.FindAsync(id);
+            var sysMenu = await menuService.GetOrThrowByIdAsync(id);
             patchDoc.ApplyTo(sysMenu);
             await menuService.UpdatesAsync(sysMenu);
             return Success();

@@ -31,8 +31,9 @@ namespace RainFramework.EFCore
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        Task<TEntity> FindAsync(object key);
-        
+        ValueTask<TEntity> GetOrThrowByIdAsync<Tid>(Tid key) where Tid : notnull;
+
+
         ValueTask<TEntity?> GetByIdAsync<Tid>(Tid id) where Tid : notnull;
 
         

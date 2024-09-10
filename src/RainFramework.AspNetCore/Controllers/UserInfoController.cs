@@ -40,7 +40,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPatch("{id}")]
         public async Task<ResultVO> UpdateUser(int id, [FromBody] JsonPatchDocument<UserInfo> patchDoc)
         {
-            var userInfo = await userInfoService.FindAsync(id);
+            var userInfo = await userInfoService.GetOrThrowByIdAsync(id);
             patchDoc.ApplyTo(userInfo);
             await userInfoService.UpdatesAsync(userInfo);
             return Success();

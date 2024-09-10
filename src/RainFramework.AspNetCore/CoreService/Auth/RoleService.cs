@@ -56,7 +56,7 @@ namespace RainFramework.AspNetCore.CoreService.Auth
             }
             foreach (var menId in menuIds)
             {
-                sysMenus.Add(await menuService.FindAsync(menId));
+                sysMenus.Add(await menuService.GetOrThrowByIdAsync(menId));
             }
             role.SysMenus = sysMenus;
             await dbContext.SaveChangesAsync();

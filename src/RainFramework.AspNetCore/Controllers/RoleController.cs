@@ -43,7 +43,7 @@ namespace RainFramework.AspNetCore.Controllers
         [HttpPatch("{id}")]
         public async Task<ResultVO> UpdateRoles(int id, [FromBody] JsonPatchDocument<Role> patchDoc)
         {
-            var role = await roleService.FindAsync(id);
+            var role = await roleService.GetOrThrowByIdAsync((object)id);
             patchDoc.ApplyTo(role);
             await roleService.UpdatesAsync(role);
             return Success();
