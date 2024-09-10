@@ -6,8 +6,9 @@ namespace RainFramework.Dao;
 /// <summary>
 /// 框架共用层DBContext
 /// </summary>
-public abstract class RFDBContext : DbContext
+public abstract partial class RFDBContext : DbContext
 {
+
     public RFDBContext(DbContextOptions options) : base(options)
     {
     }
@@ -37,6 +38,9 @@ public abstract class RFDBContext : DbContext
         modelBuilder.Entity<UserAuth>(UserAuth =>
         {
             UserAuth.HasIndex(UserAuth => UserAuth.Username).IsUnique();
+
+            //TODO实现多租户 每次web请求都会调用HasQueryFilter，通过JWT存储租户消息
+            //UserAuth.HasQueryFilter(s => s.Id == tenant.GetTenantId());
         });
     }
 }
