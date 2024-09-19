@@ -29,6 +29,7 @@ namespace RainFramework.Dao
                 {
                     await dbContext.Menus.AddRangeAsync(GetPreconfiguredUserMenu());
                     await dbContext.SaveChangesAsync();
+                    logger.LogInformation("Base Db seed Initialized Success！");
                     return true;
                 }
                 return false;

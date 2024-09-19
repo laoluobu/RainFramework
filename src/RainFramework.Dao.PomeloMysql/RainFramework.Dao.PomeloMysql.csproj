@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
 	  <Authors>AndyLuo</Authors>
-	  <Version>1.1.5</Version>
+	  <Version>1.1.6</Version>
 	  <Description>RF Dao.PomeloMysql</Description>
   </PropertyGroup>
 
