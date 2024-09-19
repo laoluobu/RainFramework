@@ -21,10 +21,6 @@ var app = builder.UseRainFrameworkCore<WMSDBContext>(Serilog.Events.LogEventLeve
 
 if (app.Environment.IsDevelopment())
 {
-    using var scope = app.Services.CreateScope();
-    var scopeServices = scope.ServiceProvider;
-    var wMSDBContext = scopeServices.GetRequiredService<WMSDBContext>();
-    var loggerFactory = scopeServices.GetRequiredService<ILoggerFactory>();
-    await RFDBContextSeed.SeedAsync(wMSDBContext, loggerFactory.CreateLogger<WMSDBContext>(), 1);
+    await WMSDBContextSeed.SeedAsync(app.Services);
 }
 await app.RunAsync();

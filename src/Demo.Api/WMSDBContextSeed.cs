@@ -4,14 +4,15 @@ namespace Demo.Api
 {
     public class WMSDBContextSeed
     {
-
-        public static async Task SeedAsnc(WMSDBContext context, ILogger logger, int retry)
+        public static async Task SeedAsync(IServiceProvider services)
         {
-            if (await RFDBContextSeed.SeedAsync(context, logger, retry))
+            using var scope = services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<WMSDBContext>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<WMSDBContextSeed>>();
+            if (await RFDBContextSeed.SeedAsync(dbContext, logger))
             {
-                await context.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
             }
-
         }
     }
 }
